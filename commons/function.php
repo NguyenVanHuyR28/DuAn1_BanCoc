@@ -72,7 +72,7 @@ function formatDate($date){
 
 function checkLoginAdmin(){
     if(!isset($_SESSION['user_admin'])){ 
-        header("Location: ".BASE_URL_ADMIN.'login-admin');
+        // header("Location: ".BASE_URL_ADMIN.'login-admin');
         exit();
     }
 }
