@@ -43,24 +43,17 @@ include './views/layouts/slidebar.php';
                                         <td><?=$danhMuc ['ten_danh_muc'] ?></td>
                                         <td><?=$danhMuc ['mo_ta'] ?></td>
                                         <td>
-                                            <a href="<?= BASE_URL_ADMIN . 'form-sua-danh-muc$id_danh_muc=' . $danhMuc['id'] ?>">
+                                            <a href="<?= BASE_URL_ADMIN . 'formEditDanhMuc&id=' . $danhMuc['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>
                                             </a>
-                                            <a href="<?= BASE_URL_ADMIN . 'xoa-danh-muc$id_danh_muc' . $danhMuc ['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
+                                            <a href="<?= BASE_URL_ADMIN . 'deleteDanhMuc&id=' . $danhMuc ['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
                                                 <button class="btn btn-danger">Xóa</button>
                                             </a>
                                         </td>
                                     </tr>
-                                    <?php endforeach ?>
+                                    <?php endforeach ?> 
                             </tbody>
                             <tfoot>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    
-                  </tr>
                   </tfoot>
                         </table>
                     </div>

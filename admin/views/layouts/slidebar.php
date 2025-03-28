@@ -27,7 +27,7 @@
         
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . 'danh-muc' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . 'listDanhMuc' ?>" class="nav-link">
           <i class="fas fa-folder"></i>
 
             <p>

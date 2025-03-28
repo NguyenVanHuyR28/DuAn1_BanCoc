@@ -18,10 +18,10 @@ $act = $_GET['act'] ?? '/';
 match($act) {
     //router danh mục
     '/' => (new HomeAdminController())->home(),
-    'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
-    'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
-    // 'them-danh-muc' => (new AdminDanhMucController())->postAddDanhMuc(),
-    'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
-    // 'sua-danh-muc' => (new AdminDanhMucController())->postEditDanhMuc(),
-    // 'xoa-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc(),
+    'listDanhMuc' => (new AdminDanhMucController())->listDanhMuc(),
+    'formAddDanhMuc' => (new AdminDanhMucController())->formAddDanhMuc(),
+    'addDanhMuc' => (new AdminDanhMucController())->addDanhMuc(),
+    'formEditDanhMuc' => (new AdminDanhMucController())->formEditDanhMuc(),
+    'editDanhMuc' => (new AdminDanhMucController())->editDanhMuc(),
+    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),
 };
