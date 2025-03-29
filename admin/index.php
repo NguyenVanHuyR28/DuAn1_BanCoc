@@ -24,4 +24,6 @@ match($act) {
     'formEditDanhMuc' => (new AdminDanhMucController())->formEditDanhMuc(),
     'editDanhMuc' => (new AdminDanhMucController())->editDanhMuc(),
     'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),
+    
+
 };

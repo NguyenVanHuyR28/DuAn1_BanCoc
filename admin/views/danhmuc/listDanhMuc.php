@@ -21,7 +21,7 @@ include './views/layouts/slidebar.php';
             <div class="row">
                 <div class="col-12">
                     <div class="card-header">
-                        <a href="<?= BASE_URL_ADMIN . 'form-them-danh-muc'?>">
+                        <a href="<?= BASE_URL_ADMIN . 'formAddDanhMuc'?>">
                             <button class="btn btn-primary">Thêm danh mục</button>
                         </a>
                     </div>
