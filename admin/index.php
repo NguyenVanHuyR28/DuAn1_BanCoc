@@ -28,5 +28,14 @@ match ($act) {
     'addDanhMuc' => (new AdminDanhMucController())->addDanhMuc(),
     'formEditDanhMuc' => (new AdminDanhMucController())->formEditDanhMuc(),
     'editDanhMuc' => (new AdminDanhMucController())->editDanhMuc(),
-    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),
+    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),    
+
+
+    // Router Sản Phẩm
+    'listSanPham' => (new AdminSanPhamController())->listSanPham(),
+    'formAddSanPham' => (new AdminSanPhamController())->formAddSanPham(),
+    'addSanPham' => (new AdminSanPhamController())->addSanPham(),
+    'formEditSanPham' => (new AdminSanPhamController())->formEditSanPham(),
+    'editSanPham' => (new AdminSanPhamController())->editSanPham(),
+    'deleteSanPham' => (new AdminSanPhamController())->deleteSanPham(),
 };
