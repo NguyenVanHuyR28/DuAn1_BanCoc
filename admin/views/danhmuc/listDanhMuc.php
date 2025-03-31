@@ -38,23 +38,24 @@ include './views/layouts/slidebar.php';
                             <tbody>
                                 <?php
                                     foreach($listDanhMuc as $key => $danhMuc) :?>
-                                    <tr>
-                                        <td><?=$key+1?></td>
-                                        <td><?=$danhMuc ['ten_danh_muc'] ?></td>
-                                        <td><?=$danhMuc ['mo_ta'] ?></td>
-                                        <td>
-                                            <a href="<?= BASE_URL_ADMIN . 'formEditDanhMuc&id=' . $danhMuc['id'] ?>">
-                                                <button class="btn btn-warning">Sửa</button>
-                                            </a>
-                                            <a href="<?= BASE_URL_ADMIN . 'deleteDanhMuc&id=' . $danhMuc ['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
-                                                <button class="btn btn-danger">Xóa</button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach ?> 
+                                <tr>
+                                    <td><?=$key+1?></td>
+                                    <td><?=$danhMuc ['ten_danh_muc'] ?></td>
+                                    <td><?=$danhMuc ['mo_ta'] ?></td>
+                                    <td>
+                                        <a href="<?= BASE_URL_ADMIN . 'formEditDanhMuc&id=' . $danhMuc['id'] ?>">
+                                            <button class="btn btn-warning">Sửa</button>
+                                        </a>
+                                        <a href="<?= BASE_URL_ADMIN . 'deleteDanhMuc&id=' . $danhMuc ['id'] ?>"
+                                            onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
+                                            <button class="btn btn-danger">Xóa</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endforeach ?>
                             </tbody>
                             <tfoot>
-                  </tfoot>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -66,21 +67,21 @@ include './views/layouts/slidebar.php';
 include './views/layouts/footer.php';
 ?>
 <script>
-  $(function() {
+$(function() {
     $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
-  });
+});
 </script>
