@@ -1,5 +1,5 @@
 <?php
-class AdminDanhMucController 
+class AdminDanhMucController
 {
     public $modelDanhMuc;
 
@@ -75,7 +75,6 @@ class AdminDanhMucController
             } else {
                 // Trả về form và lỗi
                 $danhMuc = ['id' => $id, 'ten_danh_muc' => $ten_danh_muc];
-
                 require_once "./views/DanhMuc/editDanhMuc.php";
             }
         }
@@ -88,14 +87,10 @@ class AdminDanhMucController
         $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
         if ($id) {
             $this->modelDanhMuc->deleteDanhMuc($id);
-            header('location: '.BASE_URL_ADMIN.'listDanhMuc');
+            header('location: ' . BASE_URL_ADMIN . 'listDanhMuc');
             exit();
         } else {
-            header('location: '.BASE_URL_ADMIN.'listDanhMuc');
+            header('location: ' . BASE_URL_ADMIN . 'listDanhMuc');
         }
-
     }
-
 }
-
-?>

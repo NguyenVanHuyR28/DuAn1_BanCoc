@@ -1,21 +1,25 @@
 <?php
-class AdminDanhMuc {
+class AdminDanhMuc
+{
     public $conn;
-    public function __construct(){
-        $this -> conn =connectDB();
+    public function __construct()
+    {
+        $this->conn = connectDB();
     }
-    public function getAllDanhMuc(){
-        try{
+    public function getAllDanhMuc()
+    {
+        try {
             $sql = "SELECT * from danh_muc";
-            $stmt = $this ->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }catch(Exception $e) {
-            echo "Error". $e->getMessage();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
         }
     }
-    public function insertDanhMuc($ten_danh_muc, $mo_ta){
-        try{    
+    public function insertDanhMuc($ten_danh_muc, $mo_ta)
+    {
+        try {
             $sql = "INSERT INTO danh_muc (ten_danh_muc, mo_ta) VALUES (:ten_danh_muc, :mo_ta)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
@@ -23,23 +27,24 @@ class AdminDanhMuc {
                 ':mo_ta' => $mo_ta
 
             ]);
-            
+
             return true;
-        }catch(Exception $e){
-            echo"Error" . $e->getMessage();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
         }
     }
-    public function getDetailDanhMuc($id){
-        try{
+    public function getDetailDanhMuc($id)
+    {
+        try {
             $sql = 'SELECT * FROM danh_muc WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id
             ]);
-            
+
             return $stmt->fetch();
-        }catch(Exception $e){
-            echo "Error". $e->getMessage();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
         }
     }
     public function editDanhMuc($id, $ten_danh_muc, $mo_ta)
@@ -51,11 +56,11 @@ class AdminDanhMuc {
                 ':id' => $id,
                 ':ten_danh_muc' => $ten_danh_muc,
                 ':mo_ta' => $mo_ta
-                
+
             ]);
             return true;
         } catch (Exception $e) {
-            echo 'Lỗi updateCategory() '.$e->getMessage();
+            echo 'Lỗi updateCategory() ' . $e->getMessage();
         }
     }
 
@@ -69,8 +74,7 @@ class AdminDanhMuc {
             ]);
             return true;
         } catch (Exception $e) {
-            echo 'Lỗi deleteCategory() '.$e->getMessage();
+            echo 'Lỗi deleteCategory() ' . $e->getMessage();
         }
     }
 }
-?>
