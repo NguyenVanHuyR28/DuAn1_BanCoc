@@ -45,12 +45,13 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['id'] ?></td>
                                         <td><?= $products['ten_danh_muc'] ?></td>
                                         <td><?= $products['ten_san_pham'] ?></td>
-                                        <td><?= $products['gia'] ?></td>
-                                        <td><?= $products['so_luong'] ?></td>
+                                        <td class="text-danger"><?= number_format($products['gia'], 0, ',', '.') ?> VNĐ</p>
+                                        </td>
+                                        <td><?= number_format($products['so_luong'], 0, ',', '.') ?></td>
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
                                                 width="120px" alt="Ảnh sản phẩm"></td>
-                                        <td><?= $products['ngay_tao'] ?></td>
+                                        <td class="text-success"><?= $products['ngay_tao'] ?></td>
                                         <td>
                                             <a href="<?= BASE_URL_ADMIN . 'formEditSanPham&id=' . $products['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>

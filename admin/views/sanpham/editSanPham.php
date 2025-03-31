@@ -51,7 +51,7 @@ include './views/layouts/slidebar.php';
 
                                 <div class="form-group">
                                     <label>Giá</label>
-                                    <input type="number" name="gia" class="form-control" placeholder="Nhập giá" min="0" value="<?= $products['gia'] ?>">
+                                    <input type="number" name="gia" class="form-control" placeholder="Nhập giá" min="0" value="<?= intval($products['gia']) ?>">
                                     <?php if (isset($_SESSION['error']['gia'])): ?>
                                         <p class="text-danger"><?= $_SESSION['error']['gia'] ?></p>
                                     <?php endif; ?>
@@ -59,7 +59,7 @@ include './views/layouts/slidebar.php';
 
                                 <div class="form-group">
                                     <label>Số Lượng</label>
-                                    <input type="number" name="so_luong" class="form-control" placeholder="Nhập số lượng" value="<?= $products['so_luong'] ?>">
+                                    <input type="number" name="so_luong" class="form-control" placeholder="Nhập số lượng" value="<?=intval( $products['so_luong']) ?>">
                                     <?php if (isset($_SESSION['error']['so_luong'])): ?>
                                         <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
                                     <?php endif; ?>
