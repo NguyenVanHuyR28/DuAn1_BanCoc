@@ -37,7 +37,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . 'san-pham' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . 'listSanPham' ?>" class="nav-link">
           <i class="fas fa-box"></i>
 
 
