@@ -10,10 +10,10 @@ require_once './controllers/HomeController.php';
 // Require toàn bộ file Models
 require_once './models/DanhMuc.php';
 require_once './models/SanPham.php';
-require_once './models/TaiKhoan.php';
-require_once './models/BinhLuan.php';
-require_once './models/GioHang.php';
-require_once './models/DonHang.php';
+// require_once './models/TaiKhoan.php';
+// require_once './models/BinhLuan.php';
+// require_once './models/GioHang.php';
+// require_once './models/DonHang.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
