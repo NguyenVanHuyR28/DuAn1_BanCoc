@@ -34,6 +34,7 @@ include './views/layouts/slidebar.php';
                                     <th>Giá</th>
                                     <th>Số Lượng</th>
                                     <th>Hình Ảnh</th>
+                                    <th>Mô tả</th>
                                     <th>Ngày Tạo</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -51,7 +52,12 @@ include './views/layouts/slidebar.php';
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
                                                 width="120px" alt="Ảnh sản phẩm"></td>
+<<<<<<< HEAD
                                         <td class="text-success"><?= $products['ngay_tao'] ?></td>
+=======
+                                        <td><?= $products['mo_ta']?></td>
+                                        <td><?= $products['ngay_tao'] ?></td>
+>>>>>>> a0fc0efe6292fe2042383cf668e0b951a56f9575
                                         <td>
                                             <a href="<?= BASE_URL_ADMIN . 'formEditSanPham&id=' . $products['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>

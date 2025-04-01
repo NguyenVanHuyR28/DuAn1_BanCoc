@@ -1,16 +1,6 @@
-<!-- header  -->
 <?php
 include './views/layouts/header.php';
-?>
-<!-- end header -->
-<!-- Navbar -->
-<?php
 include './views/layouts/navbar.php';
-?>
-<!-- /.navbar -->
-
-<!-- Main Sidebar Container -->
-<?php
 include './views/layouts/slidebar.php';
 ?>
 
@@ -27,7 +17,6 @@ include './views/layouts/slidebar.php';
     </div><!-- /.container-fluid -->
   </section>
 
-  
     <section class="content">
       <div class="container-fluid">
         <div class="row">
