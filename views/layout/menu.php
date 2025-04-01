@@ -27,7 +27,7 @@
                                             <a href="<?= BASE_URL ?>">Trang chủ</a>
                                         </li>
                                         <li>
-                                            <a href="<?= BASE_URL . '?act=all-san-pham' ?>">Sản phẩm</a>
+                                            <a href="<?= BASE_URL . '?act=allsanpham' ?>">Sản phẩm</a>
                                         </li>
                                         <li><a href="#">Giới thiệu</a></li>
                                         <li><a href="#">Liên hệ</a></li>
