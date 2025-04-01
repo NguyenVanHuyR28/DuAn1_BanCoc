@@ -33,7 +33,7 @@ class AdminSanPhamController
             $so_luong = $_POST['so_luong'] ?? '';
             $hinh_anh = $_FILES['hinh_anh'] ?? null;
             $mo_ta = $_POST['mo_ta'] ?? '';
-            $file_thumb = uploadFile($hinh_anh, 'assets/img/products/');
+            $file_thumb = uploadFile($hinh_anh, 'assets/img/product/');
             // var_dump($file_thumb);
             // die;
 
@@ -128,7 +128,7 @@ class AdminSanPhamController
 
             // Xử lý ảnh (nếu có upload mới)
             if ($hinh_anh && $hinh_anh['error'] !== UPLOAD_ERR_NO_FILE) {
-                $new_file = uploadFile($hinh_anh, 'assets/img/products/');
+                $new_file = uploadFile($hinh_anh, 'assets/img/product/');
                 if ($new_file) {
                     if (!empty($old_file)) {
                         deleteFile($old_file);

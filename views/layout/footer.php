@@ -24,7 +24,7 @@
                                 <address class="contact-block">
                                     <ul>
                                         <li><i class="pe-7s-home"></i>-09213184 - Việt Nam</li>
-                                        <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com">Group 9</a></li>
+                                        <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com">Group 8</a></li>
                                         <li><i class="pe-7s-call"></i> <a href="tel:(012)800456789987">(012) 800 456 789-987</a></li>
                                     </ul>
                                 </address>
@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="copyright-text text-center">
-                            <p>&copy; 2024 <b>Pet Shop</b> Được tạo  <i class="fa fa-heart text-danger"></i> bởi <b>Group 4</b></a></p>
+                            <p>&copy; 2024 <b>Pet Shop</b> Được tạo  <i class="fa fa-heart text-danger"></i> bởi <b>Group 8</b></a></p>
                         </div>
                     </div>
                 </div>
