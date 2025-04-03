@@ -32,6 +32,7 @@ include './views/layouts/slidebar.php';
                                     <th>Danh Mục</th>
                                     <th>Tên Sản Phẩm</th>
                                     <th>Giá</th>
+                                    <th>Giá khuyến mãi</th>
                                     <th>Số Lượng</th>
                                     <th>Hình Ảnh</th>
                                     <th>Mô tả</th>
@@ -47,6 +48,7 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['ten_danh_muc'] ?></td>
                                         <td><?= $products['ten_san_pham'] ?></td>
                                         <td><?= $products['gia'] ?></td>
+                                        <td><?= $products['gia_khuyen_mai'] ?></td>
                                         <td><?= $products['so_luong'] ?></td>
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
