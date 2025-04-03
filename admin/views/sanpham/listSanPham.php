@@ -52,8 +52,12 @@ include './views/layouts/slidebar.php';
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
                                                 width="120px" alt="Ảnh sản phẩm"></td>
+<<<<<<< HEAD
                                         <td class="text-success"><?= $products['ngay_tao'] ?></td>
                                         <td><?= $products['mo_ta'] ?></td>
+=======
+                                        <td><?= $products['mo_ta']?></td>
+>>>>>>> 2d7ee7e5f24dc4b36e19d8aafa5a68e572aef3f4
                                         <td><?= $products['ngay_tao'] ?></td>
                                         <td>
                                             <a href="<?= BASE_URL_ADMIN . 'formEditSanPham&id=' . $products['id'] ?>">
