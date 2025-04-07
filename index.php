@@ -12,7 +12,7 @@ require_once './models/DanhMuc.php';
 require_once './models/SanPham.php';
 // require_once './models/TaiKhoan.php';
 // require_once './models/BinhLuan.php';
-// require_once './models/GioHang.php';
+require_once './models/GioHang.php';
 // require_once './models/DonHang.php';
 
 // Route
@@ -28,7 +28,8 @@ match ($act) {
 //     //sanpham
     'allsanpham' => (new HomeController())->allSanPham(),
     'sanphamdanhmuc' => (new HomeController())->danhSachSanPhamTheoDanhMuc(),
-    'chitietsanpham' => (new HomeController())->chiTietSanPham(),
+    'chitietsanpham' => (new HomeController())->detailSanPham(),
+    'gioHang' => (new HomeController())->gioHang(),
 
 
 //     //authen
@@ -46,8 +47,8 @@ match ($act) {
 //     'dang-binh-luan' => (new HomeController())->postBinhLuan(),
 
 //     //giỏ hàng
-//     'them-gio-hang' => (new HomeController())->addGioHang(),
-//     'gio-hang' => (new HomeController())->gioHang(),
+    'them-gio-hang' => (new HomeController())->addCart(),
+    // 'gio-hang' => (new HomeController())->gioHang(),
 
 //     'thanh-toan' => (new HomeController())->thanhToan(),
 //     'xu-ly-thanh-toan' => (new HomeController())->postThanhToan(),

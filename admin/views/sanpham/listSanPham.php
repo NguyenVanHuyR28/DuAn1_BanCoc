@@ -47,7 +47,7 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['id'] ?></td>
                                         <td><?= $products['ten_danh_muc'] ?></td>
                                         <td><?= $products['ten_san_pham'] ?></td>
-                                        <td><?= $products['gia'] ?></td>
+                                        <td><?= number_format($products['gia']) ?></td>
                                         <td><?= $products['gia_khuyen_mai'] ?></td>
                                         <td><?= $products['so_luong'] ?></td>
                                         <td><img

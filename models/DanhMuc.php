@@ -16,4 +16,19 @@ class DanhMuc {
             return [];
         }
     }
+
+    public function getDetailDanhMuc($id)
+    {
+        try {
+            $sql = 'SELECT * FROM danh_muc WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
 }
