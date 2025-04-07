@@ -20,8 +20,8 @@
                 <table class="table table-bordered align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th>Ảnh</th>
-                            <th>Tên sản phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Hình Ảnh</th>
                             <th>Giá</th>
                             <th>Số lượng</th>
                             <th>Thành tiền</th>
@@ -32,23 +32,22 @@
                         <?php $tongTien = 0; ?>
                         <?php foreach ($gioHang as $item) :  ?>
                             <?php
-                            $thanhTien = $item['so_luong'];
+                            $thanhTien = $item['gia'] * $item['so_luong'];
                             $tongTien += $thanhTien;
                             ?>
                             <tr>
-                                <!-- <td><img src="<?= $item['hinh_anh'] ?>" width="80" class="img-thumbnail" alt=""></td> -->
-                                <td><?= htmlspecialchars($item['ngay_tao']) ?></td>
-                                
+                                <td><?= htmlspecialchars($item['ten_san_pham']) ?></td>
+                                <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" width="80" class="img-thumbnail" alt="<?= $item['ten_san_pham'] ?>"></td>
+                                <td><?= number_format($item['gia'], 0, ',', '.') ?>.VNĐ</td>
                                 <td style="width: 120px;">
                                     <form action="cap-nhat-gio-hang.php" method="post" class="d-flex">
                                         <input type="hidden" name="id_gio_hang" value="<?= $item['id'] ?>">
                                         <input type="number" name="so_luong" value="<?= $item['so_luong'] ?>" class="form-control form-control-sm me-2" min="1">
-                                        <button class="btn btn-sm btn-success">✔</button>
                                     </form>
                                 </td>
                                 <td><?= number_format($thanhTien, 0, ',', '.') ?>đ</td>
                                 <td>
-                                    <a href="xoa-gio-hang.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Xóa sản phẩm này khỏi giỏ?')">Xóa</a>
+                                    <a href="<?= BASE_URL . '?act=delete-gio-hang&id=' . $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Xóa sản phẩm này khỏi giỏ?')">Xóa</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
