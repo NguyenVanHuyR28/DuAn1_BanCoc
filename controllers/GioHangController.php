@@ -23,8 +23,14 @@ class GioHangController{
             $check = $this->modelGioHang->addCart($tai_khoan_id, $san_pham_id, $so_luong);
             // var_dump($check);
             // die;
-            header('location: ' . BASE_URL . '?act=gioHang');
-            exit;
+            if($check){
+                echo "<script>
+                alert('Thêm giỏ hàng thành công!');
+                window.location.href='" . BASE_URL . "?act=gioHang". "';
+                </script>";
+            }else{
+                header('location:' . BASE_URL .'?act=gioHang');
+            }
         }
     }
 
@@ -34,10 +40,15 @@ class GioHangController{
         if ($id) {
             $this->modelGioHang->deleteCart($id);
             deleteFile($item['hinh_anh']);
-            header('location:' . BASE_URL .'?act=gioHang');
+            echo "<script>
+                alert('Xóa sản phẩm hàng thành công!');
+                window.location.href='" . BASE_URL . "?act=gioHang". "';
+                </script>";
         } else {
             header('location:' . BASE_URL .'?act=gioHang');
         }
     }
+
+    
 
 }

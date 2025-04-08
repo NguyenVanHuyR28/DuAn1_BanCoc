@@ -57,7 +57,7 @@
 
             <div class="text-end">
                 <h4 class="fw-bold">Tổng tiền: <span class="text-danger"><?= number_format($tongTien, 0, ',', '.') ?>đ</span></h4>
-                <a href="thanh-toan.php" class="btn btn-primary btn-lg mt-3">Tiến hành thanh toán</a>
+                <a href="<?= BASE_URL . '?act=thanh-toan' ?>" class="btn btn-primary btn-lg mt-3">Tiến hành thanh toán</a>
             </div>
         <?php else : ?>
             <div class="alert alert-warning">Giỏ hàng của bạn đang trống.</div>
