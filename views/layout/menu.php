@@ -67,8 +67,21 @@
                                                 <div class="notification">2</div>
                                             </a>
                                         <?php  }  ?>
-                                        
+
                                     </li>
+
+                                    <li class="user-hover">
+                                        <a href="#">
+                                            <i class="pe-7s-user"></i>
+                                        </a>
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <a href="<?= BASE_URL . '?act=gioHang' ?>">Giỏ Hàng</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
                                     <li class="user-hover">
                                         <a href="#">
                                             <i class="pe-7s-user"></i>

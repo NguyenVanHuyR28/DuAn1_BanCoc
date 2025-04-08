@@ -32,12 +32,12 @@ include './views/layouts/slidebar.php';
                                         <?php foreach ($listDanhMuc as $category): ?>
                                             <option value="<?= $category['id'] ?>"> <?= $category['ten_danh_muc'] ?></option>
                                         <?php endforeach; ?>
-                                        <?php if (isset($_SESSION['error']['danh_muc_id'])) { ?>
-                                            <p class="text-danger">
-                                                <?= $_SESSION['error']['danh_muc_id'] ?>
-                                            </p>
-                                        <?php } ?>
                                     </select>
+                                    <?php if (isset($_SESSION['error']['danh_muc_id'])) { ?>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['danh_muc_id'] ?>
+                                        </p>
+                                    <?php } ?>
                                 </div>
 
                                 <div class="form-group">
@@ -56,6 +56,16 @@ include './views/layouts/slidebar.php';
                                     <?php if (isset($_SESSION['error']['gia'])) { ?>
                                         <p class="text-danger">
                                             <?= $_SESSION['error']['gia'] ?>
+                                        </p>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Giá Khuyến Mãi</label>
+                                    <input type="number" name="gia_khuyen_mai" class="form-control" id="" placeholder="Nhập giá khuyến mãi" min="0">
+                                    <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['gia_khuyen_mai'] ?>
                                         </p>
                                     <?php } ?>
                                 </div>

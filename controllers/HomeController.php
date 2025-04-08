@@ -5,17 +5,13 @@ class HomeController
     public $modelSanPham;
     public $modelTaiKhoan;
     public $modelBinhLuan;
-    public $modelGioHang;
+
     public $modelDonHang;
 
     public function __construct()
     {
         $this->modelDanhMuc = new DanhMuc();
         $this->modelSanPham = new SanPham();
-        // $this->modelTaiKhoan = new TaiKhoan();
-        // // $this->modelBinhLuan = new BinhLuan();
-        // $this->modelGioHang = new GioHang();
-        // $this->modelDonHang = new DonHang();
     }
 
     public function home()
@@ -26,10 +22,13 @@ class HomeController
     }
     // sản phẩm
 
-    public function chiTietSanPham()
+    public function detailSanPham()
     {
         $id = $_GET['id_san_pham'];
+        // var_dump($id);
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
+        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($sanPham['danh_muc_id']);
+
         // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
@@ -37,9 +36,9 @@ class HomeController
         //binhluan
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
 
-        $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['id_dm']);
+        $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
 
-        if ($sanPham) {
+        if ($sanPham && isset($sanPham['danh_muc_id'])) {
             require_once './views/detailSanPham.php';
         } else {
             header('Location: ' . BASE_URL);

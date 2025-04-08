@@ -48,7 +48,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . 'don-hang' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . 'listDonHang' ?>" class="nav-link">
             <i class="nav-icon fas fa-file-invoice-dollar"></i>
             <p>
               Đơn hàng

@@ -6,7 +6,7 @@
     <section class="slider-area">
         <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner2.jpeg">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner2.jpg">
                     <div class="container">
                         <div class="row">
 
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner3.jpeg">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner3.jpg">
                     <div class="container">
                         <div class="row">
 
@@ -25,7 +25,7 @@
             </div>
 
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner1.jpeg">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner1.jpg">
                     <div class="container">
                         <div class="row">
 
