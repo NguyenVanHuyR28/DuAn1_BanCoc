@@ -53,8 +53,8 @@ class SanPham
         try {
             $sql = 'SELECT binh_luan.*, tai_khoan.ho_ten
                     FROM binh_luan
-                    INNER JOIN tai_khoan ON binh_luan.id_tai_khoan = tai_khoan.id
-                    WHERE binh_luan.san_pham_id = :id AND binh_luan.trang_thai = 1';
+                    INNER JOIN tai_khoan ON binh_luan.tai_khoan_id = tai_khoan.id
+                    WHERE binh_luan.san_pham_id = :id ';
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([

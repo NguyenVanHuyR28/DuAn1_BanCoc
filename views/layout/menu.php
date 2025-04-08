@@ -88,7 +88,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="<?= BASE_URL.'?act=giohang' ?>"
+                                        <a href="<?= BASE_URL.'?act=gioHang' ?>"
                                             class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
                                         </a>

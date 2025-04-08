@@ -58,7 +58,7 @@ if (isset($_SESSION['tai_khoan'])) {
                 
 
                 <div class="minicart-button">
-                    <a href="<?= BASE_URL . '?act=gio-hang' ?>"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                    <a href="<?= BASE_URL . '?act=gioHang' ?>"><i class="fa fa-shopping-cart"></i> View Cart</a>
                     <a href="<?= BASE_URL . '?act=thanh-toan' ?>"><i class="fa fa-share"></i> Đặt hàng</a>
                 </div>
             </div>

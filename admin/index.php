@@ -7,10 +7,12 @@ require_once '../commons/function.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminSanPhamController.php';
+require_once './controllers/AdminDonHangController.php';
 
 // Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
+require_once './models/AdminDonHang.php';
 
 
 //route 
@@ -38,4 +40,7 @@ match ($act) {
     'formEditSanPham' => (new AdminSanPhamController())->formEditSanPham(),
     'editSanPham' => (new AdminSanPhamController())->editSanPham(),
     'deleteSanPham' => (new AdminSanPhamController())->deleteSanPham(),
+
+    // Router Đơn Hàng
+    'listDonHang' => (new AdminDonHangController())->listDonHang(),
 };

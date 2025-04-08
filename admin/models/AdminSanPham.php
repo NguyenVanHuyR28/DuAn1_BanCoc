@@ -12,7 +12,8 @@ class AdminSanPham
         try {
             $sql = "SELECT san_pham.*, danh_muc.ten_danh_muc 
                     FROM san_pham
-                    INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id;
+                    INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id
+                    ORDER BY san_pham.ngay_tao DESC;
                     ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
