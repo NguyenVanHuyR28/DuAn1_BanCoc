@@ -10,7 +10,7 @@ require_once './controllers/HomeController.php';
 // Require toàn bộ file Models
 require_once './models/DanhMuc.php';
 require_once './models/SanPham.php';
-// require_once './models/TaiKhoan.php';
+require_once './models/TaiKhoan.php';
 // require_once './models/BinhLuan.php';
 // require_once './models/GioHang.php';
 // require_once './models/DonHang.php';
@@ -19,8 +19,6 @@ require_once './models/SanPham.php';
 $act = $_GET['act'] ?? '/';
 
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
-
-
 match ($act) {
 //     // Trang chủ
     '/' => (new HomeController())->home(),
@@ -32,16 +30,17 @@ match ($act) {
 
 
 //     //authen
-//     'login' => (new HomeController())->formLogin(),
-//     'logout' => (new HomeController())->logout(),
-//     'check-login' => (new HomeController())->postLogin(),
-//     'register' => (new HomeController())->formRegister(),
-//     'dang-ky' => (new HomeController())->postRegister(),
+    'dangnhap' => (new HomeController())->formDangNhap(),
+    'dangxuat' => (new HomeController())->logout(),
+    'checkdangnhap' => (new HomeController())->dangNhap(),
+    'dangky' => (new HomeController())->formDangKy(),
+    'checkdangky' => (new HomeController())->dangKy(),
+    'xoaghinho' => (new HomeController())->xoaCookie(),
 
 //     //chinh-sua-thong-tin-nguoi-dung
-//     'form-chinh-sua' => (new HomeController())->formUser(),
-//     'thay-doi-thong-tin-tai-khoan' => (new HomeController())->postUser(),
-//     'sua-mat-khau-ca-nhan' => (new HomeController())->postEditMatKhauCaNhan(),
+    'formchinhsua' => (new HomeController())->formUser(),
+    'info-Acc' => (new HomeController())-> infoAcc(),
+    'thaydoithongtintaikhoan' => (new HomeController())-> editInfo(),
 //     //binhluan
 //     'dang-binh-luan' => (new HomeController())->postBinhLuan(),
 

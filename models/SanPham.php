@@ -66,12 +66,12 @@ class SanPham
             echo "Error" . $e->getMessage();
         }
     }
-    public function getListSanPhamDanhMuc($id_dm) {
+    public function getListSanPhamDanhMuc($danh_muc_id) {
         try {
             $sql = 'SELECT san_pham.*, danh_muc.ten_danh_muc
                     FROM san_pham
                     INNER JOIN danh_muc ON danh_muc_id = danh_muc.id
-                    WHERE danh_muc_id = '. $id_dm;
+                    WHERE danh_muc_id = '. $danh_muc_id;
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute();
@@ -81,17 +81,17 @@ class SanPham
             echo "Error" . $e->getMessage();
         }
     }
-    public function getSanPhamByCategory($id_dm) {
+    public function getSanPhamByCategory($danh_muc_id) {
         try {
             $sql = 'SELECT san_pham.*, danh_muc.ten_danh_muc
                     FROM san_pham
                     INNER JOIN danh_muc ON danh_muc_id = danh_muc.id
-                    WHERE danh_muc_id = :id_dm
+                    WHERE danh_muc_id    = :danh_muc_id
                     AND san_pham.trang_thai = 1';
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
-                ':id_dm' => $id_dm
+                ':danh_muc_id' => $danh_muc_id
             ]);
 
             return $stmt->fetchAll();

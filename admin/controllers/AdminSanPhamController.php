@@ -64,7 +64,7 @@ class AdminSanPhamController
                 // var_dump(123);
                 // die;
                 $this->modelSanPham->insertSanPham($danh_muc_id, $ten_san_pham, $gia, $so_luong, $file_thumb, $mo_ta);
-                header('location: ' . BASE_URL_ADMIN . 'listSanPham');
+                header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
                 exit();
             } else {
                 // var_dump('sai');
@@ -83,7 +83,7 @@ class AdminSanPhamController
             require_once('views/sanpham/editSanPham.php');
         } else {
             echo 'Sản Phẩm không tồn tại';
-            header('Location:' . BASE_URL_ADMIN . 'formEditSanPham');
+            header('Location:' . BASE_URL_ADMIN . '?act=formEditSanPham');
             exit();
         }
     }
@@ -145,7 +145,7 @@ class AdminSanPhamController
             if (empty($error)) {
                 unset($_SESSION['error']); // Xóa lỗi nếu cập nhật thành công
                 $this->modelSanPham->editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $so_luong, $new_file, $mo_ta);
-                header('location: ' . BASE_URL_ADMIN . 'listSanPham');
+                header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
                 exit();
             } else {
                 $_SESSION['flash'] = true;
@@ -162,9 +162,9 @@ class AdminSanPhamController
         if ($id) {
             $this->modelSanPham->deleteSanPham($id);
             deleteFile($products['hinh_anh']);
-            header('location:' . BASE_URL_ADMIN . 'listSanPham');
+            header('location:' . BASE_URL_ADMIN . '?act=listSanPham');
         } else {
-            header('location:' . BASE_URL_ADMIN . 'listSanPham');
+            header('location:' . BASE_URL_ADMIN . '?act=listSanPham');
         }
     }
 }
