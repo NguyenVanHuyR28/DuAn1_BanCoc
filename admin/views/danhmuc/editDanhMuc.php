@@ -26,7 +26,7 @@ include './views/layouts/slidebar.php';
                 <h3 class="card-title">Form </h3>
               </div>
               
-              <form action="<?= BASE_URL_ADMIN . 'editDanhMuc' ?>" method="POST">
+              <form action="<?= BASE_URL_ADMIN . '?act=editDanhMuc' ?>" method="POST">
                 <input type="text" name="id" value="<?= $danhMuc['id'] ?>" hidden>
                 <div class="card-body">
                   <div class="form-group">

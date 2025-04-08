@@ -23,7 +23,7 @@ include './views/layouts/slidebar.php';
                             <h3 class="card-title">Form </h3>
                         </div>
 
-                        <form action="<?= BASE_URL_ADMIN . 'addSanPham' ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= BASE_URL_ADMIN . '?act=addSanPham' ?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên Sản Phẩm</label>

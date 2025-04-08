@@ -16,7 +16,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN .'/'  ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN .''  ?>" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Thống kê
@@ -27,7 +27,7 @@
         
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . 'listDanhMuc' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=listDanhMuc' ?>" class="nav-link">
           <i class="fas fa-folder"></i>
 
             <p>
@@ -37,7 +37,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . 'listSanPham' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=listSanPham' ?>" class="nav-link">
           <i class="fas fa-box"></i>
 
 
@@ -59,32 +59,12 @@
         
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri' ?>" class="nav-link">        
             <i class="nav-icon fas fa-user"></i>
             <p>
               Tài khoản
             </p>
-            <i class="fas fa-angle-left right"></i>
-          </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= BASE_URL_ADMIN . 'list-tai-khoan-quan-tri' ?>" class="nav-link">
-                  <i class="nav-icon far fa-user"></i>
-                  <p>Tài khoản quản trị</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="<?= BASE_URL_ADMIN . 'list-tai-khoan-khach-hang' ?>" class="nav-link">
-                  <i class="nav-icon far fa-user"></i>
-                  <p>Tài khoản Khách hàng</p>
-                </a>
-              </li>
-            </ul>
-          
         </li>
-
-        
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

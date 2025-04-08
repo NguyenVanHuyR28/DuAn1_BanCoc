@@ -56,10 +56,10 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['mo_ta']?></td>
                                         <td><?= $products['ngay_tao'] ?></td>
                                         <td>
-                                            <a href="<?= BASE_URL_ADMIN . 'formEditSanPham&id=' . $products['id'] ?>">
+                                            <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>
                                             </a>
-                                            <a href="<?= BASE_URL_ADMIN . 'deleteSanPham&id=' . $products['id'] ?>"
+                                            <a href="<?= BASE_URL_ADMIN . '?act=deleteSanPham&id=' . $products['id'] ?>"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
                                                 <button class="btn btn-danger">Xóa</button>
                                             </a>

@@ -19,7 +19,7 @@
         
       </li>
       <li class="nav-item" >
-      <a href="<?= BASE_URL . '?act=login' ?>" class="nav-link" onclick="return confirm('Đăng xuất tài khoản')">
+      <a href="<?= BASE_URL . '?act=dangxuat' ?>" class="nav-link" onclick="return confirm('Đăng xuất tài khoản')">
           <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>

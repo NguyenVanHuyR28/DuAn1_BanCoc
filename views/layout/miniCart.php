@@ -1,17 +1,17 @@
 <?php
 
-if (isset($_SESSION['user_client'])) {
-    $mail  = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+if (isset($_SESSION['tai_khoan'])) {
+    $email  = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
     //   var_dump($mail['id']);die; 
     // Lấy dữ liệu giỏ hàng người dùng
-    $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
-    if (!$gioHang) {
-        $gioHangId = $this->modelGioHang->addGiohang($mail['id']);
-        $gioHang = ['id' => $gioHangId];
-        $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-    } else {
-        $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-    }
+    // $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+    // if (!$gioHang) {
+    //     $gioHangId = $this->modelGioHang->addGiohang($mail['id']);
+    //     $gioHang = ['id' => $gioHangId];
+    //     $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+    // } else {
+    //     $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+    // }
 }
 ?>
 <!-- offcanvas mini cart start -->
@@ -58,7 +58,7 @@ if (isset($_SESSION['user_client'])) {
                 
 
                 <div class="minicart-button">
-                    <a href="<?= BASE_URL . '?act=gio-hang' ?>"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                    <a href="<?= BASE_URL . '?act=gioHang' ?>"><i class="fa fa-shopping-cart"></i> View Cart</a>
                     <a href="<?= BASE_URL . '?act=thanh-toan' ?>"><i class="fa fa-share"></i> Đặt hàng</a>
                 </div>
             </div>

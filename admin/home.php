@@ -48,7 +48,7 @@ include './views/layouts/slidebar.php';
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="<?= BASE_URL_ADMIN . 'don-hang-moi' ?>" class="small-box-footer">Xem thêm<i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?= BASE_URL_ADMIN . '?act=don-hang-moi' ?>" class="small-box-footer">Xem thêm<i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -63,7 +63,7 @@ include './views/layouts/slidebar.php';
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="<?= BASE_URL_ADMIN . 'top10' ?>" class="small-box-footer">Xem thêm<i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?= BASE_URL_ADMIN . '?act=top10' ?>" class="small-box-footer">Xem thêm<i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -78,7 +78,7 @@ include './views/layouts/slidebar.php';
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="<?= BASE_URL_ADMIN . 'don-hoan' ?>" class="small-box-footer">Xem thêm<i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?= BASE_URL_ADMIN . '?act=don-hoan' ?>" class="small-box-footer">Xem thêm<i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -93,7 +93,7 @@ include './views/layouts/slidebar.php';
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="<?= BASE_URL_ADMIN . 'don-bom' ?>" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?= BASE_URL_ADMIN . '?act=don-bom' ?>" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

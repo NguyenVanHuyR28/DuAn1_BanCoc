@@ -23,7 +23,7 @@ include './views/layouts/slidebar.php';
                             <h3 class="card-title">Form </h3>
                         </div>
 
-                        <form action="<?= BASE_URL_ADMIN . 'addDanhMuc' ?>" method="POST">
+                        <form action="<?= BASE_URL_ADMIN . '?act=addDanhMuc' ?>" method="POST">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Tên danh mục</label>
