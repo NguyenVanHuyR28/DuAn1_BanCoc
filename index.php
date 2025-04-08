@@ -29,7 +29,7 @@ match ($act) {
     //     //sanpham
     'allsanpham' => (new HomeController())->allSanPham(),
     'sanphamdanhmuc' => (new HomeController())->danhSachSanPhamTheoDanhMuc(),
-    'chitietsanpham' => (new HomeController())->detailSanPham(),
+    'chi-tiet-san-pham' => (new HomeController())->detailSanPham(),
     // Giỏ Hàng
     'gioHang' => (new GioHangController())->gioHang(),
     'them-gio-hang' => (new GioHangController())->addGioHang(),

@@ -12,7 +12,8 @@ class GioHang
     public function getAllCart()
     {
         try {
-            $sql = 'SELECT gio_hang.*, san_pham.ten_san_pham, san_pham.hinh_anh, san_pham.gia
+            $sql =
+                'SELECT gio_hang.*, san_pham.ten_san_pham, san_pham.hinh_anh, san_pham.gia
                 FROM gio_hang
                 INNER JOIN san_pham ON san_pham.id = gio_hang.san_pham_id';
             $stmt = $this->conn->prepare($sql);

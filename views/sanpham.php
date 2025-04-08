@@ -95,13 +95,13 @@
                                             </div>
 
                                             <div class="cart-hover">
-                                                <button class="btn btn-cart"><a style="color: darkgray;" href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=' . $sanPham['id'] ?>">Xem chi tiết</a></button>
+                                                <button class="btn btn-cart"><a style="color: darkgray;" href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">Xem chi tiết</a></button>
                                             </div>
 
                                         </figure>
                                         <div class="product-caption text-center">
                                             <h6 class="product-name">
-                                                <a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham= ' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham= ' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
                                             </h6>
                                             <div class="price-box">
                                                     <?php if ($sanPham['gia_khuyen_mai']) { ?>

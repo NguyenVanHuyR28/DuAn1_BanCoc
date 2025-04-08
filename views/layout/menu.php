@@ -71,14 +71,9 @@
                                     </li>
 
                                     <li class="user-hover">
-                                        <a href="#">
-                                            <i class="pe-7s-user"></i>
+                                        <a href="<?= BASE_URL . '?act=gioHang' ?>">
+                                            <i class="pe-7s-cart"></i>
                                         </a>
-                                        <ul class="dropdown-list">
-                                            <li>
-                                                <a href="<?= BASE_URL . '?act=gioHang' ?>">Giỏ Hàng</a>
-                                            </li>
-                                        </ul>
                                     </li>
 
 
