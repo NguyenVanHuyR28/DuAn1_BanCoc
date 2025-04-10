@@ -1,15 +1,15 @@
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      By <b> Team 9 no Coppy</b>
+        By <b> Team 8 no Coppy</b>
     </div>
     <strong>Website Cốc Đẹp</strong>
-  </footer>
+</footer>
 
-  <!-- Control Sidebar -->
+<!-- Control Sidebar -->
 
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+<!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 </div>
