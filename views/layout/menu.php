@@ -42,48 +42,56 @@
 
                     <!-- mini cart area start -->
                     <div class="col-lg-4">
-                        <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+                        <div
+                            class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                             <div class="header-search-container">
-                                <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                <form class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Nhập tên sản phẩn bạn cần" class="header-search-field">
+                                <button class="search-trigger d-xl-none d-lg-block"><i
+                                        class="pe-7s-search"></i></button>
+                                <form class="header-search-box d-lg-none d-xl-block" role="search" method="post">
+                                    <input type="search" name="search" value="<?= $_POST['search'] ?? "" ?>" placeholder="Tìm kiếm sản phẩm" class="header-search-field">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
-                                    <li>
-                                        <label for="">
-                                            <?php
-                                            if (isset($_SESSION['user_client'])) {
-                                                echo $_SESSION['user_client'];
-                                            }
-                                            ?>
-                                        </label>
-                                        <?php
-                                        if (isset($_SESSION['user_client'])) { ?>
-                                            <a href="#" class="minicart-btn">
-                                                <i class="pe-7s-shopbag"></i>
-                                                <div class="notification">2</div>
-                                            </a>
-                                        <?php  }  ?>
-                                        
-                                    </li>
                                     <li class="user-hover">
-                                        <a href="#">
+                                        <a href="">
                                             <i class="pe-7s-user"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <?php
-                                            if (isset($_SESSION['user_client'])) { ?>
-                                                <li><a href="<?= BASE_URL . '?act=form-chinh-sua' ?>">Tài khoản</a></li>
-                                                <li><a href="<?= BASE_URL . '?act=logout' ?>" class="nav-link" onclick="return confirm('Đăng xuất tài khoản')">
-                                                        Đăng xuất
-                                                    </a></li>
-                                            <?php  } else { ?>
-                                                <li><a href="<?= BASE_URL . '?act=login' ?>">Đăng nhập</a></li>
-                                            <?php } ?>
+                                            <div>
+                                                <?php if (isset($_SESSION['tai_khoan'])) { ?>
+                                                <p><span style="font-weight: 400;">Acc:</span>
+                                                </span><a href="<?=BASE_URL.'?act=formchinhsua'?>" style="font-size: 11px;"><?=$_SESSION['tai_khoan']?></a>
+                                                </p>
+                                                <br>
+                                                <p><a style="font-size: 12px;"
+                                                        href="<?=BASE_URL.'?act=dangxuat'?>"
+                                                        onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a>
+                                                </p>
+
+                                                <?php } elseif (isset($_SESSION['tai_khoan_admin'])) { ?>
+
+                                                <p><span style="font-weight: 600;">Acc:
+                                                    </span><a
+                                                        style="font-size: 9px;"> <?=$_SESSION['tai_khoan_admin']?></a>
+                                                </p>
+                                                <br>
+                                                <span><a style="font-size: 15px;" href="<?=BASE_URL.'?act=dangxuat'?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng  xuất</a></span> <br> <br>
+                                                <span><a style="font-size: 13px;" href="<?=BASE_URL_ADMIN?>">Đăng nhập Admin</a></span>
+                                                <?php } else { ?>
+                                                <li><a href="<?= BASE_URL.'?act=dangnhap'?>">Đăng nhập</a></li>
+                                                <li><a href="<?= BASE_URL.'?act=dangky'?>">Đăng ký</a></li>
+                                                <?php } ?>
+                                            </div>
                                         </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="<?= BASE_URL.'?act=gioHang' ?>"
+                                            class="minicart-btn">
+                                            <i class="pe-7s-shopbag"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>

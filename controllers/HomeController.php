@@ -1,5 +1,5 @@
 <?php
-require_once './models/BinhLuan.php';
+// require_once './models/BinhLuan.php';
 
 class HomeController
 {
@@ -7,8 +7,7 @@ class HomeController
     public $modelDanhMuc;
     public $modelSanPham;
     public $modelTaiKhoan;
-    public $modelBinhLuan;
-    public $modelGioHang;
+    // public $modelBinhLuan;
 
     public $modelDonHang;
 
@@ -17,9 +16,8 @@ class HomeController
         $this->modelDanhMuc = new DanhMuc();
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
-        $this->modelBinhLuan = new BinhLuan();
         // // $this->modelBinhLuan = new BinhLuan();
-        $this->modelGioHang = new GioHang();
+        // $this->modelGioHang = new GioHang();
         // $this->modelDonHang = new DonHang();
     }
 
@@ -87,7 +85,7 @@ class HomeController
     // Đăng ký, đăng nhập, đăng xuất
     public function formDangNhap()
     {
-        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();    
         require_once './views/auth/dangnhap.php';
         deleteSessionError();
     }
@@ -113,18 +111,18 @@ class HomeController
                 // Lưu thông tin vào session
                 $_SESSION['tai_khoan_admin'] = $tai_khoan;
                 // var_dump($_SESSION['taikhoan_admin']);die;
-                header('location:' . BASE_URL_ADMIN);
+                header('location:'.BASE_URL_ADMIN );
                 exit();
             } elseif ($tai_khoan == 'Trang client') {
                 $_SESSION['tai_khoan'] = $email;
-                header('location:' . BASE_URL);
+                header('location:'. BASE_URL);
                 exit();
             } else {
                 // Lỗi thì lưu vào session
                 $_SESSION['error'] = $tai_khoan;
 
                 $_SESSION['flash'] = true;
-                header('location:' . BASE_URL . '?act=dangnhap');
+                header('location:'.BASE_URL . '?act=dangnhap');
                 exit();
             }
         }
@@ -138,10 +136,10 @@ class HomeController
         deleteSessionError();
     }
 
-    public function dangKy()
+    public function dangKy() 
     {
         $listTaiKhoan = $this->modelTaiKhoan->getAllTaiKhoan();
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $ho_ten = $_POST['ho_ten'];
             $email = $_POST['email'];
@@ -149,7 +147,7 @@ class HomeController
             $so_dien_thoai = $_POST['so_dien_thoai'];
             $dia_chi = $_POST['dia_chi'];
             $remat_khau = $_POST['remat_khau'];
-            $role = 0;
+            $role = 0; 
 
             $errors = [];
 
@@ -215,12 +213,12 @@ class HomeController
         if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])) {
             session_unset();
             session_destroy();
-            header('location:' . BASE_URL . '?act=dangnhap');
+            header('location:'.BASE_URL.'?act=dangnhap');
         } else {
-            header('location:' . BASE_URL);
-        }
+            header('location:'.BASE_URL);
+            }
     }
-    public function xoaCookie()
+    public function xoaCookie() 
     {
         if (isset($_COOKIE['email']) || isset($_COOKIE['mat_khau'])) {
             setcookie("email", "", time() - (86400 * 7));
@@ -234,10 +232,12 @@ class HomeController
     // Chỉnh sửa thông tin cá nhân
     public function infoAcc()
     {
-        $TKById
+        $id = $_GET['id'];
+        $listCategory = $this->modelDanhMuc->getAllDanhMuc();
+        $TKById = $this->modelTaiKhoan->getTKById($id);
         require_once './views/infoAcc.php';
     }
-    public function formUser()
+    public function formUser() 
     {
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
         $tai_khoan_id = $user['id'];
@@ -254,7 +254,7 @@ class HomeController
         $email = $_POST['email'];
         $dia_chi = $_POST['dia_chi'];
         $mat_khau = $_POST['mat_khau'];
-        $checkEdit = $this->modelTaiKhoan->editInfo($id, $ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi);
+        $checkEdit = $this->modelTaiKhoan-> editInfo($id, $ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi);
         if ($checkEdit) {
             echo "<script>
                 alert('Sửa thông tin thành công!');
@@ -269,59 +269,5 @@ class HomeController
             exit;
         }
     }
-
-    public function thanhToan(){
-        $tai_khoan_id = $_GET['id'];
-        $tk_id = $this->modelTaiKhoan->getTKById($tai_khoan_id);
-        $sanPham = $this->modelGioHang->getAllCart($tai_khoan_id);
-        // var_dump($sanPham);die;
-        require_once('views/thanhToan.php');
-    }
-
-    // Bình luận
-    public function postBinhLuan()
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
-            $san_pham_id = $_POST['san_pham_id'];
-            $tai_khoan_id = $_POST['tai_khoan_id'];
-            $noi_dung = $_POST['noi_dung'];
-            $ngay_tao = date('Y-m-d H:i:s');
-            $trang_thai = 1;
-
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
-
-            $errors = [];
-            if (empty($noi_dung)) {
-                $errors['noi_dung'] = "Bạn chưa bình luận";
-            }
-
-            $_SESSION['error'] = $errors;
-
-            // nếu ko lỗi tiến hành thêm danh mục
-            if (empty($errors)) {
-
-                //Nếu ko lỗi tiến hành thêm danh mục
-                $this->modelBinhLuan->insertBinhLuan(
-                    $san_pham_id,
-                    $tai_khoan_id,
-                    $noi_dung,
-                    $ngay_tao,
-                    $trang_thai
-                );
-
-
-                header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
-
-                exit();
-            } else {
-                //trả về form và lỗi
-                header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
-                exit();
-            }
-        }
-    }
-    
 }
+
