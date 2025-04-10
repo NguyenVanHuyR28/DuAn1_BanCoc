@@ -31,7 +31,7 @@ class AdminDanhMucController
 
             if (empty($error)) {
                 $this->modelDanhMuc->insertDanhMuc($ten_danh_muc, $mo_ta);
-                header('Location: ' . BASE_URL_ADMIN . 'listDanhMuc');
+                header('Location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
                 exit();
             } else {
                 require_once('views/danhmuc/addDanhMuc.php');
@@ -46,7 +46,7 @@ class AdminDanhMucController
             require_once('views/danhmuc/editDanhMuc.php');
         } else {
             echo 'Danh mục không tồn tại';
-            header('Location:' . BASE_URL_ADMIN . 'formEditDanhMuc');
+            header('Location:' . BASE_URL_ADMIN . '?act=formEditDanhMuc');
             exit();
         }
     }
@@ -70,7 +70,7 @@ class AdminDanhMucController
             if (empty($errors)) {
                 // Nếu errors rỗng thì tiến hành Sửa
                 $this->modelDanhMuc->editDanhMuc($id, $ten_danh_muc, $mo_ta);
-                header('location: ' . BASE_URL_ADMIN . 'listDanhMuc');
+                header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
                 exit();
             } else {
                 // Trả về form và lỗi
@@ -87,10 +87,10 @@ class AdminDanhMucController
         $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
         if ($id) {
             $this->modelDanhMuc->deleteDanhMuc($id);
-            header('location: ' . BASE_URL_ADMIN . 'listDanhMuc');
+            header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
             exit();
         } else {
-            header('location: ' . BASE_URL_ADMIN . 'listDanhMuc');
+            header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
         }
     }
 }

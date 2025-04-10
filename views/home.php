@@ -6,6 +6,15 @@
     <section class="slider-area">
         <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
             <div class="hero-single-slide hero-overlay">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner1.jpg">
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-single-slide hero-overlay">
                 <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner2.jpg">
                     <div class="container">
                         <div class="row">
@@ -14,18 +23,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="hero-single-slide hero-overlay">
                 <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner3.jpg">
-                    <div class="container">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner1.jpg">
                     <div class="container">
                         <div class="row">
 
@@ -57,7 +57,7 @@
                                         <?php foreach ($listSanPham as $key => $sanPham) : ?>
                                             <div class="product-item">
                                                 <figure class="product-thumb">
-                                                    <a href="<?= BASE_URL . '?act=chitietsanpham$id_sp=' . $sanPham['id'] ?>">
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham$id_san_pham=' . $sanPham['id'] ?>">
                                                         <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product" class="pri-img">
                                                         <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product" class="sec-img">
                                                     </a>
@@ -108,6 +108,4 @@
 
     </section>
 </main>
-<?php require_once 'layout/miniCart.php'; ?>
-
 <?php require_once 'layout/footer.php'; ?>

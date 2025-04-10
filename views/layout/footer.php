@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="copyright-text text-center">
-                            <p>&copy; 2024 <b>Pet Shop</b> Được tạo  <i class="fa fa-heart text-danger"></i> bởi <b>Group 8</b></a></p>
+                            <p>&copy; 2024 <b>HKD Shop</b> Được tạo  <i class="fa fa-heart text-danger"></i> bởi <b>Group 8</b></a></p>
                         </div>
                     </div>
                 </div>

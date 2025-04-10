@@ -43,4 +43,7 @@ match ($act) {
 
     // Router Đơn Hàng
     'listDonHang' => (new AdminDonHangController())->listDonHang(),
+    'detailDonHang' => (new AdminDonHangController()) ->chiTietDonHang(),
+    'capNhat' => (new AdminDonHangController())->editTrangThai(),
+
 };

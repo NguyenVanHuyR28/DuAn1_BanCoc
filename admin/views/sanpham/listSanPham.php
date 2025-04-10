@@ -20,7 +20,7 @@ include './views/layouts/slidebar.php';
             <div class="row">
                 <div class="col-12">
                     <div class="card-header">
-                        <a href="<?= BASE_URL_ADMIN . 'formAddSanPham' ?>">
+                        <a href="<?= BASE_URL_ADMIN . '?act=formAddSanPham' ?>">
                             <button class="btn btn-primary">Thêm Sản Phẩm</button>
                         </a>
                     </div>
@@ -48,7 +48,7 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['ten_danh_muc'] ?></td>
                                         <td><?= $products['ten_san_pham'] ?></td>
                                         <td><?= number_format($products['gia']) ?></td>
-                                        <td><?= $products['gia_khuyen_mai'] ?></td>
+                                        <td><?= number_format($products['gia_khuyen_mai']) ?></td>
                                         <td><?= $products['so_luong'] ?></td>
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
@@ -56,10 +56,10 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['mo_ta']?></td>
                                         <td><?= $products['ngay_tao'] ?></td>
                                         <td>
-                                            <a href="<?= BASE_URL_ADMIN . 'formEditSanPham&id=' . $products['id'] ?>">
+                                            <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>
                                             </a>
-                                            <a href="<?= BASE_URL_ADMIN . 'deleteSanPham&id=' . $products['id'] ?>"
+                                            <a href="<?= BASE_URL_ADMIN . '?act=deleteSanPham&id=' . $products['id'] ?>"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
                                                 <button class="btn btn-danger">Xóa</button>
                                             </a>

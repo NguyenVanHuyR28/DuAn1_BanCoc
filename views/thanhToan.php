@@ -1,7 +1,6 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
 
-
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -11,107 +10,126 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #f2f4f8;
         }
 
         .card {
             border-radius: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-label {
+            font-weight: 500;
         }
     </style>
 </head>
 
 <body>
     <div class="container py-5">
-        <div class="row">
-            <!-- Form thanh toán bên trái -->
-            <div class="col-md-7">
-                <div class="card p-4 mb-4">
-                    <h2 class="mb-4 text-start">Thông Tin Thanh Toán</h2>
-                    <form>
+        <h2 class="text-center mb-5 fw-bold text-primary">Xác Nhận Thanh Toán</h2>
+
+        <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="POST">
+            <div class="row g-4">
+                <!-- Cột trái: Thông tin giao hàng -->
+                <div class="col-md-7">
+                    <div class="card p-4">
+                        <h4 class="mb-4 text-primary">Thông Tin Giao Hàng</h4>
+
                         <div class="mb-3">
-                            <label for="fullname" class="form-label">Họ và Tên</label>
-                            <input type="text" class="form-control" id="fullname" placeholder="Nguyễn Văn A" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="email@example.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="0123456789" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Địa chỉ giao hàng</label>
-                            <textarea class="form-control" id="address" rows="3" required></textarea>
+                            <label for="ten_nguoi_nhan" class="form-label">Họ và Tên</label>
+                            <input type="text" class="form-control" id="ten_nguoi_nhan" name="ten_nguoi_nhan" required>
                         </div>
 
-                        <h5 class="mt-4 mb-3">Chọn phương thức thanh toán:</h5>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="cod" value="cod" checked>
-                            <label class="form-check-label" for="cod">
-                                Thanh toán khi nhận hàng (COD)
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="bank" value="bank">
-                            <label class="form-check-label" for="bank">
-                                Chuyển khoản ngân hàng
-                            </label>
-                        </div>
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="wallet" value="wallet">
-                            <label class="form-check-label" for="wallet">
-                                Ví điện tử (Momo, ZaloPay...)
-                            </label>
+                        <div class="mb-3">
+                            <label for="email_nguoi_nhan" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email_nguoi_nhan" name="email_nguoi_nhan" required>
                         </div>
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Xác Nhận Thanh Toán</button>
+                        <div class="mb-3">
+                            <label for="sdt_nguoi_nhan" class="form-label">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan" required>
                         </div>
-                    </form>
+
+                        <div class="mb-3">
+                            <label for="dia_chi_nguoi_nhan" class="form-label">Địa chỉ giao hàng</label>
+                            <textarea class="form-control" id="dia_chi_nguoi_nhan" name="dia_chi_nguoi_nhan" rows="3" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ghi_chu" class="form-label">Ghi chú (nếu có)</label>
+                            <textarea class="form-control" id="ghi_chu" name="ghi_chu" rows="2"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Phương thức thanh toán</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="phuong_thuc_thanh_toan_id" id="cod" value="1" checked>
+                                <label class="form-check-label" for="cod">Thanh toán khi nhận hàng (COD)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="phuong_thuc_thanh_toan_id" id="bank" value="2">
+                                <label class="form-check-label" for="bank">Chuyển khoản ngân hàng</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="phuong_thuc_thanh_toan_id" id="wallet" value="3">
+                                <label class="form-check-label" for="wallet">Ví điện tử (Momo, ZaloPay...)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Tóm tắt đơn hàng -->
+                <div class="col-md-5">
+                    <div class="card p-4 bg-light">
+                        <h4 class="mb-3 text-secondary">Tóm Tắt Đơn Hàng</h4>
+                        <ul class="list-group mb-3">
+                            <?php $tongTien = 0 ?>
+                            <?php foreach ($sanPham as $item): ?>
+                                <?php
+                                $gia_ap_dung = (!empty($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0)
+                                    ? $item['gia_khuyen_mai']
+                                    : $item['gia'];
+                                $thanhTien = $gia_ap_dung * $item['so_luong'];
+                                $tongTien += $thanhTien;
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <div>
+                                        <strong><?= $item['ten_san_pham'] ?></strong><br>
+                                        <small class="text-muted">Số lượng: <?= $item['so_luong'] ?></small>
+                                    </div>
+                                    <span><?= number_format($thanhTien, 0, ',', '.') ?>₫</span>
+                                </li>
+                                <input type="hidden" name="select-product[]" value="<?= $item['id'] ?>">
+                                <!-- <input type="hidden" name="product-quantity[<?= $item['id'] ?>]" value="<?= $item['so_luong'] ?>"> -->
+                                <input type="hidden" name="product-price[<?= $item['id'] ?>]" value="<?= $gia_ap_dung ?>">
+                            <?php endforeach; ?>
+
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Tạm tính</span>
+                                <strong><?= number_format($tongTien, 0, ',', '.') ?>₫</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Phí vận chuyển</span>
+                                <strong>30.000₫</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Tổng cộng</span>
+                                <strong class="text-danger"><?= number_format($tongTien + 30000, 0, ',', '.') ?>₫</strong>
+                            </li>
+                        </ul>
+                        <input type="hidden" name="tong_tien" value="<?= $tongTien + 30000 ?>">
+
+                        <button type="submit" class="btn btn-success btn-lg w-100 mt-2">Xác nhận đặt hàng</button>
+                    </div>
                 </div>
             </div>
-
-            <!-- Phần bên phải: Tóm tắt đơn hàng -->
-           <?php foreach ($sanPham as $item) : ?>
-            <div class="col-md-5">
-                <div class="card p-4 bg-light">
-                    <h4 class="mb-3">Tóm Tắt Đơn Hàng</h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between">
-                            <div>
-                                <h6 class="my-0"><?= $item['ten_san_pham'] ?></h6>
-                                <small class="text-muted">Mã: SP001</small>
-                            </div>
-                            <span class="text-muted">350.000đ</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <div>
-                                <h6 class="my-0"></h6>
-                                <small class="text-muted">Mã: SP002</small>
-                            </div>
-                            <span class="text-muted">550.000đ</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Tạm tính</span>
-                            <strong>900.000đ</strong>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Phí vận chuyển</span>
-                            <strong>30.000đ</strong>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Tổng cộng</span>
-                            <strong>930.000đ</strong>
-                        </li>
-                    </ul>
-                    <p class="text-muted">Bạn có thể kiểm tra lại đơn hàng trước khi xác nhận thanh toán.</p>
-                </div>
-            </div>
-            <?php endforeach ; ?>
-        </div>
+        </form>
     </div>
+
     <?php require_once 'layout/footer.php'; ?>
 </body>
 

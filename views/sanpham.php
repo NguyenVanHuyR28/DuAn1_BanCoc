@@ -10,7 +10,7 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item active" aria-current="page" ><a href="<?= BASE_URL . '?act=all-san-pham' ?>">shop</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" ><a href="<?= BASE_URL . '?act=allsanpham' ?>">shop</a></li>
                                 
                                
                             </ul>
@@ -33,7 +33,7 @@
                                 <ul class="shop-categories">
                                     <?php if (isset($listDanhMuc) && is_array($listDanhMuc)): ?>
                                     <?php foreach ($listDanhMuc as $danhMuc): ?>
-                                        <li><a href="<?= BASE_URL .'?act=sanphamdanhmuc&id_dm=' .$danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc']?> </a></li>
+                                        <li><a href="<?= BASE_URL .'?act=sanphamdanhmuc&danh_muc_id=' .$danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc']?> </a></li>
                                         
 
                                         <?php endforeach ?>
@@ -71,7 +71,7 @@
 
                                         <figure class="product-thumb">
 
-                                            <a href="<?= BASE_URL . '?act=chitietsanpham&id_sp=' . $sanPham['id'] ?>">
+                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                                 <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
                                                 <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
                                             </a>

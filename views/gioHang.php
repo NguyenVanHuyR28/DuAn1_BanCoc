@@ -1,70 +1,96 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
 
-<!-- views/gioHang.php -->
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <title>Giỏ hàng của bạn</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h2 class="mb-4 fw-bold">🛒 Giỏ hàng của bạn</h2>
+    <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="post">
+        <div class="container mt-5">
+            <h2 class="mb-4 fw-bold"><i class="fas fa-shopping-cart"></i> Giỏ hàng của bạn</h2>
 
-        <?php if (!empty($gioHang)) : ?>
-            <div class="table-responsive">
-                <table class="table table-bordered align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Tên Sản Phẩm</th>
-                            <th>Hình Ảnh</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $tongTien = 0; ?>
-                        <?php foreach ($gioHang as $item) :  ?>
-                            <?php
-                            $thanhTien = $item['gia'] * $item['so_luong'];
-                            $tongTien += $thanhTien;
-                            ?>
+            <?php if (!empty($cartItems)) : ?>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-dark">
                             <tr>
-                                <td><?= htmlspecialchars($item['ten_san_pham']) ?></td>
-                                <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" width="80" class="img-thumbnail" alt="<?= $item['ten_san_pham'] ?>"></td>
-                                <td><?= number_format($item['gia'], 0, ',', '.') ?>.VNĐ</td>
-                                <td style="width: 120px;">
-                                    <form action="cap-nhat-gio-hang.php" method="post" class="d-flex">
-                                        <input type="hidden" name="id_gio_hang" value="<?= $item['id'] ?>">
-                                        <input type="number" name="so_luong" value="<?= $item['so_luong'] ?>" class="form-control form-control-sm me-2" min="1">
-                                    </form>
-                                </td>
-                                <td><?= number_format($thanhTien, 0, ',', '.') ?>đ</td>
-                                <td>
-                                    <a href="<?= BASE_URL . '?act=delete-gio-hang&id=' . $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Xóa sản phẩm này khỏi giỏ?')">Xóa</a>
-                                </td>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Hình Ảnh</th>
+                                <th>Giá</th>
+                                <th>Số Lượng</th>
+                                <th>Thành Tiền</th>
+                                <th>Thao Tác</th>
                             </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            <?php $tongTien = 0; ?>
+                            <?php foreach ($cartItems as $item) : ?>
+                                <?php
+                                $gia_ap_dung = (!empty($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0)
+                                    ? $item['gia_khuyen_mai']
+                                    : $item['gia'];
 
-            <div class="text-end">
-                <h4 class="fw-bold">Tổng tiền: <span class="text-danger"><?= number_format($tongTien, 0, ',', '.') ?>đ</span></h4>
-                <a href="<?= BASE_URL . '?act=thanh-toan' ?>" class="btn btn-primary btn-lg mt-3">Tiến hành thanh toán</a>
-            </div>
-        <?php else : ?>
-            <div class="alert alert-warning">Giỏ hàng của bạn đang trống.</div>
-            <a href="<?= BASE_URL . '?act=allsanpham' ?>" class="btn btn-outline-primary">🛍️ Mua sắm ngay</a>
-        <?php endif; ?>
-    </div>
+                                $thanhTien = $gia_ap_dung * $item['so_luong'];
+                                $tongTien += $thanhTien;
+                                ?>
+
+                                <tr>
+                                    <td><?= htmlspecialchars($item['ten_san_pham']) ?></td>
+                                    <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" width="80" class="img-thumbnail" alt="<?= htmlspecialchars($item['ten_san_pham']) ?>"></td>
+                                    <td>
+                                        <?= number_format(
+                                            (!empty($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0)
+                                                ? $item['gia_khuyen_mai']
+                                                : $item['gia'],
+                                            0,
+                                            ',',
+                                            '.'
+                                        ) ?> VNĐ
+                                    </td>
+                                    <td style="width: 150px;">
+                                        <input type="hidden" name="id_gio_hang" value="<?= $item['id'] ?>">
+                                        <input type="number" name="so_luong" value="<?= $item['so_luong'] ?>" class="form-control form-control-sm me-2" min="1" style="width: 70px;" readonly>
+                                    </td>
+                                    <td><?= number_format($thanhTien, 0, ',', '.') ?>đ</td>
+                                    <td>
+                                        <a href="<?= BASE_URL . '?act=delete-gio-hang&id=' . $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Xóa sản phẩm này khỏi giỏ?')"><i class="fas fa-trash"></i> Xóa</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-end mt-4">
+                    <h4 class="fw-bold">Tổng tiền: <span class="text-danger"><?= number_format($tongTien, 0, ',', '.') ?>đ</span></h4>
+                    <a href="<?= BASE_URL . '?act=thanh-toan&id=' . $item['tai_khoan_id'] ?>" class="btn btn-primary btn-lg mt-3"><i class="fas fa-credit-card"></i> Tiến hành thanh toán</a>
+                </div>
+
+                <div>
+                    <a href="<?= BASE_URL . '?act=lich-su&id=' . $item['tai_khoan_id'] ?>" class="btn btn-outline-primary"><i class="fas fa-shopping-bag"></i>Lịch sử đơn hàng</a>
+                </div>
+            <?php else : ?>
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> Giỏ hàng của bạn đang trống.
+                </div>
+                <a href="<?= BASE_URL . '?act=allsanpham' ?>" class="btn btn-outline-primary"><i class="fas fa-shopping-bag"></i> Mua sắm ngay</a>
+            <?php endif; ?>
+        </div>
+    </form>
+
     <?php require_once 'layout/footer.php'; ?>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
