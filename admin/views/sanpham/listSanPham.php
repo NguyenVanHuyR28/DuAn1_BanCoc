@@ -20,7 +20,7 @@ include './views/layouts/slidebar.php';
             <div class="row">
                 <div class="col-12">
                     <div class="card-header">
-                        <a href="<?= BASE_URL_ADMIN . 'formAddSanPham' ?>">
+                        <a href="<?= BASE_URL_ADMIN . '?act=formAddSanPham' ?>">
                             <button class="btn btn-primary">Thêm Sản Phẩm</button>
                         </a>
                     </div>
@@ -43,28 +43,27 @@ include './views/layouts/slidebar.php';
                             <tbody>
                                 <?php
                                 foreach ($listSanPham as $products) : ?>
-                                    <tr>
-                                        <td><?= $products['id'] ?></td>
-                                        <td><?= $products['ten_danh_muc'] ?></td>
-                                        <td><?= $products['ten_san_pham'] ?></td>
-                                        <td><?= number_format($products['gia']) ?></td>
-                                        <td><?= $products['gia_khuyen_mai'] ?></td>
-                                        <td><?= $products['so_luong'] ?></td>
-                                        <td><img
-                                                src="<?= BASE_URL . $products["hinh_anh"] ?>"
-                                                width="120px" alt="Ảnh sản phẩm"></td>
-                                        <td><?= $products['mo_ta']?></td>
-                                        <td><?= $products['ngay_tao'] ?></td>
-                                        <td>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
-                                                <button class="btn btn-warning">Sửa</button>
-                                            </a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=deleteSanPham&id=' . $products['id'] ?>"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
-                                                <button class="btn btn-danger">Xóa</button>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td><?= $products['id'] ?></td>
+                                    <td><?= $products['ten_danh_muc'] ?></td>
+                                    <td><?= $products['ten_san_pham'] ?></td>
+                                    <td><?= number_format($products['gia']) ?></td>
+                                    <td><?= $products['gia_khuyen_mai'] ?></td>
+                                    <td><?= $products['so_luong'] ?></td>
+                                    <td><img src="<?= BASE_URL . $products["hinh_anh"] ?>" width="120px"
+                                            alt="Ảnh sản phẩm"></td>
+                                    <td><?= $products['mo_ta']?></td>
+                                    <td><?= $products['ngay_tao'] ?></td>
+                                    <td>
+                                        <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
+                                            <button class="btn btn-warning">Sửa</button>
+                                        </a>
+                                        <a href="<?= BASE_URL_ADMIN . '?act=deleteSanPham&id=' . $products['id'] ?>"
+                                            onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
+                                            <button class="btn btn-danger">Xóa</button>
+                                        </a>
+                                    </td>
+                                </tr>
                                 <?php endforeach ?>
                             </tbody>
                             <tfoot>
@@ -80,21 +79,21 @@ include './views/layouts/slidebar.php';
 include './views/layouts/footer.php';
 ?>
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
+});
 </script>

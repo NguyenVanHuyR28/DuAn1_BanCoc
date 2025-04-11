@@ -8,11 +8,13 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminDonHangController.php';
+require_once './controllers/AdminTaiKhoanController.php';
 
 // Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
+require_once './models/AdminTaiKhoan.php';
 
 
 //route 
@@ -43,4 +45,13 @@ match ($act) {
 
     // Router Đơn Hàng
     'listDonHang' => (new AdminDonHangController())->listDonHang(),
+
+    //Router Tài Khoản
+    'listTaiKhoan' => (new AdminTaiKhoanController())->listTaiKhoan(),
+    'formAddTaiKhoan' => (new AdminTaiKhoanController())->formAddTaiKhoan(),
+    'postAddTaiKhoan' => (new AdminTaiKhoanController())->postAddtaikhoan(),
+    'formEditTaiKhoan' => (new AdminTaiKhoanController())->formEditTaiKhoan(),
+    'postEditTaiKhoan' => (new AdminTaiKhoanController())->postEditTaiKhoan(),
+    'detailTaiKhoan' => (new AdminTaiKhoanController())->detailTaiKhoan(),
+    'deleteTaiKhoan' => (new AdminTaiKhoanController())->deleteTaiKhoan(),
 };
