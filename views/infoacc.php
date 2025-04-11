@@ -45,7 +45,7 @@ if (isset($_SESSION['user'])) {
                                     <?php } ?>
 
 
-                                        <a href="<?= BASE_URL . '?act=dangnhap' ?>" class="nav-link" onclick="return confirm('Đăng xuất tài khoản')"><i class="fa fa-sign-out"></i> Logout</a>
+                                        <a href="<?= BASE_URL . '?act=dangxuat' ?>" class="nav-link" onclick="return confirm('Đăng xuất tài khoản')"><i class="fa fa-sign-out"></i> Logout</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-9-col-mb-8">

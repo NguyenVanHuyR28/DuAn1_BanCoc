@@ -8,7 +8,7 @@ class HomeController
     public $modelSanPham;
     public $modelTaiKhoan;
     // public $modelBinhLuan;
-
+    public $modelGioHang;
     public $modelDonHang;
 
     public function __construct()
@@ -17,7 +17,7 @@ class HomeController
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
         // // $this->modelBinhLuan = new BinhLuan();
-        // $this->modelGioHang = new GioHang();
+        $this->modelGioHang = new GioHang();
         // $this->modelDonHang = new DonHang();
     }
 

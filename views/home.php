@@ -57,7 +57,7 @@
                                         <?php foreach ($listSanPham as $key => $sanPham) : ?>
                                             <div class="product-item">
                                                 <figure class="product-thumb">
-                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham$id_san_pham=' . $sanPham['id'] ?>">
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                                         <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product" class="pri-img">
                                                         <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product" class="sec-img">
                                                     </a>
@@ -85,7 +85,7 @@
                                                 </figure>
                                                 <div class="product-caption text-center">
                                                     <h6 class="product-name">
-                                                        <a href="<?= BASE_URL  . '?act=chi-tiet-san-pham$id_san_pham' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?> </a>
+                                                        <a href="<?= BASE_URL  . '?act=chi-tiet-san-pham&id_san_pham' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?> </a>
                                                     </h6>
                                                     <div class="price-box">
                                                         <?php if ($sanPham['gia_khuyen_mai']) { ?>
