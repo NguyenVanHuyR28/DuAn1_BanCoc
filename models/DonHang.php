@@ -96,10 +96,10 @@ class DonHang
         }
     }
 
-    public function detailDonHang($order_id)
+    public function detailOrder($order_id)
     {
         try {
-            $sql = 'SELECT chi_tiet_don_hang.*, san_pham.*,don_hang.trang_thai_don_hang,  danh_muc.ten_danh_muc
+            $sql = 'SELECT chi_tiet_don_hang.*, san_pham.*,don_hang.trang_thai_don_hang,danh_muc.ten_danh_muc
             FROM chi_tiet_don_hang
             INNER JOIN san_pham ON san_pham.id = chi_tiet_don_hang.san_pham_id
             INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id

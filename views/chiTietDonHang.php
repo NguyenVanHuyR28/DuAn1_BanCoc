@@ -34,18 +34,18 @@
 
 <body>
     <div class="container py-5">
-        <h2 class="mb-4 text-primary fw-bold">Chi Tiết Đơn Hàng #<?= $donHang['id'] ?></h2>
+        <h2 class="mb-4 text-primary fw-bold">Chi Tiết Đơn Hàng #<?= $chiTietDonHang['ma_don_hang'] ?></h2>
 
         <div class="card mb-4 p-4">
             <h5 class="mb-3 text-secondary">Thông Tin Người Nhận</h5>
-            <p><strong>Họ và tên:</strong> <?= $donHang['ten_nguoi_nhan'] ?></p>
-            <p><strong>Email:</strong> <?= $donHang['email_nguoi_nhan'] ?></p>
-            <p><strong>Số điện thoại:</strong> <?= $donHang['sdt_nguoi_nhan'] ?></p>
-            <p><strong>Địa chỉ:</strong> <?= $donHang['dia_chi_nguoi_nhan'] ?></p>
-            <p><strong>Ghi chú:</strong> <?= $donHang['ghi_chu'] ?: '(Không có)' ?></p>
+            <p><strong>Họ và tên:</strong> <?= $chiTietDonHang['ten_nguoi_nhan'] ?></p>
+            <p><strong>Email:</strong> <?= $chiTietDonHang['email_nguoi_nhan'] ?></p>
+            <p><strong>Số điện thoại:</strong> <?= $chiTietDonHang['sdt_nguoi_nhan'] ?></p>
+            <p><strong>Địa chỉ:</strong> <?= $chiTietDonHang['dia_chi_nguoi_nhan'] ?></p>
+            <p><strong>Ghi chú:</strong> <?= $chiTietDonHang['ghi_chu'] ?: '(Không có)' ?></p>
             <p><strong>Trạng thái:</strong>
-                <span class="order-status bg-<?= $donHang['trang_thai'] == 'dang_xu_ly' ? 'warning' : ($donHang['trang_thai'] == 'da_giao' ? 'success' : 'secondary') ?> text-white">
-                    <?= ucfirst(str_replace('_', ' ', $donHang['trang_thai'])) ?>
+                <span class="order-status bg-<?= $chiTietDonHang['trang_thai'] == 'dang_xu_ly' ? 'warning' : ($chiTietDonHang['trang_thai'] == 'da_giao' ? 'success' : 'secondary') ?> text-white">
+                    <?= ucfirst(str_replace('_', ' ', $chiTietDonHang['trang_thai'])) ?>
                 </span>
             </p>
         </div>

@@ -83,14 +83,21 @@ class AdminDanhMucController
     public function deleteDanhMuc()
     {
         // Lấy ra thông tin danh mục cần xóa
-        $id = $_GET['id'];
-        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
-        if ($id) {
-            $this->modelDanhMuc->deleteDanhMuc($id);
+        try {
+            $id = $_GET['id'];
+            $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
+            if ($id) {
+                $this->modelDanhMuc->deleteDanhMuc($id);
+                header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
+                exit();
+            } else {
+                header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
+                exit;
+            }
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
             header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
-            exit();
-        } else {
-            header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
+            exit;
         }
     }
 }

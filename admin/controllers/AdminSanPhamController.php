@@ -103,7 +103,7 @@ class AdminSanPhamController
 
             // Lấy ảnh cũ từ database
             $old_file = $products['hinh_anh'];
-
+            // var_dump($old_file);die;
             // Lấy ảnh mới từ form (nếu có)
             $hinh_anh = $_FILES['hinh_anh'] ?? null;
 

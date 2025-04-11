@@ -21,8 +21,11 @@ class HomeController
 
     public function home()
     {
+        // $id = $_GET['id'];
         $listSanPham = $this->modelSanPham->getAllSanPham();
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+
+        // $tkById = $this->modelTaiKhoan->getTKById($id);
         require_once('./views/home.php');
     }
     // sản phẩm
@@ -83,7 +86,7 @@ class HomeController
     // Đăng ký, đăng nhập, đăng xuất
     public function formDangNhap()
     {
-        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();    
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         require_once './views/auth/dangnhap.php';
         deleteSessionError();
     }
@@ -109,18 +112,20 @@ class HomeController
                 // Lưu thông tin vào session
                 $_SESSION['tai_khoan_admin'] = $tai_khoan;
                 // var_dump($_SESSION['taikhoan_admin']);die;
-                header('location:'.BASE_URL_ADMIN );
+                header('location:' . BASE_URL_ADMIN);
                 exit();
             } elseif ($tai_khoan == 'Trang client') {
                 $_SESSION['tai_khoan'] = $email;
-                header('location:'. BASE_URL);
+                // $tkid = $tai_khoan['id'];
+                // var_dump($tkid);die;
+                header('location:' . BASE_URL);
                 exit();
             } else {
                 // Lỗi thì lưu vào session
                 $_SESSION['error'] = $tai_khoan;
 
                 $_SESSION['flash'] = true;
-                header('location:'.BASE_URL . '?act=dangnhap');
+                header('location:' . BASE_URL . '?act=dangnhap');
                 exit();
             }
         }
@@ -134,10 +139,10 @@ class HomeController
         deleteSessionError();
     }
 
-    public function dangKy() 
+    public function dangKy()
     {
         $listTaiKhoan = $this->modelTaiKhoan->getAllTaiKhoan();
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $ho_ten = $_POST['ho_ten'];
             $email = $_POST['email'];
@@ -145,7 +150,7 @@ class HomeController
             $so_dien_thoai = $_POST['so_dien_thoai'];
             $dia_chi = $_POST['dia_chi'];
             $remat_khau = $_POST['remat_khau'];
-            $role = 0; 
+            $role = 0;
 
             $errors = [];
 
@@ -211,12 +216,12 @@ class HomeController
         if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])) {
             session_unset();
             session_destroy();
-            header('location:'.BASE_URL.'?act=dangnhap');
+            header('location:' . BASE_URL . '?act=dangnhap');
         } else {
-            header('location:'.BASE_URL);
-            }
+            header('location:' . BASE_URL);
+        }
     }
-    public function xoaCookie() 
+    public function xoaCookie()
     {
         if (isset($_COOKIE['email']) || isset($_COOKIE['mat_khau'])) {
             setcookie("email", "", time() - (86400 * 7));
@@ -235,7 +240,7 @@ class HomeController
         $TKById = $this->modelTaiKhoan->getTKById($id);
         require_once './views/infoAcc.php';
     }
-    public function formUser() 
+    public function formUser()
     {
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
         $tai_khoan_id = $user['id'];
@@ -252,7 +257,7 @@ class HomeController
         $email = $_POST['email'];
         $dia_chi = $_POST['dia_chi'];
         $mat_khau = $_POST['mat_khau'];
-        $checkEdit = $this->modelTaiKhoan-> editInfo($id, $ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi);
+        $checkEdit = $this->modelTaiKhoan->editInfo($id, $ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi);
         if ($checkEdit) {
             echo "<script>
                 alert('Sửa thông tin thành công!');
@@ -268,7 +273,8 @@ class HomeController
         }
     }
 
-    public function thanhToan(){
+    public function thanhToan()
+    {
         $tai_khoan_id = $_GET['id'];
         $tk_id = $this->modelTaiKhoan->getTKById($tai_khoan_id);
         $sanPham = $this->modelGioHang->getAllCart($tai_khoan_id);
@@ -276,4 +282,3 @@ class HomeController
         require_once('views/thanhToan.php');
     }
 }
-

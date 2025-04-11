@@ -75,7 +75,7 @@ include './views/layouts/slidebar.php';
                                     <input type="file" name="hinh_anh" class="form-control">
                                     <br>
                                     <?php if (!empty($products['hinh_anh'])): ?>
-                                        <img src="<?= BASE_URL . 'asset/img/product' . $products['hinh_anh']  ?>" alt="<?= ($products['ten_san_pham']) ?>" width="120px">
+                                        <img src="<?= BASE_URL . $products['hinh_anh']  ?>" alt="<?= ($products['ten_san_pham']) ?>" width="120px">
                                     <?php endif; ?>
                                     <?php if (isset($_SESSION['error']['hinh_anh'])): ?>
                                         <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>

@@ -38,7 +38,7 @@ match ($act) {
     // Thanh Toán
     'dat-hang' => (new DonHangController())->datHang(),
     'lich-su' => (new DonHangController())->lichSuDonHang(),
-    'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(),
+    'chi-tiet-don-hang' => (new DonHangController())->detailDonHang(),
     // Đăng nhập
     'dangnhap' => (new HomeController())->formDangNhap(),
     'checkdangnhap' => (new HomeController())->dangNhap(),

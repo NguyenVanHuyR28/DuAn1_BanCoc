@@ -95,7 +95,7 @@ include './views/layouts/slidebar.php';
                                         <td><?= $item['so_luong'] ?></td>
                                         <td><?= $item['ghi_chu'] ?></td>
                                         <td><?= number_format($gia, 0, ',', '.') ?>₫</td>
-                                        <td><?= number_format($thanhTien, 0, ',', '.') ?>₫</td>
+                                        <td class="text-danger"><?= number_format($thanhTien, 0, ',', '.') ?>VNĐ</td>
                                     </tr>
                                 <?php
                                 endforeach;
@@ -106,12 +106,7 @@ include './views/layouts/slidebar.php';
                                 </tr>
                             <?php endif; ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5" class="text-end fw-bold">Tổng tiền:</td>
-                                <td class="text-danger fw-bold"><?= number_format($tongTien, 0, ',', '.') ?>₫</td>
-                            </tr>
-                        </tfoot>
+
                     </table>
                 </div>
             </div>

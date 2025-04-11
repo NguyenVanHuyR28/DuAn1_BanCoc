@@ -95,10 +95,10 @@ class GioHangController
             deleteFile($item['hinh_anh']);
             echo "<script>
                 alert('Xóa sản phẩm hàng thành công!');
-                window.location.href='" . BASE_URL . "?act=gioHang" . "';
+                window.location.href='" . BASE_URL . "?act=gio-hang" . "';
                 </script>";
         } else {
-            header('location:' . BASE_URL . '?act=gioHang');
+            header('location:' . BASE_URL . '?act=gio-hang');
         }
     }
 }

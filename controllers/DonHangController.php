@@ -96,7 +96,6 @@ class DonHangController
     public function lichSuDonHang()
     {
         $listTK = $this->modelTaiKhoan->getAllTaiKhoan();
-
         if (!$_SESSION['tai_khoan']) {
             header('location:' . BASE_URL . '?act=dangnhap');
             $_SESSION['error'] = "Đăng nhập để thêm sản phẩm giỏ hàng";
@@ -110,33 +109,31 @@ class DonHangController
         }
         // var_dump($tai_khoan_id);die;
         $historyItem = $this->modelDonHang->historyDonHang($tai_khoan_id);
-        // var_dump($historyItem);die;
+        var_dump($historyItem);die;
+
         require_once('views/lichSuDon.php');
     }
 
-    public function chiTietDonHang()
+    public function detailDonHang()
     {
-        if (isset($_GET['id']) && !empty($_GET['id'])) {
-            $order_id = $_GET['id'];
+        try {
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+                $order_id = $_GET['id'];
+                var_dump($order_id);die;
+                // Lấy thông tin đơn hàng (người nhận, email, SDT, trạng thái, ghi chú...)
+                $chiTietDonHang = $this->modelDonHang->detailOrder($order_id);
+                var_dump($chiTietDonHang);die;
 
-            // Lấy chi tiết đơn hàng
-            $donHang = $this->modelDonHang->detailDonHang($order_id);
-            var_dump($donHang);
-            die;
-            if (empty($donHang)) {
-                echo "Không tìm thấy chi tiết đơn hàng cho ID: " . htmlspecialchars($order_id);
-                return;
+                // Lấy danh sách sản phẩm trong đơn hàng
+
+                // Gửi dữ liệu sang view
+                require_once('views/chiTietDonHang.php');
+            } else {
+                echo "ID đơn hàng không hợp lệ.";
             }
-
-            // Giả sử trạng thái đơn hàng nằm ở item đầu tiên
-            $order = [
-                'trang_thai_don_hang' => $donHang[0]['trang_thai_don_hang']
-            ];
-
-            // Gửi dữ liệu sang view
-            require_once('views/chiTietDonHang.php');
-        } else {
-            echo "Order ID không hợp lệ.";
+        } catch (Exception $e) {
+            error_log('Chi tiết lỗi đơn hàng: ' . $e->getMessage());
+            echo 'Có lỗi xảy ra trong quá trình truy vấn.';
         }
     }
 }

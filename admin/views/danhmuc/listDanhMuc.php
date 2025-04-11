@@ -43,10 +43,10 @@ include './views/layouts/slidebar.php';
                                     <td><?=$danhMuc ['ten_danh_muc'] ?></td>
                                     <td><?=$danhMuc ['mo_ta'] ?></td>
                                     <td>
-                                        <a href="<?= BASE_URL_ADMIN . 'formEditDanhMuc&id=' . $danhMuc['id'] ?>">
+                                        <a href="<?= BASE_URL_ADMIN . '?act=formEditDanhMuc&id=' . $danhMuc['id'] ?>">
                                             <button class="btn btn-warning">Sửa</button>
                                         </a>
-                                        <a href="<?= BASE_URL_ADMIN . 'deleteDanhMuc&id=' . $danhMuc ['id'] ?>"
+                                        <a href="<?= BASE_URL_ADMIN . '?act=deleteDanhMuc&id=' . $danhMuc ['id'] ?>"
                                             onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
                                             <button class="btn btn-danger">Xóa</button>
                                         </a>

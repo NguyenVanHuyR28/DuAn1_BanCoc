@@ -62,7 +62,7 @@
                                             <div>
                                                 <?php if (isset($_SESSION['tai_khoan'])) { ?>
                                                     <p><span style="font-weight: 400;">Acc:</span>
-                                                        </span><a href="<?= BASE_URL . '?act=formchinhsua&id=' . $_SESSION['tai_khoan'] ?>" style="font-size: 11px;"><?= $_SESSION['tai_khoan'] ?></a>
+                                                        </span><a href="<?= BASE_URL . '?act=formchinhsua&id=' . $tkid ?>" style="font-size: 11px;"><?= $_SESSION['tai_khoan'] ?></a>
                                                     </p>
                                                     <br>
                                                     <p><a style="font-size: 12px;"
@@ -92,7 +92,7 @@
                                             <i class="pe-7s-shopbag"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <a href="<?= BASE_URL . '?act=lich-su' ?>" class="minicart-btn">Lịch sử </a>
+                                            <a href="<?= BASE_URL . '?act=lich-su' ?>" class="minicart-btn">Lịch sử</a>
                                         </ul>
 
                                     </li>

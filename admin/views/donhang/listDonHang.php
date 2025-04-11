@@ -121,7 +121,7 @@
                                             ?>
                                             <form action="<?= BASE_URL_ADMIN . '?act=capNhat' ?>" method="POST" class="d-flex gap-2 align-items-center mt-3">
                                                 <input type="hidden" name="don_hang_id" value="<?= $order['id'] ?>">
-                                                <select name="trang_thai" class="form-select w-auto transition">
+                                                <select name="trang_thai" class="form-control w-auto transition">
                                                     <?php foreach ($thuTu as $index => $trangThai): ?>
                                                         <?php
                                                         if ($trangThai === 'canceled' && $khongChoHuy) continue;
@@ -137,7 +137,7 @@
                                         </td>
                                         <td>
                                             <?php if ($order['phuong_thuc_thanh_toan_id'] == 1): ?>
-                                                <span class="btn btn-primary">Thanh toán khi nhận hàng (COD)</span>
+                                                <span>Thanh toán khi nhận hàng (COD)</span>
                                             <?php elseif ($order['phuong_thuc_thanh_toan_id'] == 2): ?>
                                                 <span>Chuyển khoản ngân hàng (Momo)</span>
                                             <?php elseif ($order['phuong_thuc_thanh_toan_id'] == 3): ?>
