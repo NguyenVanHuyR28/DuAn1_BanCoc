@@ -1,11 +1,13 @@
 <?php
+// require_once './models/BinhLuan.php';
+
 class HomeController
 {
+
     public $modelDanhMuc;
     public $modelSanPham;
     public $modelTaiKhoan;
     public $modelBinhLuan;
-
     public $modelGioHang;
     public $modelDonHang;
 

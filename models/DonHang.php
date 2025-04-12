@@ -82,10 +82,10 @@ class DonHang
     public function historyDonHang($id)
     {
         try {
-            $sql = 'SELECT don_hang.*, tai_khoan.id 
-                    FROM don_hang
-                    INNER JOIN tai_khoan ON don_hang.tai_khoan_id = tai_khoan.id
-                    WHERE don_hang.tai_khoan_id = :id';
+            $sql = 'SELECT don_hang.*, tai_khoan.id AS tai_khoan_id
+            FROM don_hang
+            INNER JOIN tai_khoan ON don_hang.tai_khoan_id = tai_khoan.id
+            WHERE don_hang.tai_khoan_id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id
@@ -99,7 +99,7 @@ class DonHang
     public function detailOrder($order_id)
     {
         try {
-            $sql = 'SELECT chi_tiet_don_hang.*, san_pham.*,don_hang.trang_thai_don_hang,danh_muc.ten_danh_muc
+            $sql = 'SELECT chi_tiet_don_hang.*, san_pham.*,chi_tiet_don_hang.so_luong, don_hang.*,danh_muc.ten_danh_muc
             FROM chi_tiet_don_hang
             INNER JOIN san_pham ON san_pham.id = chi_tiet_don_hang.san_pham_id
             INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id
@@ -110,7 +110,7 @@ class DonHang
             $stmt->execute([
                 ':order_id' => $order_id
             ]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }

@@ -95,6 +95,7 @@ class DonHangController
 
     public function lichSuDonHang()
     {
+        // var_dump($_SESSION['tai_khoan']);die;
         $listTK = $this->modelTaiKhoan->getAllTaiKhoan();
         if (!$_SESSION['tai_khoan']) {
             header('location:' . BASE_URL . '?act=dangnhap');
@@ -103,13 +104,14 @@ class DonHangController
             foreach ($listTK as $value) {
                 if ($_SESSION['tai_khoan'] == $value['email']) {
                     $tai_khoan_id = $value['id'];
+                    // var_dump($value['id']);die;
                     break;
                 }
             }
         }
         // var_dump($tai_khoan_id);die;
         $historyItem = $this->modelDonHang->historyDonHang($tai_khoan_id);
-        var_dump($historyItem);die;
+        // var_dump($historyItem);die;
 
         require_once('views/lichSuDon.php');
     }
@@ -119,12 +121,11 @@ class DonHangController
         try {
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $order_id = $_GET['id'];
-                var_dump($order_id);die;
+                // var_dump($order_id);die;
                 // Lấy thông tin đơn hàng (người nhận, email, SDT, trạng thái, ghi chú...)
                 $chiTietDonHang = $this->modelDonHang->detailOrder($order_id);
-                var_dump($chiTietDonHang);die;
-
-                // Lấy danh sách sản phẩm trong đơn hàng
+                $thongTinDonHang = $chiTietDonHang[0];
+                // var_dump($chiTietDonHang);die;
 
                 // Gửi dữ liệu sang view
                 require_once('views/chiTietDonHang.php');

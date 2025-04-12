@@ -8,11 +8,13 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminDonHangController.php';
+require_once './controllers/AdminTaiKhoanController.php';
 
 // Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
+require_once './models/AdminTaiKhoan.php';
 
 
 //route 
@@ -30,7 +32,7 @@ match ($act) {
     'addDanhMuc' => (new AdminDanhMucController())->addDanhMuc(),
     'formEditDanhMuc' => (new AdminDanhMucController())->formEditDanhMuc(),
     'editDanhMuc' => (new AdminDanhMucController())->editDanhMuc(),
-    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),    
+    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),
 
 
     // Router Sản Phẩm
@@ -43,7 +45,15 @@ match ($act) {
 
     // Router Đơn Hàng
     'listDonHang' => (new AdminDonHangController())->listDonHang(),
-    'detailDonHang' => (new AdminDonHangController()) ->chiTietDonHang(),
+    'detailDonHang' => (new AdminDonHangController())->chiTietDonHang(),
     'capNhat' => (new AdminDonHangController())->editTrangThai(),
 
+    //Router Tài Khoản
+    'listTaiKhoan' => (new AdminTaiKhoanController())->listTaiKhoan(),
+    'formAddTaiKhoan' => (new AdminTaiKhoanController())->formAddTaiKhoan(),
+    'postAddTaiKhoan' => (new AdminTaiKhoanController())->postAddtaikhoan(),
+    'formEditTaiKhoan' => (new AdminTaiKhoanController())->formEditTaiKhoan(),
+    'postEditTaiKhoan' => (new AdminTaiKhoanController())->postEditTaiKhoan(),
+    'detailTaiKhoan' => (new AdminTaiKhoanController())->detailTaiKhoan(),
+    'deleteTaiKhoan' => (new AdminTaiKhoanController())->deleteTaiKhoan(),
 };

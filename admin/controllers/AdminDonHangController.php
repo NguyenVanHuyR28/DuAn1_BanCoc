@@ -54,7 +54,7 @@ class AdminDonHangController
                 // Nếu trạng thái hiện tại là shipped hoặc delivered thì không cho phép hủy đơn
                 if (
                     in_array($trang_thai_hien_tai, ['shipped', 'delivered']) &&
-                    $trang_thai_moi === 'cancelled'
+                    $trang_thai_moi === 'canceled'
                 ) {
                     echo "Không thể hủy đơn hàng đã giao hoặc đã hoàn tất.";
                     return;
