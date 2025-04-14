@@ -31,7 +31,10 @@ include './views/layouts/slidebar.php';
 
 
 
-
+  <?php
+  $listDonHang30days = $listDonHang30days ?? [];
+  ?>
+  <h3><?= count($listDonHang30days) ?></h3>
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
