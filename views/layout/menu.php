@@ -87,8 +87,9 @@
                                         </ul>
                                     </li>
 
-                                    <li class="user-hover">
-                                        <a href="<?= BASE_URL . '?act=gio-hang' ?>">
+                                    <li>
+                                        <a href="<?= BASE_URL.'?act=gio-hang' ?>"
+                                            class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
                                         </a>
                                         <ul class="dropdown-list">
