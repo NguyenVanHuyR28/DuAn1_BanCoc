@@ -9,12 +9,14 @@ require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminTaiKhoanController.php';
+require_once './controllers/AdminBinhLuanController.php';
 
 // Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/AdminTaiKhoan.php';
+require_once './models/AdminBinhLuan.php';
 
 
 //route 
@@ -54,4 +56,9 @@ match ($act) {
     'postEditTaiKhoan' => (new AdminTaiKhoanController())->postEditTaiKhoan(),
     'detailTaiKhoan' => (new AdminTaiKhoanController())->detailTaiKhoan(),
     'deleteTaiKhoan' => (new AdminTaiKhoanController())->deleteTaiKhoan(),
+
+    //Router bình luận
+    'listBinhLuan' => (new AdminBinhLuanController())->listBinhLuan(),
+    'showBinhLuan' => (new AdminBinhLuanController())->showBinhLuan(),
+    'hideBinhLuan' => (new AdminBinhLuanController())->hideBinhLuan(),
 };

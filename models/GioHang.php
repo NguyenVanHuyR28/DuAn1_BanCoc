@@ -28,7 +28,20 @@ class GioHang
             return [];
         }
     }
+    public function getGioHangFromUser($id)
+    {
+        try {
+            $sql = 'SELECT * FROM gio_hang WHERE tai_khoan_id = :tai_khoan_id';
 
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':tai_khoan_id' => $id]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
 
 
     public function addCart($tai_khoan_id, $san_pham_id, $so_luong)

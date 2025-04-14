@@ -45,7 +45,7 @@ match ($act) {
     'info-Acc' => (new HomeController())-> infoAcc(),
     'thaydoithongtintaikhoan' => (new HomeController())-> editInfo(),
 //     //binhluan
-//     'dang-binh-luan' => (new HomeController())->postBinhLuan(),
+    'dang-binh-luan' => (new HomeController())->postBinhLuan(),
     //     //chinh-sua-thong-tin-nguoi-dung
     //     'form-chinh-sua' => (new HomeController())->formUser(),
     //     'thay-doi-thong-tin-tai-khoan' => (new HomeController())->postUser(),

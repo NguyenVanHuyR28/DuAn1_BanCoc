@@ -1,5 +1,5 @@
 <?php
-// require_once './models/BinhLuan.php';
+require_once './models/BinhLuan.php';
 
 class HomeController
 {
@@ -7,7 +7,7 @@ class HomeController
     public $modelDanhMuc;
     public $modelSanPham;
     public $modelTaiKhoan;
-    // public $modelBinhLuan;
+    public $modelBinhLuan;
     public $modelGioHang;
     public $modelDonHang;
 
@@ -16,7 +16,7 @@ class HomeController
         $this->modelDanhMuc = new DanhMuc();
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
-        // // $this->modelBinhLuan = new BinhLuan();
+        $this->modelBinhLuan = new BinhLuan();
         $this->modelGioHang = new GioHang();
         // $this->modelDonHang = new DonHang();
     }
@@ -30,28 +30,27 @@ class HomeController
     // sản phẩm
 
     public function detailSanPham()
-    {
-        $id = $_GET['id_san_pham'];
-        // var_dump($id);
-        $sanPham = $this->modelSanPham->getDetailSanPham($id);
-        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($sanPham['danh_muc_id']);
+{
+    $id = $_GET['id_san_pham'];
+    $sanPham = $this->modelSanPham->getDetailSanPham($id);
+    $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($sanPham['danh_muc_id']);
 
-        // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
-        if (isset($_SESSION['tai_khoan'])) {
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
-        }
-        //binhluan
-        $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
-
-        $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
-
-        if ($sanPham && isset($sanPham['danh_muc_id'])) {
-            require_once './views/detailSanPham.php';
-        } else {
-            header('Location: ' . BASE_URL);
-            exit();
-        }
+    if (isset($_SESSION['tai_khoan'])) {
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
     }
+
+    // Lấy danh sách bình luận hiển thị
+    $listBinhLuan = $this->modelBinhLuan->getBinhLuanBySanPhamId($id);
+
+    $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
+
+    if ($sanPham && isset($sanPham['danh_muc_id'])) {
+        require_once './views/detailSanPham.php';
+    } else {
+        header('Location: ' . BASE_URL);
+        exit();
+    }
+}
 
 
     public function allSanPham()
@@ -269,5 +268,38 @@ class HomeController
             exit;
         }
     }
+    public function postBinhLuan()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $san_pham_id = $_POST['san_pham_id'];
+        $tai_khoan_id = $_POST['tai_khoan_id'];
+        $noi_dung = $_POST['noi_dung'];
+        $ngay_tao = date('Y-m-d H:i:s');
+        $trang_thai = 1; // Mặc định ẩn bình luận
+
+        $errors = [];
+        if (empty($noi_dung)) {
+            $errors['noi_dung'] = "Bạn chưa bình luận";
+        }
+
+        $_SESSION['error'] = $errors;
+
+        if (empty($errors)) {
+            $this->modelBinhLuan->insertBinhLuan(
+                $san_pham_id,
+                $tai_khoan_id,
+                $noi_dung,
+                $ngay_tao,
+                $trang_thai
+            );
+
+            header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
+            exit();
+        } else {
+            header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
+            exit();
+        }
+    }
+}
 }
 
