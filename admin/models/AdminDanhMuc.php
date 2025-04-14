@@ -75,6 +75,7 @@ class AdminDanhMuc
             return true;
         } catch (Exception $e) {
             echo 'Lỗi deleteCategory() ' . $e->getMessage();
+            return false;
         }
     }
 }

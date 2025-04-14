@@ -6,7 +6,7 @@
     <section class="slider-area">
         <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner4.jpg">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner1.jpg">
                     <div class="container">
                         <div class="row">
 
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner5.jpg">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner2.jpg">
                     <div class="container">
                         <div class="row">
 
@@ -25,7 +25,7 @@
             </div>
 
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner6.jpg">
+                <div class="hero-slider-item bg-img" data-bg="assets/img/banner/banner3.jpg">
                     <div class="container">
                         <div class="row">
 
@@ -88,13 +88,14 @@
                                                         <a href="<?= BASE_URL  . '?act=chi-tiet-san-pham&id_san_pham' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?> </a>
                                                     </h6>
                                                     <div class="price-box">
-                                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <?php if (!empty($sanPham['gia_khuyen_mai']) && $sanPham['gia_khuyen_mai'] > 0) { ?>
                                                             <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?></span>
                                                             <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
                                                         <?php } else { ?>
-                                                            <span class="price-old"><?= formatPrice($sanPham['gia']) ?></span>
+                                                            <span class="price-regular"><?= formatPrice($sanPham['gia']) ?></span>
                                                         <?php } ?>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                         <?php endforeach ?>
@@ -108,5 +109,6 @@
 
     </section>
 </main>
+<?php require_once 'layout/miniCart.php'; ?>
 
 <?php require_once 'layout/footer.php'; ?>

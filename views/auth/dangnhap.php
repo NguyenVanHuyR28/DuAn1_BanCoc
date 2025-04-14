@@ -52,7 +52,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a
-                                            href="<?= BASE_URL?>"><i
+                                            href="<?= BASE_URL ?>"><i
                                                 class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
                                 </ul>
@@ -74,17 +74,17 @@
                             <div class="login-reg-form-wrap">
                                 <h5>Đăng Nhập</h5>
                                 <form
-                                    action="<?= BASE_URL.'?act=checkdangnhap' ?>"
+                                    action="<?= BASE_URL . '?act=checkdangnhap' ?>"
                                     method="post">
                                     <div class="single-input-item">
                                         <input type="email" placeholder="Nhập Email" name="email" value="<?php if (isset($_COOKIE['email'])) {
-                                            echo $_COOKIE['email'];
-                                        } ?>">
+                                                                                                                echo $_COOKIE['email'];
+                                                                                                            } ?>">
                                     </div>
                                     <div class="single-input-item">
                                         <input type="password" placeholder="Nhập Password" name="mat_khau" value="<?php if (isset($_COOKIE['mat_khau'])) {
-                                            echo($_COOKIE['mat_khau']);
-                                        } ?>">
+                                                                                                                        echo ($_COOKIE['mat_khau']);
+                                                                                                                    } ?>">
                                     </div>
                                     <div class="single-input-item">
                                         <div
@@ -93,32 +93,32 @@
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
                                                     <label class="custom-control-label" for="rememberMe">Ghi nhớ tài khoản 7 ngày</label>
-                                                    <a href="<?=BASE_URL.'?act=xoaghinho'?>" class="forget-pwd">&ensp;&ensp;Bỏ ghi nhớ tài khoản</a>
+                                                    <a href="<?= BASE_URL . '?act=xoaghinho' ?>" class="forget-pwd">&ensp;&ensp;Bỏ ghi nhớ tài khoản</a>
                                                 </div>
                                             </div>
                                             <a href="#" class="forget-pwd">Quên mật khẩu</a>
-                                            <a href="<?= BASE_URL.'?act=dangky'?>">Đăng ký</a>
+                                            <a href="<?= BASE_URL . '?act=dangky' ?>">Đăng ký</a>
                                         </div>
                                     </div>
-                                   
-                                        <button type="submit" class="btn btn-sqr" >Đăng nhập</button>
-                                    </div>
-                                    <?php if (isset($_SESSION['error'])) { ?>
-                                   
-                                        <?= $_SESSION['error']?>
-                                    </p>
-                                    <?php }?>
-                                </form>
+
+                                    <button type="submit" class="btn btn-sqr">Đăng nhập</button>
                             </div>
+                            <?php if (isset($_SESSION['error'])) { ?>
+
+                                <?= $_SESSION['error'] ?>
+                                </p>
+                            <?php } ?>
+                            </form>
                         </div>
-                        <!-- Login Content End -->
-
-                        <!-- Register Content Start -->
-
-                        <!-- Register Content End -->
                     </div>
+                    <!-- Login Content End -->
+
+                    <!-- Register Content Start -->
+
+                    <!-- Register Content End -->
                 </div>
             </div>
+        </div>
         </div>
         <!-- login register wrapper end -->
     </main>
@@ -168,7 +168,6 @@
         document.getElementById('rememberMe').addEventListener('click', function() {
             console.log('Checkbox clicked:', this.checked);
         });
-
     </script>
 </body>
 

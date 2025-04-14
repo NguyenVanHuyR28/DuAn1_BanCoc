@@ -98,7 +98,7 @@ class GioHangController
                 window.location.href='" . BASE_URL . "?act=gio-hang" . "';
                 </script>";
         } else {
-            header('location:' . BASE_URL . '?act=gioHang');
+            header('location:' . BASE_URL . '?act=gio-hang');
         }
     }
 }

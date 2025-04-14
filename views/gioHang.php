@@ -3,10 +3,10 @@
 
 <style>
     a {
-  text-decoration: none !important;
-}
-
+        text-decoration: none !important;
+    }
 </style>
+
 <head>
     <meta charset="UTF-8">
     <title>Giỏ hàng của bạn</title>
@@ -17,22 +17,23 @@
 </head>
 
 <div class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-wrap">
-                        <nav aria-label="breadcrumb">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                
-                                <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
-                            </ul>
-                        </nav>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
+
+                            <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 <body>
     <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="post">
         <div class="container mt-5">
@@ -110,6 +111,7 @@
     <?php require_once 'layout/footer.php'; ?>
 
     <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

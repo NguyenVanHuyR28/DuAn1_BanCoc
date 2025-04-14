@@ -1,8 +1,8 @@
 <?php
-class TaiKhoan 
+class TaiKhoan
 {
     public $conn;
-    public function __construct() 
+    public function __construct()
     {
         $this->conn = connectDB();
     }
@@ -27,11 +27,12 @@ class TaiKhoan
                 return "Sai tài khoản hoặc mật khẩu!";
             }
         } catch (Exception $e) {
-            echo 'Lỗi checkLogin() '.$e->getMessage();
+            echo 'Lỗi checkLogin() ' . $e->getMessage();
             return false;
         }
     }
-    public function insertTaiKhoan($ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi, $role) {
+    public function insertTaiKhoan($ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi, $role)
+    {
         try {
             $sql = 'INSERT INTO tai_khoan (ho_ten, email, mat_khau, so_dien_thoai, dia_chi) VALUES (:ho_ten, :email, :mat_khau, :so_dien_thoai, :dia_chi, : role)';
             $stmt = $this->conn->prepare($sql);
@@ -72,14 +73,15 @@ class TaiKhoan
             echo "Error" . $e->getMessage();
         }
     }
-    public function getAllTaiKhoan() {
+    public function getAllTaiKhoan()
+    {
         try {
             $sql = "SELECT * FROM tai_khoan";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi getAllTaiKhoan() '. $e->getMessage();
+            echo 'Lỗi getAllTaiKhoan() ' . $e->getMessage();
             return [];
         }
     }
@@ -94,7 +96,7 @@ class TaiKhoan
 
             return $stmt->fetch();
         } catch (Exception $e) {
-            echo 'Lỗi getTKById() '.$e->getMessage();
+            echo 'Lỗi getTKById() ' . $e->getMessage();
         }
     }
     public function getTaiKhoanFromEmail($email)
@@ -114,7 +116,7 @@ class TaiKhoan
             echo "Error" . $e->getMessage();
         }
     }
-    public function editInfo($id, $ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi)
+    public function editInfo($id, $ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi)
     {
         try {
             $sql = "UPDATE tai_khoan SET ho_ten=:ho_ten, email=:email, mat_khau=:mat_khau, so_dien_thoai=:so_dien_thoai, dia_chi=:dia_chi
@@ -126,14 +128,14 @@ class TaiKhoan
                 ':mat_khau' => $mat_khau,
                 ':so_dien_thoai' => $so_dien_thoai,
                 ':dia_chi' => $dia_chi,
-                
+
                 ':id' => $id,
-                
+
             ]);
 
             return true;
         } catch (Exception $e) {
-            echo 'Lỗi editInfo() '.$e->getMessage();
+            echo 'Lỗi editInfo() ' . $e->getMessage();
         }
     }
 }

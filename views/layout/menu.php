@@ -61,27 +61,27 @@
                                         <ul class="dropdown-list">
                                             <div>
                                                 <?php if (isset($_SESSION['tai_khoan'])) { ?>
-                                                <p><span style="font-weight: 400;">Acc:</span>
-                                                </span><a href="<?=BASE_URL.'?act=formchinhsua'?>" style="font-size: 11px;"><?=$_SESSION['tai_khoan']?></a>
-                                                </p>
-                                                <br>
-                                                <p><a style="font-size: 12px;"
-                                                        href="<?=BASE_URL.'?act=dangxuat'?>"
-                                                        onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a>
-                                                </p>
+                                                    <p><span style="font-weight: 400;">Acc:</span>
+                                                        </span><a href="<?= BASE_URL . '?act=formchinhsua&id=' . $_SESSION['tai_khoan'] ?>" style="font-size: 11px;"><?= $_SESSION['tai_khoan'] ?></a>
+                                                    </p>
+                                                    <br>
+                                                    <p><a style="font-size: 12px;"
+                                                            href="<?= BASE_URL . '?act=dangxuat' ?>"
+                                                            onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a>
+                                                    </p>
 
                                                 <?php } elseif (isset($_SESSION['tai_khoan_admin'])) { ?>
 
-                                                <p><span style="font-weight: 600;">Acc:
-                                                    </span><a
-                                                        style="font-size: 9px;"> <?=$_SESSION['tai_khoan_admin']?></a>
-                                                </p>
-                                                <br>
-                                                <span><a style="font-size: 15px;" href="<?=BASE_URL.'?act=dangxuat'?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng  xuất</a></span> <br> <br>
-                                                <span><a style="font-size: 13px;" href="<?=BASE_URL_ADMIN?>">Đăng nhập Admin</a></span>
+                                                    <p><span style="font-weight: 600;">Acc:
+                                                        </span><a
+                                                            style="font-size: 9px;"> <?= $_SESSION['tai_khoan_admin'] ?></a>
+                                                    </p>
+                                                    <br>
+                                                    <span><a style="font-size: 15px;" href="<?= BASE_URL . '?act=dangxuat' ?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a></span> <br> <br>
+                                                    <span><a style="font-size: 13px;" href="<?= BASE_URL_ADMIN ?>">Đăng nhập Admin</a></span>
                                                 <?php } else { ?>
-                                                <li><a href="<?= BASE_URL.'?act=dangnhap'?>">Đăng nhập</a></li>
-                                                <li><a href="<?= BASE_URL.'?act=dangky'?>">Đăng ký</a></li>
+                                                    <li><a href="<?= BASE_URL . '?act=dangnhap' ?>">Đăng nhập</a></li>
+                                                    <li><a href="<?= BASE_URL . '?act=dangky' ?>">Đăng ký</a></li>
                                                 <?php } ?>
                                             </div>
                                         </ul>
@@ -92,6 +92,10 @@
                                             class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
                                         </a>
+                                        <ul class="dropdown-list">
+                                            <a href="<?= BASE_URL . '?act=lich-su' ?>" class="minicart-btn">Lịch sử</a>
+                                        </ul>
+
                                     </li>
                                 </ul>
                             </div>

@@ -61,5 +61,7 @@
 
         <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
+
+  </div>
+  <!-- /.sidebar -->
 </aside>
