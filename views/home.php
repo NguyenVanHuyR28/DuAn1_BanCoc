@@ -88,13 +88,14 @@
                                                         <a href="<?= BASE_URL  . '?act=chi-tiet-san-pham&id_san_pham' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?> </a>
                                                     </h6>
                                                     <div class="price-box">
-                                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <?php if (!empty($sanPham['gia_khuyen_mai']) && $sanPham['gia_khuyen_mai'] > 0) { ?>
                                                             <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?></span>
                                                             <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
                                                         <?php } else { ?>
-                                                            <span class="price-old"><?= formatPrice($sanPham['gia']) ?></span>
+                                                            <span class="price-regular"><?= formatPrice($sanPham['gia']) ?></span>
                                                         <?php } ?>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                         <?php endforeach ?>

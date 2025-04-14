@@ -35,7 +35,7 @@ include './views/layouts/slidebar.php';
                                     <th>Giá khuyến mãi</th>
                                     <th>Số Lượng</th>
                                     <th>Hình Ảnh</th>
-                                    <th>Mô tả</th>
+                                    <th>Trạng Thái</th>
                                     <th>Ngày Tạo</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -53,7 +53,14 @@ include './views/layouts/slidebar.php';
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
                                                 width="120px" alt="Ảnh sản phẩm"></td>
-                                        <td><?= $products['mo_ta']?></td>
+                                        <td>
+                                            <?php if ($products['trang_thai'] == 1) { ?>
+                                                <p class="text-success">Còn hàng</p>
+                                            <?php } else { ?>
+                                                <p class="text-danger">Hết hàng</p>
+                                            <?php } ?>
+                                        </td>
+
                                         <td><?= $products['ngay_tao'] ?></td>
                                         <td>
                                             <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
@@ -80,21 +87,21 @@ include './views/layouts/slidebar.php';
 include './views/layouts/footer.php';
 ?>
 <script>
-$(function() {
-    $("#example1").DataTable({
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
-});
 </script>

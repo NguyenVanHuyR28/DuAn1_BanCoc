@@ -30,7 +30,7 @@ class AdminSanPhamController
             $danh_muc_id = $_POST['danh_muc_id'] ?? '';
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia = $_POST['gia'] ?? '';
-            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
+            $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? null;
             $so_luong = $_POST['so_luong'] ?? '';
             $hinh_anh = $_FILES['hinh_anh'] ?? null;
             $mo_ta = $_POST['mo_ta'] ?? '';
@@ -62,6 +62,11 @@ class AdminSanPhamController
 
             $_SESSION['error'] = $error;
             if (empty($error)) {
+                unset($_SESSION['error']);
+                $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
+                if ($gia_khuyen_mai === '') {
+                    $gia_khuyen_mai = 0; // hoặc null nếu DB cho phép
+                }
                 $this->modelSanPham->insertSanPham($danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $file_thumb, $mo_ta);
                 header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
                 exit();
@@ -99,6 +104,7 @@ class AdminSanPhamController
             $gia = $_POST['gia'] ?? '';
             $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
             $so_luong = $_POST['so_luong'] ?? '';
+            $trang_thai = $_POST['trang_thai'] ?? '';
             $mo_ta = $_POST['mo_ta'] ?? '';
 
             // Lấy ảnh cũ từ database
@@ -153,7 +159,7 @@ class AdminSanPhamController
 
             if (empty($error)) {
                 unset($_SESSION['error']); // Xóa lỗi nếu cập nhật thành công
-                $this->modelSanPham->editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $new_file, $mo_ta);
+                $this->modelSanPham->editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $trang_thai, $new_file, $mo_ta);
                 header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
                 exit();
             } else {
