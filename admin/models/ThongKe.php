@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ThongKe
 {
@@ -39,39 +39,47 @@ class ThongKe
     public function getAllDonHang30days()
 {
     try {
-        $sql = 'SELECT don_hang.*, trang_thai_don_hang.ten_trang_thai
+        $sql = "SELECT don_hang.*, 
+                       CASE 
+                           WHEN don_hang.trang_thai_don_hang = 'pending' THEN 'Chờ xác nhận'
+                           WHEN don_hang.trang_thai_don_hang = 'processing' THEN 'Đang xử lý'
+                           WHEN don_hang.trang_thai_don_hang = 'shipped' THEN 'Đang giao'
+                           WHEN don_hang.trang_thai_don_hang = 'delivered' THEN 'Hoàn thành'
+                           WHEN don_hang.trang_thai_don_hang = 'canceled' THEN 'Đã huỷ'
+                           ELSE 'Không xác định'
+                       END AS ten_trang_thai
                 FROM don_hang
-                INNER JOIN trang_thai_don_hang ON don_hang.trang_thai_id = trang_thai_don_hang.id
-                WHERE don_hang.ngay_tao >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)';
-
+                WHERE ngay_tao >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+                ORDER BY ngay_tao DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về mảng
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về mảng kết hợp
     } catch (Exception $e) {
-        echo "Lỗi: " . $e->getMessage();
-        return []; // Trả về mảng rỗng nếu có lỗi
+        echo "Error: " . $e->getMessage();
+        return [];
     }
 }
     public function getTop10SanPham()
     {
-        try{
-            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
-                FROM san_phams 
-                INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-                ORDER BY san_phams.luot_xem DESC
+        try {
+            $sql = 'SELECT san_pham.*, danh_muc.ten_danh_muc
+                FROM san_pham 
+                INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id
+                ORDER BY san_pham.luot_xem DESC
                 LIMIT 10';
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 
-            return $stmt->fetchAll();
-        }catch(Exception $e) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về mảng
+        } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
+            return []; // Trả về mảng rỗng nếu có lỗi
         }
     }
     public function getAllDonHangBom()
     {
-        try{
+        try {
             $sql = 'SELECT don_hang.*, trang_thai_don_hang.ten_trang_thai
                 FROM don_hang
                 INNER JOIN trang_thai_don_hang ON don_hang.trang_thai_id = trang_thai_don_hang.id
@@ -79,21 +87,21 @@ class ThongKe
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':trang_thai_id' => 4 
+                ':trang_thai_id' => 4
             ]);
 
             return $stmt->fetchAll();
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
     }
     public function getAllDonHangHoan()
     {
-        try{
-            $sql = 'SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai
-                FROM don_hangs 
-                INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
-                WHERE don_hangs.trang_thai_id = :trang_thai_id';
+        try {
+            $sql = 'SELECT don_hang.*, trang_thai_don_hang.ten_trang_thai
+                FROM don_hang 
+                INNER JOIN trang_thai_don_hang ON don_hang.trang_thai_id = trang_thai_don_hang.id
+                WHERE don_hang.trang_thai_id = :trang_thai_id';
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([

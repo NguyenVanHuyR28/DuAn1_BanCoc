@@ -15,8 +15,8 @@ class DonHang
             $this->conn->beginTransaction();
 
             // Insert đơn hàng
-            $sql = "INSERT INTO don_hang (ma_don_hang, tai_khoan_id, tong_tien, ngay_tao, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, phuong_thuc_thanh_toan_id)
-                VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id)";
+            $sql = "INSERT INTO don_hang (ma_don_hang, tai_khoan_id, tong_tien, ngay_tao, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, phuong_thuc_thanh_toan_id, trang_thai_id)
+                VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id, :trang_thai_id)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':ma_don_hang'               => $ma_don_hang,
@@ -29,6 +29,8 @@ class DonHang
                 ':dia_chi_nguoi_nhan'       => $dia_chi_nguoi_nhan,
                 ':ghi_chu'                  => $ghi_chu,
                 ':phuong_thuc_thanh_toan_id' => $phuong_thuc_thanh_toan_id,
+                ':trang_thai_id'             => 1 // Giá trị mặc định (ví dụ: 1 = "pending")
+
             ]);
             $order_id = $this->conn->lastInsertId();
             // Thêm chi tiết đơn hàng
@@ -115,4 +117,5 @@ class DonHang
             echo 'Error: ' . $e->getMessage();
         }
     }
+    
 }

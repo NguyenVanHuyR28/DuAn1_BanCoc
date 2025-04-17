@@ -7,6 +7,7 @@ if (isset($_SESSION['user'])) {
     $user = null; // hoặc redirect người dùng về trang login
 }
 ?>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <main>
     <div class="breadcrumb-area">
@@ -40,7 +41,7 @@ if (isset($_SESSION['user'])) {
                                                 <i class="fa fa-sign-out"></i> Đăng nhập admin
                                             </a>
                                         <?php } else { ?>
-                                            <a href="<?= BASE_URL . '?act=lich-su' ?>" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                            <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
                                             <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
                                         <?php } ?>
 
@@ -52,75 +53,74 @@ if (isset($_SESSION['user'])) {
                                     <div class="tab-content" id="myaccountContent">
                                         <div class="tab-pane fade show active" id="orders" role="tabpanel">
                                             <div class="myaccount-content">
-                                                <h5 class="mb-4">Đon hàng của bạn</h5>
-                                                <?php
-                                                if (isset($_SESSION['error1'])): ?>
-                                                    <div class="alert alert-danger">
-                                                        <?= htmlspecialchars($_SESSION['error1']) ?>
+                                                <h5 class="mb-4">Đơn hàng của bạn</h5>
+                                                <?php if (!empty($don_hang_list)) : ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered align-middle">
+                                                            <thead class="table-dark">
+                                                                <tr>
+                                                                    <th>STT</th>
+                                                                    <th>Mã Đơn</th>
+                                                                    <th>Người Nhận</th>
+                                                                    <th>Số điện thoại</th>
+                                                                    <th>Tổng Tiền</th>
+                                                                    <th>Ngày Mua</th>
+                                                                    <th>Trạng Thái</th>
+                                                                    <th>Chi Tiết</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php foreach ($don_hang_list as $key => $don_hang) : ?>
+                                                                    <tr>
+                                                                        <td><?= $key + 1 ?></td>
+                                                                        <td><?= $don_hang['ma_don_hang'] ?></td>
+                                                                        <td><?= $don_hang['ten_nguoi_nhan'] ?></td>
+                                                                        <td><?= $don_hang['sdt_nguoi_nhan'] ?></td>
+                                                                        <td><?= number_format($don_hang['tong_tien'], 0, ',', '.') ?>đ</td>
+                                                                        <td><?= date('d/m/Y H:i', strtotime($don_hang['ngay_tao'])) ?></td>
+                                                                        <td>
+                                                                            <?php
+                                                                            switch ($don_hang['trang_thai_don_hang']) {
+                                                                                case 'pending':
+                                                                                    echo '<span class="badge bg-warning">Chờ xác nhận</span>';
+                                                                                    break;
+                                                                                case 'processing':
+                                                                                    echo '<span class="badge bg-primary">Đang xử lý</span>';
+                                                                                    break;
+                                                                                case 'shipped':
+                                                                                    echo '<span class="badge bg-info">Đang giao</span>';
+                                                                                    break;
+                                                                                case 'delivered':
+                                                                                    echo '<span class="badge bg-success">Hoàn thành</span>';
+                                                                                    break;
+                                                                                case 'canceled':
+                                                                                    echo '<span class="badge bg-danger">Đã hủy</span>';
+                                                                                    break;
+                                                                                default:
+                                                                                    echo '<span class="badge bg-secondary">Không rõ</span>';
+                                                                                    break;
+                                                                            }
+
+                                                                            ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="<?= BASE_URL . '?act=chi-tiet-don-hang&id=' . $don_hang['id'] ?>" class="btn btn-sm btn-primary">
+                                                                                <i class="fas fa-eye"></i> Xem
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                <?php unset($_SESSION['error1']);
-                                                endif; ?>
-                                                <?php
-                                                if (isset($_SESSION['message'])): ?>
-                                                    <div class="alert alert-success">
-                                                        <?= htmlspecialchars($_SESSION['message']) ?>
+                                                <?php else : ?>
+                                                    <div class="alert alert-warning" role="alert">
+                                                        <i class="fas fa-exclamation-triangle"></i> Bạn chưa có đơn hàng nào.
                                                     </div>
-                                                <?php unset($_SESSION['message']);
-                                                endif; ?>
-
-                                                <div class="myaccount-table table-responsive text-content">
-                                                    <table class="table table-bordered">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>Mã đơn hàng</th>
-                                                                <th>Tên người nhận</th>
-                                                                <th>Số điện thoại</th>
-                                                                <th>Ngày đặt</th>
-                                                                <th>Tổng số tiền</th>
-                                                                <th>Trạng thái</th>
-                                                                <th>Thao tác</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <!-- <tbody>
-                                                        <?php foreach ($don_hang_list as $key => $don_hang): ?>
-                                                            <tr>
-                                                                <td><?= $key + 1; ?></td>
-                                                                <td><?= $don_hang['ma_don_hang'] ?></td>
-                                                                <td><?= $don_hang['ten_nguoi_nhan'] ?></td>
-                                                                <td><?= $don_hang['sdt_nguoi_nhan'] ?></td>
-
-                                                                <td><?= date('d M, Y', strtotime($don_hang['ngay_dat'])); ?></td>
-
-                                                                <td><?= formatPrice($don_hang['tong_tien']) . 'đ' ?></td>
-                                                                <td><?= $don_hang['ten_trang_thai'] ?></td>
-                                                                <-- Nút xem chi tiết đơn hàng
-                                                                <td>
-                                                                    <button class="btn btn-info btn-sm mb-2">
-                                                                        <a href="<?= BASE_URL . '?act=chi-tiet-don-hang-user&id_don_hang=' . $don_hang['id'] ?>">
-                                                                            Xem Chi Tiết
-                                                                        </a><br>
-                                                                    </button><br>
-
-                                                                    <button class="btn btn-danger btn-sm mb-2">
-                                                                        <a href="<?= BASE_URL . '?act=huy-don&id=' . $don_hang['id'] ?>" 
-                                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn không?')">
-                                                                        Hủy Đơn </a><br>
-                                                                    </button><br>
-
-                                                                    <button class="btn btn-success btn-sm">
-                                                                        <a href="<?= BASE_URL . '?act=hoan-don&id=' . $don_hang['id'] ?>" 
-                                                                        onclick="return confirm('Bạn có chắc chắn muốn hoàn hàng không?')">
-                                                                        Hoàn Hàng </a>
-                                                                    </button>
-                                                                </td>
-                                                                    
-
-                                                            </tr>
-                                                            <?php endforeach; ?>
-                                                    </tbody> -->
-                                                    </table>
-                                                </div>
+                                                    <a href="<?= BASE_URL . '?act=allsanpham' ?>" class="btn btn-outline-primary">
+                                                        <i class="fas fa-shopping-bag"></i> Mua sắm ngay
+                                                    </a>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
 
@@ -241,3 +241,4 @@ if (isset($_SESSION['user'])) {
     </div>
 </main>
 <?php require_once 'views/layout/footer.php'; ?>
+<?php require_once 'layout/miniCart.php'; ?>

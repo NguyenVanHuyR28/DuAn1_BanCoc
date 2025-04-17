@@ -1,13 +1,11 @@
-<!-- header  -->
 <?php
 include './views/layouts/header.php';
 include './views/layouts/navbar.php';
 include './views/layouts/slidebar.php';
 ?>
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
+<section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -16,10 +14,6 @@ include './views/layouts/slidebar.php';
       </div>
     </div><!-- /.container-fluid -->
   </section>
-
-  
-
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -48,12 +42,12 @@ include './views/layouts/slidebar.php';
                       <td><?= $donHang['ma_don_hang'] ?></td>
                       <td><?= $donHang['ten_nguoi_nhan'] ?></td>
                       <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
-                      <td><?= $donHang['ngay_dat'] ?></td>
+                      <td><?= $donHang['ngay_tao'] ?></td>
                       <td><?= $donHang['tong_tien'] ?></td>
                       <td><?= $donHang['ten_trang_thai'] ?></td>
    
                       <td>
-                        <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>">
+                        <a href="<?= BASE_URL_ADMIN . '?act=detailDonHang&id=' . $donHang['id'] ?>">
                           <button class="btn btn-success"><i class="far fa-eye"></i></button>
                         </a>
 
@@ -91,8 +85,7 @@ include './views/layouts/slidebar.php';
     </div>
     <!-- /.container-fluid -->
   </section>
-  <!-- /.content -->
-</div>
+  </div>
 <!-- /.content-wrapper -->
 <!-- Footer -->
 <?php

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class AdminBaoCaoThongKeController
 {
@@ -13,9 +13,9 @@ class AdminBaoCaoThongKeController
 
     public function home()
     {
-        $listDonHang30days=$this->modelThongKe->getAllDonHang30days();
-        $list10top=$this->modelThongKe->getTop10SanPham();
-        $listDonBom=$this->modelThongKe->getAllDonHangBom();
+        $listDonHang30days = $this->modelThongKe->getAllDonHang30days();
+        $list10top = $this->modelThongKe->getTop10SanPham();
+        $listDonBom = $this->modelThongKe->getAllDonHangBom();
         $listDonHoan = $this->modelThongKe->getAllDonHangHoan();
         $listThongKe = $this->modelThongKe->loadAll_thongke();
 

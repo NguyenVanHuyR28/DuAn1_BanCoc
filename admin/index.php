@@ -51,6 +51,7 @@ match ($act) {
     'detailDonHang' => (new AdminDonHangController())->chiTietDonHang(),
     'capNhat' => (new AdminDonHangController())->editTrangThai(),
 
+
     //Router Tài Khoản
     'listTaiKhoan' => (new AdminTaiKhoanController())->listTaiKhoan(),
     'formAddTaiKhoan' => (new AdminTaiKhoanController())->formAddTaiKhoan(),
