@@ -2,7 +2,8 @@
 <?php
 include './views/layouts/header.php';
 include './views/layouts/navbar.php';
-include './views/layouts/slidebar.php';?>
+include './views/layouts/slidebar.php';
+?>
 
 <div class="content-wrapper">
     <section class="content-header">

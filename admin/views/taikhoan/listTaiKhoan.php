@@ -38,7 +38,6 @@ include './views/layouts/slidebar.php';
                                         <th>STT</th>
                                         <th>Họ tên</th>
                                         <th>Email</th>
-                                        <th>Mật Khẩu</th>
                                         <th>Số điện thoại</th>
                                         <th>Địa chỉ</th>
                                         <th>Ngày tạo</th>
@@ -52,7 +51,6 @@ include './views/layouts/slidebar.php';
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $taiKhoan['ho_ten'] ?></td>
                                         <td><?= $taiKhoan['email'] ?></td>
-                                        <td><?= $taiKhoan['mat_khau']   ?></td>
                                         <td><?= $taiKhoan['so_dien_thoai'] ?></td>
                                         <td><?= $taiKhoan['dia_chi'] ?></td>
                                         <td><?= $taiKhoan['ngay_tao'] ?></td>

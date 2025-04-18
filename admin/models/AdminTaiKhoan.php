@@ -120,5 +120,28 @@ class AdminTaiKhoan {
     private function handleError($e) {
         error_log("Database error: " . $e->getMessage());
     }
+
+    public function checkLogin($email, $mat_khau)
+    {
+        try {
+            $sql = 'SELECT * FROM tai_khoan WHERE email = :email';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch();
+            if ($user && password_verify($mat_khau, $user['mat_khau'])) {
+                if ($user['role'] == 0) {
+
+                    return $user['email'];
+                } else {
+                    return "Tài khoản không có quyền đăng nhập";
+                }
+            } else {
+                return "Bạn nhập sai thông tin";
+            }
+        } catch (\Exception $e) {
+            echo "Lỗi" . $e->getMessage();
+            return false;
+        }
+    }
 }
 ?>

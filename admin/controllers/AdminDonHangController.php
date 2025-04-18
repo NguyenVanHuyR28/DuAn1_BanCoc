@@ -15,29 +15,29 @@ class AdminDonHangController
     }
 
     public function chiTietDonHang()
-{
-    if (isset($_GET['id']) && !empty($_GET['id'])) {
-        $order_id = intval($_GET['id']);
+    {
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $order_id = intval($_GET['id']);
 
-        // Lấy chi tiết đơn hàng
-        $detailItem = $this->modelDonHang->detailDonHang($order_id);
-        // var_dump($detailItem);die;
-        if (empty($detailItem)) {
-            echo "Không tìm thấy chi tiết đơn hàng cho ID: " . htmlspecialchars($order_id);
-            return;
+            // Lấy chi tiết đơn hàng
+            $detailItem = $this->modelDonHang->detailDonHang($order_id);
+            // var_dump($detailItem);die;
+            if (empty($detailItem)) {
+                echo "Không tìm thấy chi tiết đơn hàng cho ID: " . htmlspecialchars($order_id);
+                return;
+            }
+
+            // Giả sử trạng thái đơn hàng nằm ở item đầu tiên
+            $order = [
+                'trang_thai_don_hang' => $detailItem[0]['trang_thai_don_hang']
+            ];
+
+            // Gửi dữ liệu sang view
+            require_once('views/donhang/detailDonHang.php');
+        } else {
+            echo "Order ID không hợp lệ.";
         }
-
-        // Giả sử trạng thái đơn hàng nằm ở item đầu tiên
-        $order = [
-            'trang_thai_don_hang' => $detailItem[0]['trang_thai_don_hang']
-        ];
-
-        // Gửi dữ liệu sang view
-        require_once('views/donhang/detailDonHang.php');
-    } else {
-        echo "Order ID không hợp lệ.";
     }
-}
 
 
     public function editTrangThai()

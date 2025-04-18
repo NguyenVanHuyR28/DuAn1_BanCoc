@@ -1,13 +1,26 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
 
-<!DOCTYPE html>
-<html lang="vi">
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Lịch sử đơn hàng</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <head>
     <meta charset="UTF-8">
     <title>Lịch sử đơn hàng</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -83,8 +96,8 @@
     </div>
 
     <?php require_once 'layout/footer.php'; ?>
+    <?php require_once 'layout/miniCart.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

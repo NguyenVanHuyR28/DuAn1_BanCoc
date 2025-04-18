@@ -42,11 +42,9 @@
 
                     <!-- mini cart area start -->
                     <div class="col-lg-4">
-                        <div
-                            class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+                        <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                             <div class="header-search-container">
-                                <button class="search-trigger d-xl-none d-lg-block"><i
-                                        class="pe-7s-search"></i></button>
+                                <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
                                 <form class="header-search-box d-lg-none d-xl-block" role="search" method="post">
                                     <input type="search" name="search" value="<?= $_POST['search'] ?? "" ?>" placeholder="Tìm kiếm sản phẩm" class="header-search-field">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
@@ -55,6 +53,7 @@
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
                                     <li class="user-hover">
+
                                         <a href="">
                                             <i class="pe-7s-user"></i>
                                         </a>
@@ -88,15 +87,15 @@
                                     </li>
 
                                     <li>
-                                        <a href="<?= BASE_URL.'?act=gio-hang' ?>"
-                                            class="minicart-btn">
-                                            <i class="pe-7s-shopbag"></i>
-                                        </a>
-                                        <ul class="dropdown-list">
-                                            <a href="<?= BASE_URL . '?act=lich-su' ?>" class="minicart-btn">Lịch sử</a>
-                                        </ul>
+                                        <?php
+                                        if (isset($_SESSION['tai_khoan'])) { ?>
+                                            <a href="#" class="minicart-btn">
+                                                <i class="pe-7s-shopbag"></i>
+                                            </a>
+                                        <?php  }  ?>
 
                                     </li>
+
                                 </ul>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ class HomeController
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelBinhLuan = new BinhLuan();
         $this->modelGioHang = new GioHang();
-        // $this->modelDonHang = new DonHang();
+        $this->modelDonHang = new DonHang();
     }
 
     public function home()
@@ -246,6 +246,7 @@ class HomeController
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
         $tai_khoan_id = $user['id'];
         $TKById = $this->modelTaiKhoan->getTKById($tai_khoan_id); // THÊM DÒNG NÀY
+        $don_hang_list = $this->modelDonHang->historyDonHang($tai_khoan_id);
         require_once './views/infoacc.php';
         exit();
     }

@@ -4,7 +4,7 @@ class DonHangController
 {
     public $modelGioHang;
     public $modelTaiKhoan;
-
+    public $modelSanPham;
     public $modelDonHang;
 
     public function __construct()
@@ -14,6 +14,8 @@ class DonHangController
         $this->modelTaiKhoan = new TaiKhoan();
 
         $this->modelDonHang = new DonHang();
+
+        $this->modelSanPham = new SanPham();
     }
     public function datHang()
     {
@@ -36,6 +38,18 @@ class DonHangController
 
             // Lấy danh sách sản phẩm trong giỏ hàng theo tài khoản
             $items = $this->modelGioHang->getAllCart($tai_khoan_id);
+            $cartItems = $this->modelGioHang->getAllCart($tai_khoan_id);
+
+            foreach ($cartItems as $item) {
+                $sanPham = $this->modelSanPham->getDetailSanPham($item['san_pham_id']);
+                if ($sanPham['so_luong'] < $item['so_luong']) {
+                    echo "<script>
+                        alert('Sản phẩm \"{$sanPham['ten_san_pham']}\" không đủ số lượng để đặt hàng!');
+                        window.location.href='" . BASE_URL . "?act=gio-hang';
+                    </script>";
+                    exit();
+                }
+            }
             // var_dump($items);die;
             // Tạo mã đơn hàng ngẫu nhiên
             function randomChuoi($length = 8)
@@ -69,14 +83,18 @@ class DonHangController
                 $phuong_thuc_thanh_toan_id,
                 $items // <== thêm dòng này
             );
-            // var_dump($check);
+            // Trừ số lượng sản phẩm trong kho
+            foreach ($cartItems as $item) {
+                $this->modelSanPham->updateSoLuongSanPham($item['san_pham_id'], $item['so_luong']);
+            }
+            // var_dump($check);die;
             // die;
             // Nếu thành công, xoá giỏ hàng và thông báo
             if ($check) {
                 $this->modelGioHang->deleteAllCart($tai_khoan_id);
                 echo "<script>
                 alert('Đặt hàng thành công!');
-                window.location.href='" . BASE_URL . "?act=/';
+                window.location.href='" . BASE_URL . "?act=lich-su';
                 </script>";
                 exit;
             } else {

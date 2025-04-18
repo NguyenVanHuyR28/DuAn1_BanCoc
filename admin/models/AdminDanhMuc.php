@@ -78,4 +78,17 @@ class AdminDanhMuc
             return false;
         }
     }
+    public function hasSanPham($id)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as total FROM san_pham WHERE danh_muc_id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'] > 0; // Trả về true nếu có sản phẩm
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }

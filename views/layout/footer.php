@@ -48,12 +48,12 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="widget-item">
-                        <h6 class="widget-title">theo dõi chúng tôi</h6>
+                        <h6 class="widget-title">Theo dõi chúng tôi</h6>
                         <div class="widget-body social-link">
-                            <a href="https://www.facebook.com/profile.php?id=100034610330756"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/lason.fb"><i class="fa fa-facebook"></i></a>
 
-                            <a href="https://www.instagram.com/duc_coan24/"><i class="fa fa-instagram"></i></a>
-                            <a href="https://www.youtube.com/@6.ngogiauc16"><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/_nvh282/"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.youtube.com"><i class="fa fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>

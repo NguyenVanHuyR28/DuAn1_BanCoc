@@ -45,6 +45,7 @@ match ($act) {
     'checkdangnhap' => (new HomeController())->dangNhap(),
     'dangky' => (new HomeController())->formDangKy(),
     'checkdangky' => (new HomeController())->dangKy(),
+    'dangxuat' => (new HomeController())->logout(),
     'xoaghinho' => (new HomeController())->xoaCookie(),
     'dangxuat' => (new HomeController())->logout(),
 
@@ -54,21 +55,5 @@ match ($act) {
     'thaydoithongtintaikhoan' => (new HomeController())-> editInfo(),
 //     //binhluan
     'dang-binh-luan' => (new HomeController())->postBinhLuan(),
-    //     //chinh-sua-thong-tin-nguoi-dung
-    //     'form-chinh-sua' => (new HomeController())->formUser(),
-    //     'thay-doi-thong-tin-tai-khoan' => (new HomeController())->postUser(),
-    //     'sua-mat-khau-ca-nhan' => (new HomeController())->postEditMatKhauCaNhan(),
-    //     //binhluan
-    //     'dang-binh-luan' => (new HomeController())->postBinhLuan(),
-
-    //     //giỏ hàng
-
-    //     'thanh-toan' => (new HomeController())->thanhToan(),
-    //     'xu-ly-thanh-toan' => (new HomeController())->postThanhToan(),
-
-    //     'xoa-san-pham-gio-hang' => (new HomeController())->deleteSpGioHang(),
-
-    //     'chi-tiet-don-hang-user' => (new HomeController())->show(),
-    //     'huy-don' => (new HomeController())->huyDon(),
-    //     'hoan-don' => (new HomeController())->hoanDon(),
+ 
 };

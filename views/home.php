@@ -95,7 +95,7 @@
                                                             <span class="price-regular"><?= formatPrice($sanPham['gia']) ?></span>
                                                         <?php } ?>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         <?php endforeach ?>
@@ -109,6 +109,6 @@
 
     </section>
 </main>
-<?php require_once 'layout/miniCart.php'; ?>
 
 <?php require_once 'layout/footer.php'; ?>
+<?php require_once 'layout/miniCart.php'; ?>
