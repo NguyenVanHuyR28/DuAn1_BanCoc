@@ -43,6 +43,7 @@
             <p><strong>Địa chỉ:</strong> <?= $thongTinDonHang['dia_chi_nguoi_nhan'] ?></p>
             <p><strong>Ghi chú:</strong> <?= $thongTinDonHang['ghi_chu'] ?: '(Không có)' ?></p>
             <p><strong>Trạng thái:</strong>
+            <p><strong>Trạng thái:</strong>
                 <?php
                 switch ($thongTinDonHang['trang_thai_don_hang']) {
                     case 'pending':
@@ -65,7 +66,17 @@
                         break;
                 }
                 ?>
-            </p>
+
+                <?php if (in_array($thongTinDonHang['trang_thai_don_hang'], ['pending', 'processing'])): ?>
+            <form action="<?= BASE_URL . '?act=cap-nhat' ?>" method="POST" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này không?');" class="d-inline">
+                <input type="hidden" name="don_hang_id" value="<?= $thongTinDonHang['id'] ?>">
+                <button type="submit" class="btn btn-danger ms-3">Hủy hàng</button>
+            </form>
+        <?php endif; ?>
+
+        </p>
+
+        </p>
         </div>
 
 
