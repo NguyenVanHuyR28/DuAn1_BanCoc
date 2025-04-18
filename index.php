@@ -55,5 +55,8 @@ match ($act) {
     'thaydoithongtintaikhoan' => (new HomeController())-> editInfo(),
 //     //binhluan
     'dang-binh-luan' => (new HomeController())->postBinhLuan(),
+
+    'lien-he' =>(new HomeController())->lienhe(),
+    'gioi-thieu' =>(new HomeController())->gioithieu(),
  
 };
