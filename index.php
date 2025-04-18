@@ -39,12 +39,14 @@ match ($act) {
     'dat-hang' => (new DonHangController())->datHang(),
     'lich-su' => (new DonHangController())->lichSuDonHang(),
     'chi-tiet-don-hang' => (new DonHangController())->detailDonHang(),
+    'cap-nhat' => (new DonHangController())->capNhat(),
     // Đăng nhập
     'dangnhap' => (new HomeController())->formDangNhap(),
     'checkdangnhap' => (new HomeController())->dangNhap(),
     'dangky' => (new HomeController())->formDangKy(),
     'checkdangky' => (new HomeController())->dangKy(),
     'xoaghinho' => (new HomeController())->xoaCookie(),
+    'dangxuat' => (new HomeController())->logout(),
 
 //     //chinh-sua-thong-tin-nguoi-dung
     'formchinhsua' => (new HomeController())->formUser(),

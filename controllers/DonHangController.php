@@ -137,4 +137,49 @@ class DonHangController
             echo 'Có lỗi xảy ra trong quá trình truy vấn.';
         }
     }
+
+
+    public function capNhat()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $don_hang_id = $_POST['don_hang_id'] ?? '';
+
+            if (!$don_hang_id) {
+                echo "Thiếu ID đơn hàng!";
+                exit;
+            }
+
+            // Lấy đơn hàng từ DB
+            $thongTinDonHang = $this->modelDonHang->getTrangThai($don_hang_id);
+            // var_dump($thongTinDonHang);die;
+
+            if (!$thongTinDonHang) {
+                echo "Không tìm thấy đơn hàng!";
+                exit;
+            }
+
+            $trang_thai_hien_tai = $thongTinDonHang['trang_thai_don_hang'] ?? '';
+            // var_dump($trang_thai_hien_tai);die;
+
+            // Chỉ cho phép hủy nếu đang ở trạng thái 'pending' hoặc 'processing'
+            if (!in_array($trang_thai_hien_tai, ['pending', 'processing'])) {
+                echo "Không thể hủy đơn hàng vì đã được giao hoặc hoàn tất.";
+                exit;
+            }
+
+            // Cập nhật trạng thái thành canceled
+            $daHuy = $this->modelDonHang->updateTrangThai('canceled', $don_hang_id);
+
+            if ($daHuy) {
+                header("Location: " . BASE_URL . "?act=chi-tiet-don-hang&id=" . $don_hang_id);
+                exit;
+            } else {
+                echo "Lỗi khi cập nhật trạng thái đơn hàng.";
+                exit;
+            }
+        } else {
+            echo "Phương thức gửi không hợp lệ.";
+            exit;
+        }
+    }
 }

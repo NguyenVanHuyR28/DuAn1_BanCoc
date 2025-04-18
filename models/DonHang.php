@@ -19,15 +19,15 @@ class DonHang
                 VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':ma_don_hang'               => $ma_don_hang,
-                ':tai_khoan_id'              => $tai_khoan_id,
-                ':tong_tien'                 => $tong_tien,
-                ':ngay_tao'                  => $ngay_tao,
-                ':ten_nguoi_nhan'           => $ten_nguoi_nhan,
-                ':email_nguoi_nhan'         => $email_nguoi_nhan,
-                ':sdt_nguoi_nhan'           => $sdt_nguoi_nhan,
-                ':dia_chi_nguoi_nhan'       => $dia_chi_nguoi_nhan,
-                ':ghi_chu'                  => $ghi_chu,
+                ':ma_don_hang' => $ma_don_hang,
+                ':tai_khoan_id' => $tai_khoan_id,
+                ':tong_tien'  => $tong_tien,
+                ':ngay_tao'  => $ngay_tao,
+                ':ten_nguoi_nhan' => $ten_nguoi_nhan,
+                ':email_nguoi_nhan' => $email_nguoi_nhan,
+                ':sdt_nguoi_nhan' => $sdt_nguoi_nhan,
+                ':dia_chi_nguoi_nhan' => $dia_chi_nguoi_nhan,
+                ':ghi_chu' => $ghi_chu,
                 ':phuong_thuc_thanh_toan_id' => $phuong_thuc_thanh_toan_id,
             ]);
             $order_id = $this->conn->lastInsertId();
@@ -111,6 +111,39 @@ class DonHang
                 ':order_id' => $order_id
             ]);
             return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function updateTrangThai($trang_thai, $don_hang_id)
+    {
+        try {
+            $sql = "UPDATE don_hang SET trang_thai_don_hang = :trang_thai WHERE id = :don_hang_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':trang_thai'    => $trang_thai,
+                ':don_hang_id'   => $don_hang_id,
+            ]);
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi cập nhật trạng thái: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getTrangThai($id)
+    {
+        try {
+            $sql = 'SELECT don_hang.trang_thai_don_hang
+            FROM don_hang
+            WHERE don_hang.id = :id
+            ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+            return $stmt->fetch();
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
