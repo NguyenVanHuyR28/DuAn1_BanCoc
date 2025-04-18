@@ -7,7 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Chi Tiết Đơn Hàng</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f4f6f9;
@@ -120,6 +119,7 @@
             </ul>
         </div>
     </div>
+    <?php require_once 'layout/miniCart.php'; ?>
 
     <?php require_once 'layout/footer.php'; ?>
 </body>

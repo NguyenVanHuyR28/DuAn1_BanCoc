@@ -1,62 +1,56 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
 
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Trang Thanh Toán</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f2f4f8;
-        }
-
-        .card {
-            border-radius: 1rem;
-            transition: box-shadow 0.3s;
-        }
-
-        .card:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-    </style>
-</head>
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Lịch sử đơn hàng</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <body>
     <div class="container py-5">
-        <h2 class="text-center mb-5 fw-bold text-primary">Xác Nhận Thanh Toán</h2>
+        <h2 class="text-center mb-5 fw-bold text-danger">Xác Nhận Thanh Toán</h2>
 
         <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="POST">
+            <?php
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
+            $tai_khoan_id = $user['id'];
+            ?>
             <div class="row g-4">
                 <!-- Cột trái: Thông tin giao hàng -->
                 <div class="col-md-7">
                     <div class="card p-4">
-                        <h4 class="mb-4 text-primary">Thông Tin Giao Hàng</h4>
+                        <h4 class="mb-4 text-warning">Thông Tin Giao Hàng</h4>
 
                         <div class="mb-3">
                             <label for="ten_nguoi_nhan" class="form-label">Họ và Tên</label>
-                            <input type="text" class="form-control" id="ten_nguoi_nhan" name="ten_nguoi_nhan" required>
+                            <input type="text" class="form-control" id="ten_nguoi_nhan" name="ten_nguoi_nhan" required value="<?= $user['ho_ten'] ?>">
                         </div>
 
                         <div class="mb-3">
                             <label for="email_nguoi_nhan" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email_nguoi_nhan" name="email_nguoi_nhan" required>
+                            <input type="email" class="form-control" id="email_nguoi_nhan" name="email_nguoi_nhan" value="<?= $user['email'] ?>" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="sdt_nguoi_nhan" class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan" required>
+                            <input type="tel" class="form-control" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan" value="<?= $user['so_dien_thoai'] ?>" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="dia_chi_nguoi_nhan" class="form-label">Địa chỉ giao hàng</label>
-                            <textarea class="form-control" id="dia_chi_nguoi_nhan" name="dia_chi_nguoi_nhan" rows="3" required></textarea>
+                            <textarea class="form-control" id="dia_chi_nguoi_nhan" name="dia_chi_nguoi_nhan" rows="3" required><?= $user['dia_chi'] ?></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -123,7 +117,7 @@
                         </ul>
                         <input type="hidden" name="tong_tien" value="<?= $tongTien + 30000 ?>">
 
-                        <button type="submit" class="btn btn-success btn-lg w-100 mt-2">Xác nhận đặt hàng</button>
+                        <button type="submit" class="btn btn-cart2" id="add-to-cart-btn">Xác nhận thanh toán</button>
                     </div>
                 </div>
             </div>
@@ -131,6 +125,8 @@
     </div>
 
     <?php require_once 'layout/footer.php'; ?>
+    <?php require_once 'layout/miniCart.php'; ?>
+
 </body>
 
 </html>

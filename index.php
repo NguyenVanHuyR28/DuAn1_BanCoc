@@ -45,5 +45,13 @@ match ($act) {
     'dangky' => (new HomeController())->formDangKy(),
     'checkdangky' => (new HomeController())->dangKy(),
     'dangxuat' => (new HomeController())->logout(),
-    'formchinhsua' => (new HomeController())->infoAcc(),
+    'xoaghinho' => (new HomeController())->xoaCookie(),
+
+//     //chinh-sua-thong-tin-nguoi-dung
+    'formchinhsua' => (new HomeController())->formUser(),
+    'info-Acc' => (new HomeController())-> infoAcc(),
+    'thaydoithongtintaikhoan' => (new HomeController())-> editInfo(),
+//     //binhluan
+    'dang-binh-luan' => (new HomeController())->postBinhLuan(),
+ 
 };

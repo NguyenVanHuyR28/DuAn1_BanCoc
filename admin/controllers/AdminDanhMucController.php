@@ -81,23 +81,26 @@ class AdminDanhMucController
     }
 
     public function deleteDanhMuc()
-    {
-        // Lấy ra thông tin danh mục cần xóa
-        try {
-            $id = $_GET['id'];
-            $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
-            if ($id) {
-                $this->modelDanhMuc->deleteDanhMuc($id);
-                header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
-                exit();
-            } else {
-                header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
-                exit;
-            }
-        } catch (Exception $e) {
-            echo "Error" . $e->getMessage();
+{
+    try {
+        $id = $_GET['id'];
+
+        // Kiểm tra xem danh mục có sản phẩm nào không
+        if ($this->modelDanhMuc->hasSanPham($id)) {
+            $_SESSION['error'] = "Không thể xóa danh mục vì vẫn còn sản phẩm liên kết.";
             header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
-            exit;
+            exit();
         }
+
+        // Nếu không có sản phẩm, tiến hành xóa
+        $this->modelDanhMuc->deleteDanhMuc($id);
+        $_SESSION['success'] = "Xóa danh mục thành công.";
+        header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
+        exit();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        header('location: ' . BASE_URL_ADMIN . '?act=listDanhMuc');
+        exit();
     }
+}
 }

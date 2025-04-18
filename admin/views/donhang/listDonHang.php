@@ -81,7 +81,7 @@
                                     <tr>
                                         <td><?= $order['id'] ?></td>
                                         <td><?= $order['ma_don_hang'] ?></td>
-                                        <td><?= $order['tai_khoan_id'] ?></td>
+                                        <td><?= htmlspecialchars($order['email']) ?></td>
                                         <td><?= number_format($order['tong_tien']) ?></td>
                                         <td><?= $order['ngay_tao'] ?></td>
                                         <td>
