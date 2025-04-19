@@ -5,7 +5,8 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <!-- <img src="" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
             <div class="info">
-                <a href="#" class="d-block">Admin</a>
+                <img style="width:3.1rem" src="./assets/dist/img/logo2.png" class="img-circle elevation-2" alt="User Image">
+                <span style="font-size: 26px; color:white; margin:20px">HKD Shop</span>
             </div>
         </div>
 

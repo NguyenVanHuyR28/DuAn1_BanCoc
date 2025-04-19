@@ -41,8 +41,12 @@ if (isset($_SESSION['user'])) {
                                                 <i class="fa fa-sign-out"></i> Đăng nhập admin
                                             </a>
                                         <?php } else { ?>
-                                            <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
-                                            <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
+                                            <a href="#orders" data-bs-toggle="tab" class="<?= isset($_GET['tab']) && $_GET['tab'] == 'orders' ? 'active' : '' ?>">
+    <i class="fa fa-cart-arrow-down"></i> Orders
+</a>
+<a href="#account-info" data-bs-toggle="tab" class="<?= isset($_GET['tab']) && $_GET['tab'] == 'account-info' ? 'active' : '' ?>">
+    <i class="fa fa-user"></i> Account Details
+</a>
                                         <?php } ?>
 
 
@@ -51,7 +55,7 @@ if (isset($_SESSION['user'])) {
                                 </div>
                                 <div class="col-lg-9-col-mb-8">
                                     <div class="tab-content" id="myaccountContent">
-                                        <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                                    <div class="tab-pane fade <?= isset($_GET['tab']) && $_GET['tab'] == 'orders' ? 'show active' : '' ?>" id="orders" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h5 class="mb-4">Đơn hàng của bạn</h5>
                                                 <?php if (!empty($don_hang_list)) : ?>
@@ -124,7 +128,7 @@ if (isset($_SESSION['user'])) {
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="account-info" role="tabpanel">
+                                        <div class="tab-pane fade <?= isset($_GET['tab']) && $_GET['tab'] == 'account-info' ? 'show active' : '' ?>" id="account-info" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <div class="account-details-form">
                                                     <form action="<?= BASE_URL . '?act=thaydoithongtintaikhoan' ?>" method="POST" enctype="multipart/form-data">
@@ -182,7 +186,7 @@ if (isset($_SESSION['user'])) {
                                                                                     <label class="custom-control-label" for="ship_to_different">Sửa thông tin?</label>
                                                                                 </div>
                                                                             </div>
-                                                                            <form action="<?= BASE_URL . '?act=thaydoithongtintaikhoan' ?>" method="post">
+                                                                            <form action="<?= BASE_URL . '?act=thaydoithongtintaikhoan&tab=account-info' ?>" method="POST" enctype="multipart/form-data">
                                                                                 <div class="ship-to-different single-form-row">
                                                                                     <div class="billing-form-wrap mt-3">
                                                                                         <div class="single-input-item">

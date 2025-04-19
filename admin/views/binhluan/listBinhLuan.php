@@ -96,8 +96,7 @@ include './views/layouts/slidebar.php';
 </div>
 <!-- /.content-wrapper -->
 <!-- Footer -->
-<?php include './views/layouts/footer.php';
- ?>
+<?php include './views/layouts/footer.php'; ?>
 <!-- EndFooter -->
 <!-- Page specific script -->
 <script>

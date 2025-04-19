@@ -31,6 +31,17 @@ class HomeController
         require_once('./views/home.php');
     }
     // sản phẩm
+    public function gioithieu(){
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        require_once './views/gioithieu.php';
+    }
+    
+    public function lienHe()
+    {
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        require_once './views/lienhe.php';
+
+    }
 
     public function detailSanPham()
 {

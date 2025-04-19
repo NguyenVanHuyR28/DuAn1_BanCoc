@@ -119,6 +119,72 @@
             </div>
         </div>
     </div>
+    <section class="related-products section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- section title start -->
+                    <div class="section-title text-center">
+                        <h2 class="title">Sản phẩm liên quan</h2>
+                        <p class="sub-title"></p>
+                    </div>
+                    <!-- section title start -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
+                        <!-- product item start -->
+                        <?php foreach ($listSanPhamCungDanhMuc as $key => $sanPham): ?>
+                            <!-- product item start -->
+                            <div class="product-item">
+                                <figure class="product-thumb">
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                        <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                        <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                    </a>
+                                    <div class="product-badge">
+                                        <?php
+                                        $ngayNhap = new DateTime($sanPham['ngay_tao']);
+                                        $ngayHienTai = new DateTime();
+                                        $tinhNgay = $ngayNhap->diff($ngayHienTai);
+                                        if ($tinhNgay->days <= 7) {
+                                        ?>
+                                            <div class="product-label new">
+                                                <span>Mới</span>
+                                            </div>
+                                        <?php  } ?>
+                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                            <div class="product-label discount">
+                                                <span>Giảm giá</span>
+                                            </div>
+                                        <?php  } ?>
+                                    </div>
+
+                                    <div class="cart-hover">
+                                        <button class="btn btn-cart">Chi tiết</button>
+                                    </div>
+                                </figure>
+                                <div class="product-caption text-center">
+                                    <h6 class="product-name">
+                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham= ' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
+                                    </h6>
+                                    <div class="price-box">
+                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                            <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?></span>
+                                            <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
+                                        <?php } else { ?>
+                                            <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 <?php require_once 'layout/miniCart.php'; ?>
 <?php require_once 'layout/footer.php'; ?>
