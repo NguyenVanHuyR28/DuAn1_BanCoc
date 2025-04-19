@@ -28,6 +28,23 @@
     <div class="container mt-5">
         <h2 class="mb-4 fw-bold"><i class="fas fa-box"></i> Lịch sử đơn hàng</h2>
 
+        <?php
+        // Kiểm tra session của người dùng hoặc admin
+        if (isset($_SESSION['tai_khoan'])) {
+            $email = $_SESSION['tai_khoan'];
+        } elseif (isset($_SESSION['tai_khoan_admin'])) {
+            $email = $_SESSION['tai_khoan_admin'];
+        } else {
+            $_SESSION['error'] = "Vui lòng đăng nhập để xem lịch sử đơn hàng!";
+            header('location:' . BASE_URL . '?act=dangnhap');
+            exit();
+        }
+
+        // Lấy thông tin tài khoản
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
+        $tai_khoan_id = $user['id'];
+        ?>
+
         <?php if (!empty($historyItem)) : ?>
             <div class="table-responsive">
                 <table class="table table-bordered align-middle">
@@ -72,7 +89,6 @@
                                             echo '<span class="badge bg-secondary">Không rõ</span>';
                                             break;
                                     }
-
                                     ?>
                                 </td>
                                 <td>

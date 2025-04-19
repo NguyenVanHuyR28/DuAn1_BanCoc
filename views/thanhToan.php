@@ -9,7 +9,7 @@
                     <nav aria-label="breadcrumb">
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Lịch sử đơn hàng</li>
+                            <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
                         </ul>
                     </nav>
                 </div>
@@ -24,7 +24,19 @@
 
         <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="POST">
             <?php
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
+            // Kiểm tra session của người dùng hoặc admin
+            if (isset($_SESSION['tai_khoan'])) {
+                $email = $_SESSION['tai_khoan'];
+            } elseif (isset($_SESSION['tai_khoan_admin'])) {
+                $email = $_SESSION['tai_khoan_admin'];
+            } else {
+                $_SESSION['error'] = "Vui lòng đăng nhập để thanh toán!";
+                header('location:' . BASE_URL . '?act=dangnhap');
+                exit();
+            }
+
+            // Lấy thông tin tài khoản
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
             $tai_khoan_id = $user['id'];
             ?>
             <div class="row g-4">
@@ -98,7 +110,6 @@
                                     <span><?= number_format($thanhTien, 0, ',', '.') ?>₫</span>
                                 </li>
                                 <input type="hidden" name="select-product[]" value="<?= $item['id'] ?>">
-                                <!-- <input type="hidden" name="product-quantity[<?= $item['id'] ?>]" value="<?= $item['so_luong'] ?>"> -->
                                 <input type="hidden" name="product-price[<?= $item['id'] ?>]" value="<?= $gia_ap_dung ?>">
                             <?php endforeach; ?>
 

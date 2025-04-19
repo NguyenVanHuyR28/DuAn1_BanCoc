@@ -10,7 +10,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="<?= BASE_URL ?>">
-                                <img src="assets/img/logo/logo1.png" style="height:150px;width: 150px;" alt="Brand Logo">
+                                <img src="assets/img/logo/logo2.png" style="height:100px;width: 100px;" alt="Brand Logo">
                             </a>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                         <a href="">
                                             <i class="pe-7s-user"></i>
                                         </a>
-                                        <ul class="dropdown-list">
+                                        <ul class="dropdown-list" style="width: 200px;">
                                             <div>
                                                 <?php if (isset($_SESSION['tai_khoan'])) { ?>
                                                     <p><span style="font-weight: 400;">Acc:</span>
@@ -71,13 +71,12 @@
 
                                                 <?php } elseif (isset($_SESSION['tai_khoan_admin'])) { ?>
 
-                                                    <p><span style="font-weight: 600;">Acc:
-                                                        </span><a
-                                                            style="font-size: 9px;"> <?= $_SESSION['tai_khoan_admin'] ?></a>
+                                                    <p><span style="font-weight: 400;">Acc:</span>
+                                                        </span><a href="<?= BASE_URL . '?act=formchinhsua&id=' . $_SESSION['tai_khoan_admin'] ?>" style="font-size: 11px;"><?= $_SESSION['tai_khoan_admin'] ?></a>
                                                     </p>
                                                     <br>
-                                                    <span><a style="font-size: 15px;" href="<?= BASE_URL . '?act=dangxuat' ?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a></span> <br> <br>
-                                                    <span><a style="font-size: 13px;" href="<?= BASE_URL_ADMIN ?>">Đăng nhập Admin</a></span>
+                                                    <span><a style="font-size: 12px;" href="<?= BASE_URL . '?act=dangxuat' ?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a></span> <br> <br>
+                                                    <span><a style="font-size: 12px;" href="<?= BASE_URL_ADMIN ?>">Đăng nhập Admin</a></span>
                                                 <?php } else { ?>
                                                     <li><a href="<?= BASE_URL . '?act=dangnhap' ?>">Đăng nhập</a></li>
                                                     <li><a href="<?= BASE_URL . '?act=dangky' ?>">Đăng ký</a></li>
@@ -88,7 +87,7 @@
 
                                     <li>
                                         <?php
-                                        if (isset($_SESSION['tai_khoan'])) { ?>
+                                                  if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])) { ?>
                                             <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
                                             </a>

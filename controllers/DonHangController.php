@@ -18,38 +18,41 @@ class DonHangController
         $this->modelSanPham = new SanPham();
     }
     public function datHang()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Kiểm tra đăng nhập
-            if (!isset($_SESSION['tai_khoan']) || empty($_SESSION['tai_khoan'])) {
-                $_SESSION['error'] = "Vui lòng đăng nhập để đặt hàng";
-                header('Location: ' . BASE_URL . '?act=dangnhap');
-                exit;
-            }
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Kiểm tra đăng nhập
+        if (!isset($_SESSION['tai_khoan']) && !isset($_SESSION['tai_khoan_admin'])) {
+            $_SESSION['error'] = "Vui lòng đăng nhập để đặt hàng";
+            header('Location: ' . BASE_URL . '?act=dangnhap');
+            exit;
+        }
 
-            // Lấy thông tin tài khoản
-            $listTk = $this->modelTaiKhoan->getAllTaiKhoan();
-            foreach ($listTk as $value) {
-                if ($_SESSION['tai_khoan'] === $value['email']) {
-                    $tai_khoan_id = $value['id'];
-                    break;
-                }
+        // Lấy thông tin tài khoản
+        $listTk = $this->modelTaiKhoan->getAllTaiKhoan();
+        foreach ($listTk as $value) {
+            if (isset($_SESSION['tai_khoan']) && $_SESSION['tai_khoan'] === $value['email']) {
+                $tai_khoan_id = $value['id'];
+                break;
+            } elseif (isset($_SESSION['tai_khoan_admin']) && $_SESSION['tai_khoan_admin'] === $value['email']) {
+                $tai_khoan_id = $value['id'];
+                break;
             }
+        }
 
-            // Lấy danh sách sản phẩm trong giỏ hàng theo tài khoản
-            $items = $this->modelGioHang->getAllCart($tai_khoan_id);
-            $cartItems = $this->modelGioHang->getAllCart($tai_khoan_id);
+        // Lấy danh sách sản phẩm trong giỏ hàng theo tài khoản
+        $items = $this->modelGioHang->getAllCart($tai_khoan_id);
+        $cartItems = $this->modelGioHang->getAllCart($tai_khoan_id);
 
-            foreach ($cartItems as $item) {
-                $sanPham = $this->modelSanPham->getDetailSanPham($item['san_pham_id']);
-                if ($sanPham['so_luong'] < $item['so_luong']) {
-                    echo "<script>
-                        alert('Sản phẩm \"{$sanPham['ten_san_pham']}\" không đủ số lượng để đặt hàng!');
-                        window.location.href='" . BASE_URL . "?act=gio-hang';
-                    </script>";
-                    exit();
-                }
+        foreach ($cartItems as $item) {
+            $sanPham = $this->modelSanPham->getDetailSanPham($item['san_pham_id']);
+            if ($sanPham['so_luong'] < $item['so_luong']) {
+                echo "<script>
+                    alert('Sản phẩm \"{$sanPham['ten_san_pham']}\" không đủ số lượng để đặt hàng!');
+                    window.location.href='" . BASE_URL . "?act=gio-hang';
+                </script>";
+                exit();
             }
+        }
             // var_dump($items);die;
             // Tạo mã đơn hàng ngẫu nhiên
             function randomChuoi($length = 8)
@@ -112,27 +115,27 @@ class DonHangController
 
 
     public function lichSuDonHang()
-    {
-        // var_dump($_SESSION['tai_khoan']);die;
-        $listTK = $this->modelTaiKhoan->getAllTaiKhoan();
-        if (!$_SESSION['tai_khoan']) {
-            header('location:' . BASE_URL . '?act=dangnhap');
-            $_SESSION['error'] = "Đăng nhập để thêm sản phẩm giỏ hàng";
-        } else {
-            foreach ($listTK as $value) {
-                if ($_SESSION['tai_khoan'] == $value['email']) {
-                    $tai_khoan_id = $value['id'];
-                    // var_dump($value['id']);die;
-                    break;
-                }
-            }
-        }
-        // var_dump($tai_khoan_id);die;
-        $historyItem = $this->modelDonHang->historyDonHang($tai_khoan_id);
-        // var_dump($historyItem);die;
-
-        require_once('views/lichSuDon.php');
+{
+    $listTK = $this->modelTaiKhoan->getAllTaiKhoan();
+    if (!isset($_SESSION['tai_khoan']) && !isset($_SESSION['tai_khoan_admin'])) {
+        header('location:' . BASE_URL . '?act=dangnhap');
+        $_SESSION['error'] = "Đăng nhập để xem lịch sử đơn hàng";
+        exit();
     }
+
+    foreach ($listTK as $value) {
+        if (isset($_SESSION['tai_khoan']) && $_SESSION['tai_khoan'] === $value['email']) {
+            $tai_khoan_id = $value['id'];
+            break;
+        } elseif (isset($_SESSION['tai_khoan_admin']) && $_SESSION['tai_khoan_admin'] === $value['email']) {
+            $tai_khoan_id = $value['id'];
+            break;
+        }
+    }
+
+    $historyItem = $this->modelDonHang->historyDonHang($tai_khoan_id);
+    require_once('views/lichSuDon.php');
+}
 
     public function detailDonHang()
     {

@@ -1,5 +1,6 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -60,7 +61,11 @@
                                     <label for="quantity" class="form-label">Số lượng:</label>
                                     <input type="number" name="so_luong" class="form-control w-25 d-inline" value="1" min="1" max="<?= $sanPham['so_luong'] ?>">
                                 </div>
-                                <button type="submit" class="btn btn-cart2" id="add-to-cart-btn">Thêm vào giỏ hàng</button>
+                                <?php if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])): ?>
+                                    <button type="submit" class="btn btn-cart2" id="add-to-cart-btn">Thêm vào giỏ hàng</button>
+                                <?php else: ?>
+                                    <p class="text-danger">Vui lòng đăng nhập để mua hàng.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -70,62 +75,50 @@
                 <div class="col-lg-12">
                     <div class="product-review-info">
                         <ul class="nav review-tab">
-
                             <li>
                                 <?php $countComment = count($listBinhLuan); ?>
                                 <a class="active" data-bs-toggle="tab" href="#tab_three">Bình luận (<?= $countComment ?> )</a>
                             </li>
                         </ul>
                         <div class="tab-content reviews-tab">
-
                             <?php foreach ($listBinhLuan as $binhLuan): ?>
                                 <div class="tab-pane fade show active" id="tab_three">
-
-
                                     <div class="total-reviews">
                                         <div class="review-box">
-
                                             <div class="post-author">
                                                 <p><span><?= $binhLuan['ho_ten'] ?> - </span><?= $binhLuan['ngay_tao'] ?></p>
                                             </div>
                                             <p><?= $binhLuan['noi_dung'] ?></p>
-
-                                        </div>
-
-                                    </div>
-                                <?php endforeach ?>
-                                <form action="<?= BASE_URL . '?act=dang-binh-luan' ?>" class="review-form" method="post">
-                                    <div class="form-group row">
-                                        <div class="col">
-                                            <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-                                            <input type="hidden" name="tai_khoan_id" value="<?= $user['id'] ?>">
-
-                                            <label class="col-form-label"><span class="text-danger">*</span>
-                                                Nội dung Bình luận</label>
-                                            <textarea class="form-control" name="noi_dung" required></textarea>
-
                                         </div>
                                     </div>
-
-                                    <?php
-                                    if (isset($_SESSION['tai_khoan'])) { ?>
-
-                                        <div class="buttons">
-                                            <button class="btn btn-sqr" type="submit">Bình luận</button>
-                                        </div>
-                                    <?php  } else {  ?>
-                                        <p class="text-danger">Để bình luận vui lòng đăng nhập</p>
-                                    <?php } ?>
-
-                                </form> <!-- end of review-form -->
                                 </div>
+                            <?php endforeach ?>
+                            <form action="<?= BASE_URL . '?act=dang-binh-luan' ?>" class="review-form" method="post">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                        <input type="hidden" name="tai_khoan_id" value="<?= $user['id'] ?>">
+
+                                        <label class="col-form-label"><span class="text-danger">*</span>
+                                            Nội dung Bình luận</label>
+                                        <textarea class="form-control" name="noi_dung" required></textarea>
+                                    </div>
+                                </div>
+
+                                <?php if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])): ?>
+                                    <div class="buttons">
+                                        <button class="btn btn-sqr" type="submit">Bình luận</button>
+                                    </div>
+                                <?php else: ?>
+                                    <p class="text-danger">Để bình luận vui lòng đăng nhập</p>
+                                <?php endif; ?>
+                            </form> <!-- end of review-form -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </main>
-    <?php require_once 'layout/miniCart.php'; ?>
-
-    <?php require_once 'layout/footer.php'; ?>
+</body>
+<?php require_once 'layout/miniCart.php'; ?>
+<?php require_once 'layout/footer.php'; ?>

@@ -33,27 +33,30 @@ class HomeController
     // sản phẩm
 
     public function detailSanPham()
-    {
-        $id = $_GET['id_san_pham'];
-        $sanPham = $this->modelSanPham->getDetailSanPham($id);
-        $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($sanPham['danh_muc_id']);
+{
+    $id = $_GET['id_san_pham'];
+    $sanPham = $this->modelSanPham->getDetailSanPham($id);
+    $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($sanPham['danh_muc_id']);
 
-        if (isset($_SESSION['tai_khoan'])) {
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
-        }
-
-        // Lấy danh sách bình luận hiển thị
-        $listBinhLuan = $this->modelBinhLuan->getBinhLuanBySanPhamId($id);
-
-        $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
-
-        if ($sanPham && isset($sanPham['danh_muc_id'])) {
-            require_once './views/detailSanPham.php';
-        } else {
-            header('Location: ' . BASE_URL);
-            exit();
-        }
+    // Kiểm tra session của người dùng hoặc admin
+    if (isset($_SESSION['tai_khoan'])) {
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
+    } elseif (isset($_SESSION['tai_khoan_admin'])) {
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan_admin']);
     }
+
+    // Lấy danh sách bình luận hiển thị
+    $listBinhLuan = $this->modelBinhLuan->getBinhLuanBySanPhamId($id);
+
+    $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
+
+    if ($sanPham && isset($sanPham['danh_muc_id'])) {
+        require_once './views/detailSanPham.php';
+    } else {
+        header('Location: ' . BASE_URL);
+        exit();
+    }
+}
 
 
     public function allSanPham()
@@ -242,15 +245,29 @@ class HomeController
         require_once './views/infoAcc.php';
     }
     public function formUser()
-    {
-        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
-        $tai_khoan_id = $user['id'];
-        $TKById = $this->modelTaiKhoan->getTKById($tai_khoan_id); // THÊM DÒNG NÀY
-        $don_hang_list = $this->modelDonHang->historyDonHang($tai_khoan_id);
-        require_once './views/infoacc.php';
+{
+    // Kiểm tra session của người dùng hoặc admin
+    if (isset($_SESSION['tai_khoan'])) {
+        $email = $_SESSION['tai_khoan'];
+    } elseif (isset($_SESSION['tai_khoan_admin'])) {
+        $email = $_SESSION['tai_khoan_admin'];
+    } else {
+        $_SESSION['error'] = "Vui lòng đăng nhập để xem thông tin tài khoản!";
+        header('location:' . BASE_URL . '?act=dangnhap');
         exit();
     }
 
+    // Lấy thông tin tài khoản
+    $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
+    $tai_khoan_id = $user['id'];
+
+    // Lấy thông tin tài khoản và danh sách đơn hàng
+    $TKById = $this->modelTaiKhoan->getTKById($tai_khoan_id);
+    $don_hang_list = $this->modelDonHang->historyDonHang($tai_khoan_id);
+
+    require_once './views/infoacc.php';
+    exit();
+}
     public function editInfo()
     {
         $id = $_POST['id'];
@@ -309,11 +326,25 @@ class HomeController
     }
 
     public function thanhToan()
-    {
-        $tai_khoan_id = $_GET['id'];
-        $tk_id = $this->modelTaiKhoan->getTKById($tai_khoan_id);
-        $sanPham = $this->modelGioHang->getAllCart($tai_khoan_id);
-        // var_dump($sanPham);die;
-        require_once('views/thanhToan.php');
+{
+    // Kiểm tra session của người dùng hoặc admin
+    if (isset($_SESSION['tai_khoan'])) {
+        $email = $_SESSION['tai_khoan'];
+    } elseif (isset($_SESSION['tai_khoan_admin'])) {
+        $email = $_SESSION['tai_khoan_admin'];
+    } else {
+        $_SESSION['error'] = "Vui lòng đăng nhập để thanh toán!";
+        header('location:' . BASE_URL . '?act=dangnhap');
+        exit();
     }
+
+    // Lấy thông tin tài khoản
+    $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
+    $tai_khoan_id = $user['id'];
+
+    // Lấy danh sách sản phẩm trong giỏ hàng
+    $sanPham = $this->modelGioHang->getAllCart($tai_khoan_id);
+
+    require_once('views/thanhToan.php');
+}
 }
