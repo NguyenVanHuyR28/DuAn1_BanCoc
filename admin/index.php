@@ -44,6 +44,7 @@ match ($act) {
     'addSanPham' => (new AdminSanPhamController())->addSanPham(),
     'formEditSanPham' => (new AdminSanPhamController())->formEditSanPham(),
     'editSanPham' => (new AdminSanPhamController())->editSanPham(),
+    'show' => (new AdminSanPhamController())->showSanPham(),
 
     // Router Đơn Hàng
     'listDonHang' => (new AdminDonHangController())->listDonHang(),

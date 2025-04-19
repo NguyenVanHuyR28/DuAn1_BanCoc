@@ -66,7 +66,7 @@ include './views/layouts/slidebar.php';
                                             <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>
                                             </a>
-                                            <a href="<?= BASE_URL_ADMIN . '' . $products['id'] ?>">
+                                            <a href="<?= BASE_URL_ADMIN . '?act=show&id=' . $products['id'] ?>">
                                                 <button class="btn btn-success">Xem</button>
                                             </a>
                                         </td>

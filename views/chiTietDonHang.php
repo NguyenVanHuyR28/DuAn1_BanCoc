@@ -88,7 +88,7 @@
                 <?php if (in_array($thongTinDonHang['trang_thai_id'], [1, 2 ,3])): ?>
             <form action="<?= BASE_URL . '?act=cap-nhat' ?>" method="POST" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này không?');" class="d-inline">
                 <input type="hidden" name="don_hang_id" value="<?= $thongTinDonHang['don_hang_id'] ?>">
-                <button type="submit" class="btn btn-danger ms-3">Hủy hàng</button>
+                <button type="submit" class=" btn-danger px-3">Hủy hàng</button>
             </form>
         <?php endif; ?>
 

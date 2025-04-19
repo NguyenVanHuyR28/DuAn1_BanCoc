@@ -112,4 +112,22 @@ class AdminSanPham
             echo "Error" . $e->getMessage();
         }
     }
+
+    public function getShow($id) {
+        try {
+            $sql = "SELECT san_pham.*, danh_muc.* 
+                    FROM san_pham 
+                    JOIN danh_muc ON danh_muc.id = san_pham.danh_muc_id
+                    WHERE san_pham.id = :id
+                    ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
 }

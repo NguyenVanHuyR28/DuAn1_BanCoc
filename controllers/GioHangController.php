@@ -92,7 +92,7 @@ class GioHangController
         $item = $this->modelGioHang->detailCart($id);
         if ($id) {
             $this->modelGioHang->deleteCart($id);
-            deleteFile($item['hinh_anh']);
+          
             echo "<script>
                 alert('Xóa sản phẩm hàng thành công!');
                 window.location.href='" . BASE_URL . "?act=gio-hang" . "';

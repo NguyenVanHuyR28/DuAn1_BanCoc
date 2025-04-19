@@ -16,6 +16,13 @@ class AdminSanPhamController
         require_once('views/sanpham/listSanPham.php');
     }
 
+    public function showSanPham()
+    {
+        $id = $_GET['id'];
+        $sanPham = $this->modelSanPham->getShow($id);
+        require_once('./views/sanpham/show.php');
+    }
+
     public function formAddSanPham()
     {
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
@@ -76,7 +83,7 @@ class AdminSanPhamController
                     $gia_khuyen_mai = 0; // hoặc null nếu DB cho phép
                 }
                 $this->modelSanPham->insertSanPham($danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $file_thumb, $mo_ta);
-                
+
                 unset($_SESSION['error']);
                 unset($_SESSION['old']);
                 header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
@@ -120,7 +127,7 @@ class AdminSanPhamController
             $gia = $_POST['gia'] ?? '';
             $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
             $so_luong = $_POST['so_luong'] ?? '';
-            $trang_thai = $_POST['trang_thai'] ?? '';
+            $trang_thai = $_POST['trang_thai'] ?? null;
             $mo_ta = $_POST['mo_ta'] ?? '';
 
             // Lấy ảnh cũ từ database
@@ -181,7 +188,7 @@ class AdminSanPhamController
                 unset($_SESSION['error']); // Xóa lỗi nếu cập nhật thành công
                 unset($_SESSION['old']);
                 $this->modelSanPham->editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $trang_thai, $new_file, $mo_ta);
-                header('location: ' . BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $id);
+                header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
                 exit();
             } else {
                 $_SESSION['flash'] = true;

@@ -53,10 +53,11 @@ include './views/layouts/slidebar.php';
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Trạng Thái</label>
+                                    <label>Is Active
+                                    </label>
                                     <select name="trang_thai" id="">
-                                        <option value="1" <?= $products['trang_thai'] == 1 ? 'selected' : '' ?>>Còn Hàng</option>
-                                        <option value="0" <?= $products['trang_thai'] == 0 ? 'selected' : '' ?>>Hết Hàng</option>
+                                        <option value="1" <?= $products['trang_thai'] == 1 ? 'selected' : '' ?>>Yes</option>
+                                        <option value="0" <?= $products['trang_thai'] == 0 ? 'selected' : '' ?>>No</option>
                                     </select>
                                 </div>
 
