@@ -10,6 +10,7 @@ require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminBinhLuanController.php';
+require_once './controllers/AdminBaoCaoThongKeController.php';
 
 // Models
 require_once './models/AdminDanhMuc.php';
@@ -17,7 +18,7 @@ require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminBinhLuan.php';
-
+require_once './models/ThongKe.php';
 
 //route 
 $act = $_GET['act'] ?? '/';
@@ -34,7 +35,7 @@ match ($act) {
     'addDanhMuc' => (new AdminDanhMucController())->addDanhMuc(),
     'formEditDanhMuc' => (new AdminDanhMucController())->formEditDanhMuc(),
     'editDanhMuc' => (new AdminDanhMucController())->editDanhMuc(),
-    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),    
+    'deleteDanhMuc' => (new AdminDanhMucController())->deleteDanhMuc(),
 
 
     // Router Sản Phẩm
@@ -47,6 +48,9 @@ match ($act) {
 
     // Router Đơn Hàng
     'listDonHang' => (new AdminDonHangController())->listDonHang(),
+    'detailDonHang' => (new AdminDonHangController())->chiTietDonHang(),
+    'capNhat' => (new AdminDonHangController())->editTrangThai(),
+
 
     //Router Tài Khoản
     'listTaiKhoan' => (new AdminTaiKhoanController())->listTaiKhoan(),
@@ -61,4 +65,11 @@ match ($act) {
     'listBinhLuan' => (new AdminBinhLuanController())->listBinhLuan(),
     'showBinhLuan' => (new AdminBinhLuanController())->showBinhLuan(),
     'hideBinhLuan' => (new AdminBinhLuanController())->hideBinhLuan(),
+
+    // route báo cáo thống kê - trang chủ
+    '/' => (new AdminBaoCaoThongKeController())->home(),
+    'top10' => (new AdminBaoCaoThongKeController())->top10sanpham(),
+    'don-hang-moi' => (new AdminBaoCaoThongKeController())->donHangMoi(),
+    'don-bom' => (new AdminBaoCaoThongKeController())->donBom(),
+    'don-hoan' => (new AdminBaoCaoThongKeController())->donHoan(),
 };

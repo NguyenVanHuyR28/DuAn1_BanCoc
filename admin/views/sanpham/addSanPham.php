@@ -26,7 +26,7 @@ include './views/layouts/slidebar.php';
                             enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Tên Sản Phẩm</label>
+                                    <label>Tên Danh Mục</label>
                                     <select name="danh_muc_id" id="" class="form-control">
                                         <option value="">Chọn Danh Mục</option>
                                         <?php foreach ($listDanhMuc as $category): ?>

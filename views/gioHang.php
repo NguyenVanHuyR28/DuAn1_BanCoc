@@ -3,10 +3,10 @@
 
 <style>
     a {
-  text-decoration: none !important;
-}
-
+        text-decoration: none !important;
+    }
 </style>
+
 <head>
     <meta charset="UTF-8">
     <title>Giỏ hàng của bạn</title>
@@ -16,23 +16,31 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
+<?php if (isset($_SESSION['error'])) : ?>
+    <div class="alert alert-danger">
+        <?= $_SESSION['error'];
+        unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
+
 <div class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-wrap">
-                        <nav aria-label="breadcrumb">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                
-                                <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
-                            </ul>
-                        </nav>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
+
+                            <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 <body>
     <form action="<?= BASE_URL . '?act=dat-hang' ?>" method="post">
         <div class="container mt-5">
@@ -108,8 +116,8 @@
     </form>
 
     <?php require_once 'layout/footer.php'; ?>
+    <?php require_once 'layout/miniCart.php'; ?>
 
-    <!-- Bootstrap JS -->
 </body>
 
 </html>

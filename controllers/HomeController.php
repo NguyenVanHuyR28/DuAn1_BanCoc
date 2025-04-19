@@ -18,16 +18,30 @@ class HomeController
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelBinhLuan = new BinhLuan();
         $this->modelGioHang = new GioHang();
-        // $this->modelDonHang = new DonHang();
+        $this->modelDonHang = new DonHang();
     }
 
     public function home()
     {
+        // $id = $_GET['id'];
         $listSanPham = $this->modelSanPham->getAllSanPham();
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+
+        // $tkById = $this->modelTaiKhoan->getTKById($id);
         require_once('./views/home.php');
     }
     // sản phẩm
+    public function gioithieu(){
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        require_once './views/gioithieu.php';
+    }
+    
+    public function lienHe()
+    {
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        require_once './views/lienhe.php';
+
+    }
 
     public function detailSanPham()
 {
@@ -35,8 +49,11 @@ class HomeController
     $sanPham = $this->modelSanPham->getDetailSanPham($id);
     $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($sanPham['danh_muc_id']);
 
+    // Kiểm tra session của người dùng hoặc admin
     if (isset($_SESSION['tai_khoan'])) {
         $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
+    } elseif (isset($_SESSION['tai_khoan_admin'])) {
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan_admin']);
     }
 
     // Lấy danh sách bình luận hiển thị
@@ -84,7 +101,7 @@ class HomeController
     // Đăng ký, đăng nhập, đăng xuất
     public function formDangNhap()
     {
-        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();    
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         require_once './views/auth/dangnhap.php';
         deleteSessionError();
     }
@@ -110,18 +127,20 @@ class HomeController
                 // Lưu thông tin vào session
                 $_SESSION['tai_khoan_admin'] = $tai_khoan;
                 // var_dump($_SESSION['taikhoan_admin']);die;
-                header('location:'.BASE_URL_ADMIN );
+                header('location:' . BASE_URL_ADMIN);
                 exit();
             } elseif ($tai_khoan == 'Trang client') {
                 $_SESSION['tai_khoan'] = $email;
-                header('location:'. BASE_URL);
+                // $tkid = $tai_khoan['id'];
+                // var_dump($tkid);die;
+                header('location:' . BASE_URL);
                 exit();
             } else {
                 // Lỗi thì lưu vào session
                 $_SESSION['error'] = $tai_khoan;
 
                 $_SESSION['flash'] = true;
-                header('location:'.BASE_URL . '?act=dangnhap');
+                header('location:' . BASE_URL . '?act=dangnhap');
                 exit();
             }
         }
@@ -135,10 +154,10 @@ class HomeController
         deleteSessionError();
     }
 
-    public function dangKy() 
+    public function dangKy()
     {
         $listTaiKhoan = $this->modelTaiKhoan->getAllTaiKhoan();
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $ho_ten = $_POST['ho_ten'];
             $email = $_POST['email'];
@@ -146,7 +165,7 @@ class HomeController
             $so_dien_thoai = $_POST['so_dien_thoai'];
             $dia_chi = $_POST['dia_chi'];
             $remat_khau = $_POST['remat_khau'];
-            $role = 0; 
+            $role = 0;
 
             $errors = [];
 
@@ -212,12 +231,12 @@ class HomeController
         if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])) {
             session_unset();
             session_destroy();
-            header('location:'.BASE_URL.'?act=dangnhap');
+            header('location:' . BASE_URL . '?act=dangnhap');
         } else {
-            header('location:'.BASE_URL);
-            }
+            header('location:' . BASE_URL);
+        }
     }
-    public function xoaCookie() 
+    public function xoaCookie()
     {
         if (isset($_COOKIE['email']) || isset($_COOKIE['mat_khau'])) {
             setcookie("email", "", time() - (86400 * 7));
@@ -236,15 +255,30 @@ class HomeController
         $TKById = $this->modelTaiKhoan->getTKById($id);
         require_once './views/infoAcc.php';
     }
-    public function formUser() 
-    {
-        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['tai_khoan']);
-        $tai_khoan_id = $user['id'];
-        $TKById = $this->modelTaiKhoan->getTKById($tai_khoan_id); // THÊM DÒNG NÀY
-        require_once './views/infoacc.php';
+    public function formUser()
+{
+    // Kiểm tra session của người dùng hoặc admin
+    if (isset($_SESSION['tai_khoan'])) {
+        $email = $_SESSION['tai_khoan'];
+    } elseif (isset($_SESSION['tai_khoan_admin'])) {
+        $email = $_SESSION['tai_khoan_admin'];
+    } else {
+        $_SESSION['error'] = "Vui lòng đăng nhập để xem thông tin tài khoản!";
+        header('location:' . BASE_URL . '?act=dangnhap');
         exit();
     }
 
+    // Lấy thông tin tài khoản
+    $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
+    $tai_khoan_id = $user['id'];
+
+    // Lấy thông tin tài khoản và danh sách đơn hàng
+    $TKById = $this->modelTaiKhoan->getTKById($tai_khoan_id);
+    $don_hang_list = $this->modelDonHang->historyDonHang($tai_khoan_id);
+
+    require_once './views/infoacc.php';
+    exit();
+}
     public function editInfo()
     {
         $id = $_POST['id'];
@@ -253,7 +287,7 @@ class HomeController
         $email = $_POST['email'];
         $dia_chi = $_POST['dia_chi'];
         $mat_khau = $_POST['mat_khau'];
-        $checkEdit = $this->modelTaiKhoan-> editInfo($id, $ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi);
+        $checkEdit = $this->modelTaiKhoan->editInfo($id, $ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi);
         if ($checkEdit) {
             echo "<script>
                 alert('Sửa thông tin thành công!');
@@ -269,37 +303,59 @@ class HomeController
         }
     }
     public function postBinhLuan()
-{
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $san_pham_id = $_POST['san_pham_id'];
-        $tai_khoan_id = $_POST['tai_khoan_id'];
-        $noi_dung = $_POST['noi_dung'];
-        $ngay_tao = date('Y-m-d H:i:s');
-        $trang_thai = 1; // Mặc định ẩn bình luận
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $san_pham_id = $_POST['san_pham_id'];
+            $tai_khoan_id = $_POST['tai_khoan_id'];
+            $noi_dung = $_POST['noi_dung'];
+            $ngay_tao = date('Y-m-d H:i:s');
+            $trang_thai = 1; // Mặc định ẩn bình luận
 
-        $errors = [];
-        if (empty($noi_dung)) {
-            $errors['noi_dung'] = "Bạn chưa bình luận";
-        }
+            $errors = [];
+            if (empty($noi_dung)) {
+                $errors['noi_dung'] = "Bạn chưa bình luận";
+            }
 
-        $_SESSION['error'] = $errors;
+            $_SESSION['error'] = $errors;
 
-        if (empty($errors)) {
-            $this->modelBinhLuan->insertBinhLuan(
-                $san_pham_id,
-                $tai_khoan_id,
-                $noi_dung,
-                $ngay_tao,
-                $trang_thai
-            );
+            if (empty($errors)) {
+                $this->modelBinhLuan->insertBinhLuan(
+                    $san_pham_id,
+                    $tai_khoan_id,
+                    $noi_dung,
+                    $ngay_tao,
+                    $trang_thai
+                );
 
-            header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
-            exit();
-        } else {
-            header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
-            exit();
+                header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
+                exit();
+            } else {
+                header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $san_pham_id);
+                exit();
+            }
         }
     }
-}
-}
 
+    public function thanhToan()
+{
+    // Kiểm tra session của người dùng hoặc admin
+    if (isset($_SESSION['tai_khoan'])) {
+        $email = $_SESSION['tai_khoan'];
+    } elseif (isset($_SESSION['tai_khoan_admin'])) {
+        $email = $_SESSION['tai_khoan_admin'];
+    } else {
+        $_SESSION['error'] = "Vui lòng đăng nhập để thanh toán!";
+        header('location:' . BASE_URL . '?act=dangnhap');
+        exit();
+    }
+
+    // Lấy thông tin tài khoản
+    $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
+    $tai_khoan_id = $user['id'];
+
+    // Lấy danh sách sản phẩm trong giỏ hàng
+    $sanPham = $this->modelGioHang->getAllCart($tai_khoan_id);
+
+    require_once('views/thanhToan.php');
+}
+}

@@ -13,9 +13,7 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item active" aria-current="page" ><a href="<?= BASE_URL . '?act=allsanpham' ?>">shop</a></li>
-                                
-                               
+                                <li class="breadcrumb-item active" aria-current="page"><a href="<?= BASE_URL . '?act=allsanpham' ?>">Shop</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -39,13 +37,13 @@
                                 <ul class="shop-categories">
                                     <?php if (isset($listDanhMuc) && is_array($listDanhMuc)): ?>
                                         <?php foreach ($listDanhMuc as $danhMuc): ?>
-                                        <li><a href="<?= BASE_URL . '?act=sanphamdanhmuc&danh_muc_id=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
+                                            <li><a href="<?= BASE_URL . '?act=sanphamdanhmuc&danh_muc_id=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
 
-                                    <?php endforeach ?>
+                                        <?php endforeach ?>
                                     <?php else: ?>
                                         <p>Không có danh mục nào.</p>
                                     <?php endif; ?>
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -53,7 +51,7 @@
 
 
 
-                        
+
                         <!-- single sidebar end -->
                     </aside>
                 </div>
@@ -81,47 +79,47 @@
                         <!-- product item list wrapper start -->
                         <div class="shop-product-wrap grid-view row mbn-30">
                             <!-- product single item start -->
-                            <?php if($listSanPham) { ?>
-                            <?php foreach ($listSanPham as $sanPham): ?>
-                                <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
+                            <?php if ($listSanPham) { ?>
+                                <?php foreach ($listSanPham as $sanPham): ?>
+                                    <div class="col-md-4 col-sm-6">
+                                        <!-- product grid start -->
+                                        <div class="product-item">
 
-                                        <figure class="product-thumb">
+                                            <figure class="product-thumb">
 
-                                            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
-                                                <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
-                                                <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
-                                            </a>
-                                            <div class="product-badge">
-                                                <?php
-                                                $ngayTao = new DateTime($sanPham['ngay_tao']);
-                                                $ngayHienTai = new DateTime();
-                                                $tinhNgay = $ngayTao->diff($ngayHienTai);
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                                    <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                                </a>
+                                                <div class="product-badge">
+                                                    <?php
+                                                    $ngayTao = new DateTime($sanPham['ngay_tao']);
+                                                    $ngayHienTai = new DateTime();
+                                                    $tinhNgay = $ngayTao->diff($ngayHienTai);
 
-                                                if ($tinhNgay->days <= 7) {
-                                                ?>
-                                                    <div class="product-label new">
-                                                        <span>Mới</span>
-                                                    </div>
-                                                <?php  } ?>
-                                                <?php if ($sanPham['gia_khuyen_mai']) { ?>
-                                                    <div class="product-label discount">
-                                                        <span>Giảm giá</span>
-                                                    </div>
-                                                <?php  } ?>
-                                            </div>
+                                                    if ($tinhNgay->days <= 7) {
+                                                    ?>
+                                                        <div class="product-label new">
+                                                            <span>Mới</span>
+                                                        </div>
+                                                    <?php  } ?>
+                                                    <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <div class="product-label discount">
+                                                            <span>Giảm giá</span>
+                                                        </div>
+                                                    <?php  } ?>
+                                                </div>
 
-                                            <div class="cart-hover">
-                                                <button class="btn btn-cart"><a style="color: darkgray;" href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">Xem chi tiết</a></button>
-                                            </div>
+                                                <div class="cart-hover">
+                                                    <button class="btn btn-cart"><a style="color: darkgray;" href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">Xem chi tiết</a></button>
+                                                </div>
 
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <h6 class="product-name">
-                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham= ' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
-                                            </h6>
-                                            <div class="price-box">
+                                            </figure>
+                                            <div class="product-caption text-center">
+                                                <h6 class="product-name">
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham= ' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
+                                                </h6>
+                                                <div class="price-box">
                                                     <?php if ($sanPham['gia_khuyen_mai']) { ?>
                                                         <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?></span>
                                                         <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
@@ -132,17 +130,17 @@
 
 
                                                 </div>
+                                            </div>
+
                                         </div>
+                                        <!-- product grid end -->
+
 
                                     </div>
-                                    <!-- product grid end -->
-
-
-                                </div>
-                            <?php endforeach ?>
-                            <?php }else{ ?>
+                                <?php endforeach ?>
+                            <?php } else { ?>
                                 <h3>Không có sản phẩm nằm trong danh mục này</h3>
-                            <?php } ?>  
+                            <?php } ?>
                             <!-- product single item start -->
 
 
@@ -170,3 +168,4 @@
 </main>
 
 <?php require_once 'layout/footer.php'; ?>
+<?php require_once 'layout/miniCart.php'; ?>

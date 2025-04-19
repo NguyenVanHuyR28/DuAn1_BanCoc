@@ -5,6 +5,17 @@ include './views/layouts/slidebar.php';
 ?>
 
 <div class="content-wrapper">
+<?php if (isset($_SESSION['error'])) : ?>
+    <div class="alert alert-danger">
+        <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['success'])) : ?>
+    <div class="alert alert-success">
+        <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -26,7 +37,7 @@ include './views/layouts/slidebar.php';
                         </a>
                     </div>
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>STT</th>
@@ -43,10 +54,10 @@ include './views/layouts/slidebar.php';
                                     <td><?=$danhMuc ['ten_danh_muc'] ?></td>
                                     <td><?=$danhMuc ['mo_ta'] ?></td>
                                     <td>
-                                        <a href="<?= BASE_URL_ADMIN . 'formEditDanhMuc&id=' . $danhMuc['id'] ?>">
+                                        <a href="<?= BASE_URL_ADMIN . '?act=formEditDanhMuc&id=' . $danhMuc['id'] ?>">
                                             <button class="btn btn-warning">Sửa</button>
                                         </a>
-                                        <a href="<?= BASE_URL_ADMIN . 'deleteDanhMuc&id=' . $danhMuc ['id'] ?>"
+                                        <a href="<?= BASE_URL_ADMIN . '?act=deleteDanhMuc&id=' . $danhMuc ['id'] ?>"
                                             onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
                                             <button class="btn btn-danger">Xóa</button>
                                         </a>

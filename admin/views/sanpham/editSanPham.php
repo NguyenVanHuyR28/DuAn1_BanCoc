@@ -31,14 +31,14 @@ include './views/layouts/slidebar.php';
                                     <label>Chọn Danh Mục</label>
                                     <select class="form-control" name="danh_muc_id" id="danh_muc_id">
                                         <?php foreach ($categories as $danhMuc): ?>
-                                        <option <?= $danhMuc['id'] === $products['danh_muc_id'] ? 'selected' : '' ?>
-                                            value="<?= $danhMuc['id'] ?>">
-                                            <?= $danhMuc['ten_danh_muc'] ?>
-                                        </option>
+                                            <option <?= $danhMuc['id'] === $products['danh_muc_id'] ? 'selected' : '' ?>
+                                                value="<?= $danhMuc['id'] ?>">
+                                                <?= $danhMuc['ten_danh_muc'] ?>
+                                            </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?php if (isset($_SESSION['error']['danh_muc_id'])): ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['danh_muc_id'] ?></p>
+                                        <p class="text-danger"><?= $_SESSION['error']['danh_muc_id'] ?></p>
                                     <?php endif; ?>
                                 </div>
 
@@ -48,25 +48,39 @@ include './views/layouts/slidebar.php';
                                         placeholder="Nhập tên sản phẩm"
                                         value="<?= htmlspecialchars($products['ten_san_pham']) ?>">
                                     <?php if (isset($_SESSION['error']['ten_san_pham'])): ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['ten_san_pham'] ?></p>
+                                        <p class="text-danger"><?= $_SESSION['error']['ten_san_pham'] ?></p>
                                     <?php endif; ?>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Trạng Thái</label>
+                                    <select name="trang_thai" id="">
+                                        <option value="1" <?= $products['trang_thai'] == 1 ? 'selected' : '' ?>>Còn Hàng</option>
+                                        <option value="0" <?= $products['trang_thai'] == 0 ? 'selected' : '' ?>>Hết Hàng</option>
+                                    </select>
+                                </div>
+
 
                                 <div class="form-group">
                                     <label>Giá</label>
                                     <input type="number" name="gia" class="form-control" placeholder="Nhập giá" min="0"
                                         value="<?= $products['gia'] ?>">
                                     <?php if (isset($_SESSION['error']['gia'])): ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['gia'] ?></p>
+                                        <p class="text-danger"><?= $_SESSION['error']['gia'] ?></p>
                                     <?php endif; ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Giá khuyến mãi</label>
+                                    <input type="number" name="gia_khuyen_mai" class="form-control" placeholder="Nhập giá" min="0" value="<?= $products['gia_khuyen_mai'] ?>">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Số Lượng</label>
                                     <input type="number" name="so_luong" class="form-control"
-                                        placeholder="Nhập số lượng" value="<?= $products['so_luong'] ?>">
+                                        placeholder="Nhập số lượng" value="<?= $products['so_luong'] ?>" min="0">
                                     <?php if (isset($_SESSION['error']['so_luong'])): ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
+                                        <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
                                     <?php endif; ?>
                                 </div>
 
@@ -75,11 +89,11 @@ include './views/layouts/slidebar.php';
                                     <input type="file" name="hinh_anh" class="form-control">
                                     <br>
                                     <?php if (!empty($products['hinh_anh'])): ?>
-                                    <img src="<?= BASE_URL . $products['hinh_anh']  ?>"
-                                        alt="<?= htmlspecialchars($products['ten_san_pham']) ?>" width="120px">
+                                        <img src="<?= BASE_URL . $products['hinh_anh']  ?>"
+                                            alt="<?= htmlspecialchars($products['ten_san_pham']) ?>" width="120px">
                                     <?php endif; ?>
                                     <?php if (isset($_SESSION['error']['hinh_anh'])): ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
+                                        <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
                                     <?php endif; ?>
                                 </div>
 
@@ -88,7 +102,7 @@ include './views/layouts/slidebar.php';
                                     <textarea name="mo_ta"
                                         class="form-control"><?= htmlspecialchars($products['mo_ta']) ?></textarea>
                                     <?php if (isset($_SESSION['error']['mo_ta'])): ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['mo_ta'] ?></p>
+                                        <p class="text-danger"><?= $_SESSION['error']['mo_ta'] ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>

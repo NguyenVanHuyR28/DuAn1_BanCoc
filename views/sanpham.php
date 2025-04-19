@@ -2,7 +2,7 @@
 <?php require_once 'layout/menu.php'; ?>
 
 <main>
-<div class="breadcrumb-area">
+    <div class="breadcrumb-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -10,9 +10,9 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item active" aria-current="page" ><a href="<?= BASE_URL . '?act=allsanpham' ?>">shop</a></li>
-                                
-                               
+                                <li class="breadcrumb-item active" aria-current="page"><a href="<?= BASE_URL . '?act=allsanpham' ?>">shop</a></li>
+
+
                             </ul>
                         </nav>
                     </div>
@@ -32,9 +32,9 @@
                             <div class="sidebar-body">
                                 <ul class="shop-categories">
                                     <?php if (isset($listDanhMuc) && is_array($listDanhMuc)): ?>
-                                    <?php foreach ($listDanhMuc as $danhMuc): ?>
-                                        <li><a href="<?= BASE_URL .'?act=sanphamdanhmuc&danh_muc_id=' .$danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc']?> </a></li>
-                                        
+                                        <?php foreach ($listDanhMuc as $danhMuc): ?>
+                                            <li><a href="<?= BASE_URL . '?act=sanphamdanhmuc&danh_muc_id=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?> </a></li>
+
 
                                         <?php endforeach ?>
                                     <?php else: ?>
@@ -45,7 +45,7 @@
                         </div>
                     </aside>
                 </div>
-                
+
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="shop-product-wrapper">
                         <!-- shop product top wrap start -->
@@ -104,16 +104,13 @@
                                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham= ' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
                                             </h6>
                                             <div class="price-box">
-                                                    <?php if ($sanPham['gia_khuyen_mai']) { ?>
-                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?></span>
-                                                        <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
-                                                    <?php } else { ?>
-                                                        <span class="price-old"><?= formatPrice($sanPham['gia']) ?></span>
-                                                    <?php } ?>
-
-
-
-                                                </div>
+                                                <?php if (!empty($sanPham['gia_khuyen_mai']) && $sanPham['gia_khuyen_mai'] > 0) { ?>
+                                                    <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?></span>
+                                                    <span class="price-old"><del><?= formatPrice($sanPham['gia']) ?></del></span>
+                                                <?php } else { ?>
+                                                    <span class="price-regular"><?= formatPrice($sanPham['gia']) ?></span>
+                                                <?php } ?>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -135,7 +132,7 @@
                                 <li><a class="next" href="#"><i class="pe-7s-angle-right"></i></a></li>
                             </ul>
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <!-- shop main wrapper end -->
             </div>
@@ -143,3 +140,4 @@
     </div>
 </main>
 <?php require_once 'layout/footer.php'; ?>
+<?php require_once 'layout/miniCart.php'; ?>

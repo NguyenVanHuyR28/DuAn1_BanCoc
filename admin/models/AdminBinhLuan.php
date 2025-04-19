@@ -8,7 +8,7 @@ class AdminBinhLuan
         $this->conn = connectDB();
     }
 
-    public function hideBinhLuan($bl_id) 
+    public function hideBinhLuan($bl_id)
     {
         try {
             $sql = 'UPDATE binh_luan SET an_hien = 0 WHERE id = :bl_id';
@@ -20,7 +20,7 @@ class AdminBinhLuan
             return false;
         }
     }
-    public function showBinhLuan($bl_id) 
+    public function showBinhLuan($bl_id)
     {
         try {
             $sql = 'UPDATE binh_luan SET an_hien = 1 WHERE id = :bl_id';

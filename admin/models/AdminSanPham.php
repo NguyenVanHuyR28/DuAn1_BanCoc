@@ -23,16 +23,17 @@ class AdminSanPham
         }
     }
 
-    public function insertSanPham($danh_muc_id, $ten_san_pham, $gia, $so_luong, $file_thumb, $mo_ta)
+    public function insertSanPham($danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $file_thumb, $mo_ta)
     {
         try {
-            $sql = "INSERT INTO san_pham ( danh_muc_id, ten_san_pham, gia, so_luong ,hinh_anh, mo_ta) 
-            VALUES(:danh_muc_id, :ten_san_pham, :gia, :so_luong, :hinh_anh, :mo_ta)";
+            $sql = "INSERT INTO san_pham ( danh_muc_id, ten_san_pham, gia,gia_khuyen_mai, so_luong ,hinh_anh, mo_ta) 
+            VALUES(:danh_muc_id, :ten_san_pham, :gia, :gia_khuyen_mai, :so_luong, :hinh_anh, :mo_ta)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':danh_muc_id' => $danh_muc_id,
                 ':ten_san_pham' => $ten_san_pham,
                 ':gia' => $gia,
+                ':gia_khuyen_mai' => $gia_khuyen_mai,
                 ':so_luong' => $so_luong,
                 ':hinh_anh' => $file_thumb,
                 ':mo_ta' => $mo_ta
@@ -57,11 +58,11 @@ class AdminSanPham
         }
     }
 
-    public function editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $so_luong, $file_thumb, $mo_ta)
+    public function editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong,$trang_thai, $file_thumb, $mo_ta)
     {
         try {
             $sql = "UPDATE san_pham SET danh_muc_id = :danh_muc_id, ten_san_pham = :ten_san_pham, 
-            gia = :gia, so_luong = :so_luong, hinh_anh = :hinh_anh, mo_ta = :mo_ta WHERE id = :id";
+            gia = :gia, gia_khuyen_mai = :gia_khuyen_mai, so_luong = :so_luong,trang_thai = :trang_thai , hinh_anh = :hinh_anh, mo_ta = :mo_ta WHERE id = :id";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
@@ -69,7 +70,9 @@ class AdminSanPham
                 ':danh_muc_id' => $danh_muc_id,
                 ':ten_san_pham' => $ten_san_pham,
                 ':gia' => $gia,
+                ':gia_khuyen_mai' => $gia_khuyen_mai,
                 ':so_luong' => $so_luong,
+                'trang_thai' => $trang_thai,
                 ':hinh_anh' => $file_thumb,
                 ':mo_ta' => $mo_ta
             ]);

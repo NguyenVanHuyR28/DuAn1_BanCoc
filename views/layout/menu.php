@@ -10,7 +10,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="<?= BASE_URL ?>">
-                                <img src="assets/img/logo/logo1.png" style="height:150px;width: 150px;" alt="Brand Logo">
+                                <img src="assets/img/logo/logo2.png" style="height:100px;width: 100px;" alt="Brand Logo">
                             </a>
                         </div>
                     </div>
@@ -29,8 +29,8 @@
                                         <li>
                                             <a href="<?= BASE_URL . '?act=allsanpham' ?>">Sản phẩm</a>
                                         </li>
-                                        <li><a href="#">Giới thiệu</a></li>
-                                        <li><a href="#">Liên hệ</a></li>
+                                        <li><a href="<?= BASE_URL . '?act=gioi-thieu' ?>">Giới thiệu</a></li>
+                                        <li><a href="<?= BASE_URL . '?act=lien-he' ?>">Liên hệ</a></li>
                                     </ul>
 
                                 </nav>
@@ -48,51 +48,68 @@
                                 <button class="search-trigger d-xl-none d-lg-block"><i
                                         class="pe-7s-search"></i></button>
                                 <form class="header-search-box d-lg-none d-xl-block" role="search" method="post">
-                                    <input type="search" name="search" value="<?= $_POST['search'] ?? "" ?>" placeholder="Tìm kiếm sản phẩm" class="header-search-field">
+                                    <input type="search" name="search" value="<?= $_POST['search'] ?? "" ?>"
+                                        placeholder="Tìm kiếm sản phẩm" class="header-search-field">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
                                     <li class="user-hover">
+
                                         <a href="">
                                             <i class="pe-7s-user"></i>
                                         </a>
-                                        <ul class="dropdown-list">
+                                        <ul class="dropdown-list" style="width: 200px;">
                                             <div>
                                                 <?php if (isset($_SESSION['tai_khoan'])) { ?>
                                                 <p><span style="font-weight: 400;">Acc:</span>
-                                                </span><a href="<?=BASE_URL.'?act=formchinhsua'?>" style="font-size: 11px;"><?=$_SESSION['tai_khoan']?></a>
+                                                    </span><a
+                                                        href="<?= BASE_URL . '?act=formchinhsua&id=' . $_SESSION['tai_khoan'] ?>"
+                                                        style="font-size: 11px;"><?= $_SESSION['tai_khoan'] ?></a>
                                                 </p>
                                                 <br>
-                                                <p><a style="font-size: 12px;"
-                                                        href="<?=BASE_URL.'?act=dangxuat'?>"
+                                                <p><a style="font-size: 12px;" href="<?= BASE_URL . '?act=dangxuat' ?>"
                                                         onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a>
                                                 </p>
 
                                                 <?php } elseif (isset($_SESSION['tai_khoan_admin'])) { ?>
 
+                                                    <p><span style="font-weight: 400;">Acc:</span>
+                                                        </span><a href="<?= BASE_URL . '?act=formchinhsua&id=' . $_SESSION['tai_khoan_admin'] ?>" style="font-size: 11px;"><?= $_SESSION['tai_khoan_admin'] ?></a>
+                                                    </p>
+                                                    <br>
+                                                    <span><a style="font-size: 12px;" href="<?= BASE_URL . '?act=dangxuat' ?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng xuất</a></span> <br> <br>
+                                                    <span><a style="font-size: 12px;" href="<?= BASE_URL_ADMIN ?>">Đăng nhập Admin</a></span>
                                                 <p><span style="font-weight: 600;">Acc:
-                                                    </span><a
-                                                        style="font-size: 9px;"> <?=$_SESSION['tai_khoan_admin']?></a>
+                                                    </span><a style="font-size: 9px;">
+                                                        <?= $_SESSION['tai_khoan_admin'] ?></a>
                                                 </p>
                                                 <br>
-                                                <span><a style="font-size: 15px;" href="<?=BASE_URL.'?act=dangxuat'?>" onclick="return confirm('Bạn muốn đăng xuất?')">Đăng  xuất</a></span> <br> <br>
-                                                <span><a style="font-size: 13px;" href="<?=BASE_URL_ADMIN?>">Đăng nhập Admin</a></span>
+                                                <span><a style="font-size: 15px;"
+                                                        href="<?= BASE_URL . '?act=dangxuat' ?>"
+                                                        onclick="return confirm('Bạn muốn đăng xuất?')">Đăng
+                                                        xuất</a></span> <br> <br>
+                                                <span><a style="font-size: 13px;" href="<?= BASE_URL_ADMIN ?>">Đăng nhập
+                                                        Admin</a></span>
                                                 <?php } else { ?>
-                                                <li><a href="<?= BASE_URL.'?act=dangnhap'?>">Đăng nhập</a></li>
-                                                <li><a href="<?= BASE_URL.'?act=dangky'?>">Đăng ký</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=dangnhap' ?>">Đăng nhập</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=dangky' ?>">Đăng ký</a></li>
                                                 <?php } ?>
                                             </div>
                                         </ul>
                                     </li>
 
                                     <li>
-                                        <a href="<?= BASE_URL.'?act=gio-hang' ?>"
-                                            class="minicart-btn">
-                                            <i class="pe-7s-shopbag"></i>
-                                        </a>
+                                        <?php
+                                                  if (isset($_SESSION['tai_khoan']) || isset($_SESSION['tai_khoan_admin'])) { ?>
+                                            <a href="#" class="minicart-btn">
+                                                <i class="pe-7s-shopbag"></i>
+                                            </a>
+                                        <?php  }  ?>
+
                                     </li>
+
                                 </ul>
                             </div>
                         </div>

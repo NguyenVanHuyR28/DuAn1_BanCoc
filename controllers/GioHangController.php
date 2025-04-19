@@ -13,30 +13,37 @@ class GioHangController
     }
     public function gioHang()
     {
-
         $listTK = $this->modelTaiKhoan->getAllTaiKhoan();
 
-        if(!$_SESSION['tai_khoan']){
-            header('location:' .BASE_URL.'?act=dangnhap');
-            $_SESSION['error'] = "Đăng nhập để thêm sản phẩm giỏ hàng";
-        }else{
-            foreach($listTK as $value){
-                if($_SESSION['tai_khoan'] == $value['email']){
-                    $tai_khoan_id = $value['id'];
-                }
-            }
-        }
-        if(!$tai_khoan_id){
+        // Kiểm tra nếu không có session người dùng hoặc admin
+        if (!isset($_SESSION['tai_khoan']) && !isset($_SESSION['tai_khoan_admin'])) {
             $_SESSION['error'] = "Vui lòng đăng nhập để xem giỏ hàng!";
-            header('location:' .BASE_URL.'?act=dangnhap');
+            header('location:' . BASE_URL . '?act=dangnhap');
             exit;
         }
 
+        // Xác định tài khoản hiện tại
+        $email = isset($_SESSION['tai_khoan']) ? $_SESSION['tai_khoan'] : $_SESSION['tai_khoan_admin'];
+
+        // Tìm `tai_khoan_id` dựa trên email
+        foreach ($listTK as $value) {
+            if ($email === $value['email']) {
+                $tai_khoan_id = $value['id'];
+                break;
+            }
+        }
+
+        // Kiểm tra nếu không tìm thấy tài khoản
+        if (!isset($tai_khoan_id)) {
+            $_SESSION['error'] = "Tài khoản không hợp lệ!";
+            header('location:' . BASE_URL . '?act=dangnhap');
+            exit;
+        }
+
+        // Lấy danh sách giỏ hàng
         $cartItems = $this->modelGioHang->getAllCart($tai_khoan_id);
-        // var_dump($cartItems);
         require_once('views/gioHang.php');
     }
-
 
     public function addGioHang()
     {
@@ -45,42 +52,46 @@ class GioHangController
             $san_pham_id = isset($_POST['san_pham_id']) ? (int)$_POST['san_pham_id'] : 0;
             $so_luong = isset($_POST['so_luong']) ? (int)$_POST['so_luong'] : 1;
 
-            // Kiểm tra đăng nhập
-            if (!isset($_SESSION['tai_khoan']) || empty($_SESSION['tai_khoan'])) {
-                $_SESSION['error'] = "Đăng nhập để thêm giỏ hàng";
+            // Kiểm tra nếu không có session người dùng hoặc admin
+            if (!isset($_SESSION['tai_khoan']) && !isset($_SESSION['tai_khoan_admin'])) {
+                $_SESSION['error'] = "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!";
                 header('Location: ' . BASE_URL . '?act=dangnhap');
                 exit;
             }
 
-            // Lấy danh sách tài khoản
-            $listTk = $this->modelTaiKhoan->getAllTaiKhoan();
+            // Xác định tài khoản hiện tại
+            $email = isset($_SESSION['tai_khoan']) ? $_SESSION['tai_khoan'] : $_SESSION['tai_khoan_admin'];
 
-            // Tìm tai_khoan_id dựa trên email trong session
-            foreach ($listTk as $value) {
-                if ($_SESSION['tai_khoan'] === $value['email']) { // So sánh chính xác
-                    $tai_khoan_id = (int)$value['id'];
+            // Lấy danh sách tài khoản
+            $listTK = $this->modelTaiKhoan->getAllTaiKhoan();
+
+            // Tìm `tai_khoan_id` dựa trên email
+            foreach ($listTK as $value) {
+                if ($email === $value['email']) {
+                    $tai_khoan_id = $value['id'];
                     break;
                 }
             }
 
-            // Kiểm tra nếu không tìm thấy tai_khoan_id
-            if ($tai_khoan_id === null) {
-                $_SESSION['error'] = "Tài khoản không hợp lệ hoặc không tồn tại";
+            // Kiểm tra nếu không tìm thấy tài khoản
+            if (!isset($tai_khoan_id)) {
+                $_SESSION['error'] = "Tài khoản không hợp lệ!";
                 header('Location: ' . BASE_URL . '?act=dangnhap');
                 exit;
             }
-            // Thêm vào giỏ hàng
+
+            // Thêm sản phẩm vào giỏ hàng
             $check = $this->modelGioHang->addCart($tai_khoan_id, $san_pham_id, $so_luong);
 
             if ($check) {
                 echo "<script>
-                alert('Thêm giỏ hàng thành công!');
-                window.location.href='" . BASE_URL . "?act=gio-hang" . "';
+                    alert('Thêm sản phẩm vào giỏ hàng thành công!');
+                    window.location.href='" . BASE_URL . "?act=gio-hang';
                 </script>";
             } else {
                 echo "<script>
-                alert('Thêm giỏ hàng thất bại!');
-                window.location.href='" . BASE_URL . "?act=gio-hang" . "';
+                    alert('Thêm sản phẩm vào giỏ hàng thất bại!');
+                    window.location.href='" . BASE_URL . "?act=gio-hang';
                 </script>";
             }
         }
