@@ -92,8 +92,37 @@ class AdminSanPham
     public function editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $trang_thai, $file_thumb, $mo_ta)
     {
         try {
-            $sql = "UPDATE san_pham SET danh_muc_id = :danh_muc_id, ten_san_pham = :ten_san_pham, 
-            gia = :gia, gia_khuyen_mai = :gia_khuyen_mai, so_luong = :so_luong,trang_thai = :trang_thai , hinh_anh = :hinh_anh, mo_ta = :mo_ta WHERE id = :id";
+            // Chuẩn hóa tên sản phẩm (loại bỏ khoảng trắng và chuyển thành chữ thường)
+            $ten_san_pham_clean = strtolower(preg_replace('/\s+/', '', $ten_san_pham));
+
+            // Kiểm tra sản phẩm trùng tên nhưng khác ID
+            $sqlCheck = "SELECT id, ten_san_pham FROM san_pham WHERE id != :id";
+            $stmtCheck = $this->conn->prepare($sqlCheck);
+            $stmtCheck->execute([':id' => $id]);
+            $products = $stmtCheck->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($products as $sp) {
+                $ten_sp_db = strtolower(preg_replace('/\s+/', '', $sp['ten_san_pham']));
+                if ($ten_sp_db == $ten_san_pham_clean) {
+                    echo "<script>
+                    alert('Sản phẩm đã tồn tại!');
+                    window.location.href='" . BASE_URL_ADMIN . "?act=formEditSanPham&id=$id';
+                </script>";
+                    exit;
+                }
+            }
+
+            // Nếu không trùng, thực hiện cập nhật
+            $sql = "UPDATE san_pham SET 
+                    danh_muc_id = :danh_muc_id, 
+                    ten_san_pham = :ten_san_pham, 
+                    gia = :gia, 
+                    gia_khuyen_mai = :gia_khuyen_mai, 
+                    so_luong = :so_luong,
+                    trang_thai = :trang_thai, 
+                    hinh_anh = :hinh_anh, 
+                    mo_ta = :mo_ta 
+                WHERE id = :id";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
@@ -103,17 +132,20 @@ class AdminSanPham
                 ':gia' => $gia,
                 ':gia_khuyen_mai' => $gia_khuyen_mai,
                 ':so_luong' => $so_luong,
-                'trang_thai' => $trang_thai,
+                ':trang_thai' => $trang_thai,
                 ':hinh_anh' => $file_thumb,
                 ':mo_ta' => $mo_ta
             ]);
+
             return true;
         } catch (Exception $e) {
-            echo "Error" . $e->getMessage();
+            echo "Lỗi: " . $e->getMessage();
         }
     }
 
-    public function getShow($id) {
+
+    public function getShow($id)
+    {
         try {
             $sql = "SELECT san_pham.*, danh_muc.* 
                     FROM san_pham 

@@ -36,6 +36,7 @@ include './views/layouts/slidebar.php';
                                     <th>Số Lượng</th>
                                     <th>Hình Ảnh</th>
                                     <th>Trạng Thái</th>
+                                    <th>Is Active</th>
                                     <th>Ngày Tạo</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -58,6 +59,14 @@ include './views/layouts/slidebar.php';
                                                 <p class="text-success">Còn hàng</p>
                                             <?php } else { ?>
                                                 <p class="text-danger">Hết hàng</p>
+                                            <?php } ?>
+                                        </td>
+
+                                        <td>
+                                            <?php if ($products['trang_thai'] == 1  ) { ?>
+                                                <p class="text-success">Yes</p>
+                                            <?php } else { ?>
+                                                <p class="text-danger">No</p>
                                             <?php } ?>
                                         </td>
 
