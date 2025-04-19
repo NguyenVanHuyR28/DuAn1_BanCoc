@@ -45,6 +45,7 @@
             height: 200px;
             object-fit: cover;
         }
+        
     </style>
 
 </head>

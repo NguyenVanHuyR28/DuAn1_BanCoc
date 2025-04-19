@@ -16,14 +16,14 @@ include './views/layouts/slidebar.php';
       </div>
     </div><!-- /.container-fluid -->
   </section>
-<!-- Main content -->
+  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
 
           <div class="card">
-            
+
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -39,22 +39,22 @@ include './views/layouts/slidebar.php';
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($listDonBom as $key => $donHang): ?>
+                  <?php foreach ($listSanPhamHuy as $key => $donHang): ?>
                     <tr>
                       <td><?= $key + 1 ?></td>
                       <td><?= $donHang['ma_don_hang'] ?></td>
-                      <td><?= $donHang['ten_nguoi_nhan'] ?></td>
-                      <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
+                      <td><?= isset($donHang['ten_nguoi_nhan']) ? $donHang['ten_nguoi_nhan'] : 'Không có' ?></td>
+                      <td><?= isset($donHang['sdt_nguoi_nhan']) ? $donHang['sdt_nguoi_nhan'] : 'Không có' ?></td>
+                      <td><?= isset($donHang['tong_tien']) ? number_format($donHang['tong_tien'], 0, ',', '.') . ' VND' : 'Không có' ?></td>
                       <td><?= $donHang['ngay_tao'] ?></td>
-                      <td><?= $donHang['tong_tien'] ?></td>
-                      <td><?= $donHang['ten_trang_thai'] ?></td>
+                      <td><?= isset($donHang['ten_trang_thai']) ? $donHang['ten_trang_thai'] : 'Đã Hủy' ?></td>
                       <td>
-                        <a href="<?= BASE_URL_ADMIN . '?act=detailDonHang&id=' . $donHang['id'] ?>">
+                        <a href="<?= BASE_URL_ADMIN . '?act=detailDonHang&id=' . $donHang['don_hang_id'] ?>">
                           <button class="btn btn-success"><i class="far fa-eye"></i></button>
                         </a>
                       </td>
                     </tr>
-                  <?php endforeach ?>
+                  <?php endforeach; ?>
                 </tbody>
                 <tfoot>
                   <tr>
@@ -65,7 +65,6 @@ include './views/layouts/slidebar.php';
                     <th>Ngày đặt</th>
                     <th>Tổng tiền</th>
                     <th>Trạng Thái</th>
-                    <th>Thao Tác</th>
 
                   </tr>
                 </tfoot>

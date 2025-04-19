@@ -78,7 +78,7 @@ include './views/layouts/slidebar.php';
                                 <div class="form-group">
                                     <label>Số Lượng</label>
                                     <input type="number" name="so_luong" class="form-control"
-                                        placeholder="Nhập số lượng" value="<?= $products['so_luong'] ?>">
+                                        placeholder="Nhập số lượng" value="<?= $products['so_luong'] ?>" min="0">
                                     <?php if (isset($_SESSION['error']['so_luong'])): ?>
                                         <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
                                     <?php endif; ?>

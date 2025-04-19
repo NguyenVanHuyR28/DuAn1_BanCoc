@@ -34,7 +34,7 @@ class TaiKhoan
     public function insertTaiKhoan($ho_ten, $email, $mat_khau, $so_dien_thoai, $dia_chi, $role)
     {
         try {
-            $sql = 'INSERT INTO tai_khoan (ho_ten, email, mat_khau, so_dien_thoai, dia_chi) VALUES (:ho_ten, :email, :mat_khau, :so_dien_thoai, :dia_chi, : role)';
+            $sql = 'INSERT INTO tai_khoan (ho_ten, email, mat_khau, so_dien_thoai, dia_chi, role) VALUES (:ho_ten, :email, :mat_khau, :so_dien_thoai, :dia_chi, :role)';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':ho_ten' => $ho_ten,

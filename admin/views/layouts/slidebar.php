@@ -9,8 +9,7 @@
                 <span style="font-size: 26px; color:white; margin:20px">HKD Shop</span>
             </div>
         </div>
-
-
+    
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

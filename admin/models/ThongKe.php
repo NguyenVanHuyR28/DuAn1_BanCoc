@@ -113,4 +113,27 @@ class ThongKe
             echo "Error: " . $e->getMessage();
         }
     }
+    public function getSanPhamDonHangHuy()
+    {
+        try {
+            $sql = 'SELECT don_hang.id AS don_hang_id,san_pham.id AS san_pham_id, san_pham.ten_san_pham, san_pham.gia, san_pham.hinh_anh,
+                           chi_tiet_don_hang.so_luong, don_hang.ma_don_hang, don_hang.ngay_tao, 
+                           don_hang.ten_nguoi_nhan, don_hang.sdt_nguoi_nhan, don_hang.tong_tien, don_hang.trang_thai_don_hang
+                    FROM chi_tiet_don_hang
+                    INNER JOIN don_hang ON chi_tiet_don_hang.don_hang_id = don_hang.id
+                    INNER JOIN san_pham ON chi_tiet_don_hang.san_pham_id = san_pham.id
+                    WHERE don_hang.trang_thai_don_hang = :trang_thai_don_hang
+                    ORDER BY don_hang.ngay_tao DESC';
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':trang_thai_don_hang' => 'canceled' // Trạng thái đơn hàng bị hủy
+            ]);
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về danh sách sản phẩm
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return [];
+        }
+    }
 }

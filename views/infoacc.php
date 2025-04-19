@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
     $user = null; // hoặc redirect người dùng về trang login
 }
 ?>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <main>
     <div class="breadcrumb-area">
@@ -42,11 +42,11 @@ if (isset($_SESSION['user'])) {
                                             </a>
                                         <?php } else { ?>
                                             <a href="#orders" data-bs-toggle="tab" class="<?= isset($_GET['tab']) && $_GET['tab'] == 'orders' ? 'active' : '' ?>">
-    <i class="fa fa-cart-arrow-down"></i> Orders
-</a>
-<a href="#account-info" data-bs-toggle="tab" class="<?= isset($_GET['tab']) && $_GET['tab'] == 'account-info' ? 'active' : '' ?>">
-    <i class="fa fa-user"></i> Account Details
-</a>
+                                                <i class="fa fa-cart-arrow-down"></i> Orders
+                                            </a>
+                                            <a href="#account-info" data-bs-toggle="tab" class="<?= isset($_GET['tab']) && $_GET['tab'] == 'account-info' ? 'active' : '' ?>">
+                                                <i class="fa fa-user"></i> Account Details
+                                            </a>
                                         <?php } ?>
 
 
@@ -55,7 +55,7 @@ if (isset($_SESSION['user'])) {
                                 </div>
                                 <div class="col-lg-9-col-mb-8">
                                     <div class="tab-content" id="myaccountContent">
-                                    <div class="tab-pane fade <?= isset($_GET['tab']) && $_GET['tab'] == 'orders' ? 'show active' : '' ?>" id="orders" role="tabpanel">
+                                        <div class="tab-pane fade <?= isset($_GET['tab']) && $_GET['tab'] == 'orders' ? 'show active' : '' ?>" id="orders" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h5 class="mb-4">Đơn hàng của bạn</h5>
                                                 <?php if (!empty($don_hang_list)) : ?>

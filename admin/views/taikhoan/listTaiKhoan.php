@@ -80,7 +80,6 @@ include './views/layouts/slidebar.php';
                                         <th>STT</th>
                                         <th>Họ tên</th>
                                         <th>Email</th>
-                                        <th>Mật Khẩu</th>
                                         <th>Số điện thoại</th>
                                         <th>Địa Chỉ</th>
                                         <th>Ngày tạo</th>

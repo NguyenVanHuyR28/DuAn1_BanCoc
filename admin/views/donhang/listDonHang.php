@@ -1,53 +1,11 @@
-<!-- header.php -->
-<?php include './views/layouts/header.php'; ?>
-<?php include './views/layouts/navbar.php'; ?>
-<?php include './views/layouts/slidebar.php'; ?>
+<?php
+include './views/layouts/header.php';
+include './views/layouts/navbar.php';
+include './views/layouts/slidebar.php';
+?>
 
-<style>
-    body {
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .dark-mode {
-        background-color: #121212;
-        color: #f1f1f1;
-    }
-
-    .dark-mode .table,
-    .dark-mode .card-body {
-        background-color: #1e1e1e;
-        color: #fff;
-    }
-
-    .mode-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 999;
-    }
-
-    .transition {
-        transition: all 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
-
-        .table th,
-        .table td {
-            font-size: 12px;
-            padding: 6px;
-        }
-
-        .form-select,
-        .btn {
-            font-size: 12px;
-            padding: 4px 8px;
-        }
-    }
-</style>
 
 <div class="content-wrapper">
-    <button class="btn btn-dark mode-toggle" onclick="toggleDarkMode()">🌙/☀️</button>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">

@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <html lang="vi">
+<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
 
 <head>
     <meta charset="UTF-8">
@@ -24,27 +25,37 @@
         .card {
             border-radius: 1rem;
         }
+
+        a {
+            text-decoration: none;
+            /* Loại bỏ gạch chân */
+        }
+
+        a:hover {
+            text-decoration: none;
+            /* Đảm bảo không có gạch chân khi hover */
+        }
     </style>
 </head>
 
 <body>
-<div class="breadcrumb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb-wrap">
-                    <nav aria-label="breadcrumb">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-
-                            <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
-                        </ul>
-                    </nav>
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">Sản phẩm</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng</li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <div class="container py-5">
         <h2 class="mb-4 text-primary fw-bold">Chi Tiết Đơn Hàng #<?= $thongTinDonHang['ma_don_hang'] ?></h2>
 
@@ -82,7 +93,7 @@
                 <?php if (in_array($thongTinDonHang['trang_thai_don_hang'], ['pending', 'processing'])): ?>
             <form action="<?= BASE_URL . '?act=cap-nhat' ?>" method="POST" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này không?');" class="d-inline">
                 <input type="hidden" name="don_hang_id" value="<?= $thongTinDonHang['id'] ?>">
-                <button type="submit" class="btn btn-danger ms-3">Hủy hàng</button>
+                <button type="submit" class="btn btn-danger ms-3 btn-lg">Hủy hàng</button>
             </form>
         <?php endif; ?>
 

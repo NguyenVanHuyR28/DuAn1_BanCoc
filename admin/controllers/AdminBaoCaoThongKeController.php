@@ -18,6 +18,8 @@ class AdminBaoCaoThongKeController
         $listDonBom = $this->modelThongKe->getAllDonHangBom();
         $listDonHoan = $this->modelThongKe->getAllDonHangHoan();
         $listThongKe = $this->modelThongKe->loadAll_thongke();
+        $listSanPhamHuy = $this->modelThongKe->getSanPhamDonHangHuy();
+
 
         require_once 'home.php';
     }
@@ -35,10 +37,10 @@ class AdminBaoCaoThongKeController
 
 
     public function donBom()
-    {
-        $listDonBom = $this->modelThongKe->getAllDonHangBom();
-        require_once './views/thongke/donBom.php';
-    }
+{
+    $listSanPhamHuy = $this->modelThongKe->getSanPhamDonHangHuy(); // Lấy danh sách sản phẩm bị hủy
+    require_once './views/thongke/donBom.php';
+}
 
     public function donHoan()
     {

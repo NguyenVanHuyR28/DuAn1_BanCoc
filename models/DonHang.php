@@ -15,21 +15,21 @@ class DonHang
             $this->conn->beginTransaction();
 
             // Insert đơn hàng
-            $sql = "INSERT INTO don_hang (ma_don_hang, tai_khoan_id, tong_tien, ngay_tao, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, phuong_thuc_thanh_toan_id, trang_thai_don_hang)
-                VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id, :trang_thai_don_hang)";
+            $sql = "INSERT INTO don_hang (ma_don_hang, tai_khoan_id, tong_tien, ngay_tao, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, phuong_thuc_thanh_toan_id, trang_thai_id)
+                VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id, :trang_thai_id)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':ma_don_hang' => $ma_don_hang,
-                ':tai_khoan_id' => $tai_khoan_id,
-                ':tong_tien'  => $tong_tien,
-                ':ngay_tao'  => $ngay_tao,
-                ':ten_nguoi_nhan' => $ten_nguoi_nhan,
-                ':email_nguoi_nhan' => $email_nguoi_nhan,
-                ':sdt_nguoi_nhan' => $sdt_nguoi_nhan,
-                ':dia_chi_nguoi_nhan' => $dia_chi_nguoi_nhan,
-                ':ghi_chu' => $ghi_chu,
+                ':ma_don_hang'               => $ma_don_hang,
+                ':tai_khoan_id'              => $tai_khoan_id,
+                ':tong_tien'                 => $tong_tien,
+                ':ngay_tao'                  => $ngay_tao,
+                ':ten_nguoi_nhan'           => $ten_nguoi_nhan,
+                ':email_nguoi_nhan'         => $email_nguoi_nhan,
+                ':sdt_nguoi_nhan'           => $sdt_nguoi_nhan,
+                ':dia_chi_nguoi_nhan'       => $dia_chi_nguoi_nhan,
+                ':ghi_chu'                  => $ghi_chu,
                 ':phuong_thuc_thanh_toan_id' => $phuong_thuc_thanh_toan_id,
-                ':trang_thai_don_hang'             => 'pending' // Giá trị mặc định (ví dụ: 1 = "pending")
+                ':trang_thai_id'             => 1 // Giá trị mặc định (ví dụ: 1 = "pending")
 
             ]);
             $order_id = $this->conn->lastInsertId();
