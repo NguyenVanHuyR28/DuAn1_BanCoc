@@ -64,14 +64,6 @@
                                 <input class="form-check-input" type="radio" name="phuong_thuc_thanh_toan_id" id="cod" value="1" checked>
                                 <label class="form-check-label" for="cod">Thanh toán khi nhận hàng (COD)</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="phuong_thuc_thanh_toan_id" id="bank" value="2">
-                                <label class="form-check-label" for="bank">Chuyển khoản ngân hàng</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="phuong_thuc_thanh_toan_id" id="wallet" value="3">
-                                <label class="form-check-label" for="wallet">Ví điện tử (Momo, ZaloPay...)</label>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +90,7 @@
                                     <span><?= number_format($thanhTien, 0, ',', '.') ?>₫</span>
                                 </li>
                                 <input type="hidden" name="select-product[]" value="<?= $item['id'] ?>">
-                                <!-- <input type="hidden" name="product-quantity[<?= $item['id'] ?>]" value="<?= $item['so_luong'] ?>"> -->
+                                <input type="hidden" name="product-quantity[<?= $item['id'] ?>]" value="<?= $item['so_luong'] ?>" min="1" max="10">
                                 <input type="hidden" name="product-price[<?= $item['id'] ?>]" value="<?= $gia_ap_dung ?>">
                             <?php endforeach; ?>
 

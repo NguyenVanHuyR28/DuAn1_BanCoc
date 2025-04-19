@@ -8,14 +8,21 @@ class SanPham
         $this->conn = connectDB();
     }
 
-    public function getAllSanPham()
+    public function getAllSanPham($keyword = '')
     {
         try {
             $sql = 'SELECT san_pham.*, danh_muc.ten_danh_muc
                     FROM san_pham
                     INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id
-                    WHERE san_pham.trang_thai = 1';
+                    WHERE san_pham.trang_thai = 1 AND san_pham.so_luong > 2 ';
+
+            if (!empty($keyword)) {
+                $sql .= ' AND san_pham.ten_san_pham LIKE :keyword';
+            }
             $stmt = $this->conn->prepare($sql);
+            if (!empty($keyword)) {
+                $stmt->bindValue(':keyword', '%' . $keyword . '%');
+            }
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (Exception $e) {

@@ -16,6 +16,9 @@ include './views/layouts/slidebar.php';
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <?php if (isset($_SESSION['error']['tontai'])): ?>
+                    <p class="text-danger"><?= $_SESSION['error']['tontai'] ?></p>
+                <?php endif; ?>
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -27,61 +30,64 @@ include './views/layouts/slidebar.php';
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên Danh Mục</label>
-                                    <select name="danh_muc_id" id="" class="form-control">
+                                    <select name="danh_muc_id" id="" class="form-control"
+                                        value="<?= $_SESSION['old']['danh_muc_id'] ??  '' ?>">
                                         <option value="">Chọn Danh Mục</option>
                                         <?php foreach ($listDanhMuc as $category): ?>
-                                        <option value="<?= $category['id'] ?>"> <?= $category['ten_danh_muc'] ?>
-                                        </option>
+                                            <option value="<?= $category['id'] ?>"> <?= $category['ten_danh_muc'] ?>
+                                            </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?php if (isset($_SESSION['error']['danh_muc_id'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['danh_muc_id'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['danh_muc_id'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Tên Sản Phẩm</label>
                                     <input name="ten_san_pham" class="form-control" id=""
-                                        placeholder="Nhập tên sản phẩm">
+                                        placeholder="Nhập tên sản phẩm"
+                                        value="<?= $_SESSION['old']['ten_san_pham'] ??  '' ?>">
                                     <?php if (isset($_SESSION['error']['ten_san_pham'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['ten_san_pham'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['ten_san_pham'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Giá</label>
-                                    <input type="number" name="gia" class="form-control" id="" placeholder="Nhập giá"
-                                        min="0">
+                                    <input type="number" name="gia" class="form-control" id="" placeholder="Nhập giá" min="0"
+                                        value="<?= $_SESSION['old']['gia'] ??  '' ?>">
                                     <?php if (isset($_SESSION['error']['gia'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['gia'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['gia'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Giá Khuyến Mãi</label>
                                     <input type="number" name="gia_khuyen_mai" class="form-control" id=""
-                                        placeholder="Nhập giá khuyến mãi" min="0">
+                                        placeholder="Nhập giá khuyến mãi" min="0" value="<?= $_SESSION['old']['gia_khuyen_mai'] ??  '' ?>">
                                     <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['gia_khuyen_mai'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['gia_khuyen_mai'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Số Lượng</label>
                                     <input type="number" name="so_luong" class="form-control" id=""
-                                        placeholder="Nhập số lượng">
+                                        placeholder="Nhập số lượng"
+                                        value="<?= $_SESSION['old']['so_luong'] ??  '' ?>">
                                     <?php if (isset($_SESSION['error']['so_luong'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['so_luong'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['so_luong'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 
@@ -89,19 +95,19 @@ include './views/layouts/slidebar.php';
                                     <label>Chọn hình ảnh</label>
                                     <input type="file" name="hinh_anh" class="form-control" id="">
                                     <?php if (isset($_SESSION['error']['hinh_anh'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['hinh_anh'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['hinh_anh'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Nhập thêm mô tả</label>
-                                    <textarea type="text" name="mo_ta" class="form-control" id=""> </textarea>
+                                    <textarea type="text" name="mo_ta" class="form-control" id="" value="<?= $_SESSION['old']['mo_ta'] ??  '' ?>"> </textarea>
                                     <?php if (isset($_SESSION['error']['mo_ta'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['mo_ta'] ?>
-                                    </p>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['mo_ta'] ?>
+                                        </p>
                                     <?php } ?>
                                 </div>
 

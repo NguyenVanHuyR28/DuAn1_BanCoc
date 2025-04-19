@@ -49,12 +49,12 @@ include './views/layouts/slidebar.php';
                                         <td><?= $products['ten_san_pham'] ?></td>
                                         <td><?= number_format($products['gia']) ?></td>
                                         <td><?= number_format($products['gia_khuyen_mai']) ?></td>
-                                        <td><?= $products['so_luong'] ?></td>
+                                        <td><?= $products['so_luong']  ?></td>
                                         <td><img
                                                 src="<?= BASE_URL . $products["hinh_anh"] ?>"
                                                 width="120px" alt="Ảnh sản phẩm"></td>
                                         <td>
-                                            <?php if ($products['trang_thai'] == 1) { ?>
+                                            <?php if ($products['so_luong'] > 0  ) { ?>
                                                 <p class="text-success">Còn hàng</p>
                                             <?php } else { ?>
                                                 <p class="text-danger">Hết hàng</p>
@@ -66,9 +66,8 @@ include './views/layouts/slidebar.php';
                                             <a href="<?= BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $products['id'] ?>">
                                                 <button class="btn btn-warning">Sửa</button>
                                             </a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=deleteSanPham&id=' . $products['id'] ?>"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
-                                                <button class="btn btn-danger">Xóa</button>
+                                            <a href="<?= BASE_URL_ADMIN . '' . $products['id'] ?>">
+                                                <button class="btn btn-success">Xem</button>
                                             </a>
                                         </td>
                                     </tr>

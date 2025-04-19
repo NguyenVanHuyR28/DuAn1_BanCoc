@@ -29,7 +29,7 @@ class AdminDonHangController
 
             // Giả sử trạng thái đơn hàng nằm ở item đầu tiên
             $order = [
-                'trang_thai_don_hang' => $detailItem[0]['trang_thai_don_hang']
+                'trang_thai_id' => $detailItem[0]['trang_thai_id']
             ];
 
             // Gửi dữ liệu sang view
@@ -49,19 +49,19 @@ class AdminDonHangController
             if ($don_hang_id && $trang_thai_moi) {
                 // Lấy trạng thái hiện tại từ DB
                 $donHang = $this->modelDonHang->getAllDonHang($don_hang_id);
-                $trang_thai_hien_tai = $donHang['trang_thai_don_hang'] ?? null;
+                $trang_thai_hien_tai = $donHang['trang_thai_id'] ?? null;
 
                 // Nếu trạng thái hiện tại là shipped hoặc delivered thì không cho phép hủy đơn
                 if (
-                    in_array($trang_thai_hien_tai, ['shipped', 'delivered']) &&
-                    $trang_thai_moi === 'canceled'
+                    in_array($trang_thai_hien_tai, [6, 7, 8, 9,]) &&
+                    $trang_thai_moi === 10
                 ) {
                     echo "Không thể hủy đơn hàng đã giao hoặc đã hoàn tất.";
                     return;
                 }
 
                 // Đảm bảo người dùng chỉ có thể chuyển sang trạng thái tiếp theo, không quay ngược
-                $thuTu = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+                $thuTu = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                 $viTriHienTai = array_search($trang_thai_hien_tai, $thuTu);
                 $viTriMoi = array_search($trang_thai_moi, $thuTu);
 

@@ -24,10 +24,9 @@ class HomeController
     public function home()
     {
         // $id = $_GET['id'];
+      
         $listSanPham = $this->modelSanPham->getAllSanPham();
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
-
-        // $tkById = $this->modelTaiKhoan->getTKById($id);
         require_once('./views/home.php');
     }
     // sản phẩm
@@ -315,5 +314,15 @@ class HomeController
         $sanPham = $this->modelGioHang->getAllCart($tai_khoan_id);
         // var_dump($sanPham);die;
         require_once('views/thanhToan.php');
+    }
+
+    public function timKiemSanPham()
+    {
+        $keyword = $_GET['keyword'] ?? '';
+        // var_dump($keyword);
+        $listSanPham = $this->modelSanPham->getAllSanPham($keyword);
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        // var_dump($listSanPham);die;
+        require_once('./views/sanpham.php');
     }
 }

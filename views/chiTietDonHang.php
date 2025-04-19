@@ -32,6 +32,9 @@
 </head>
 
 <body>
+    <?php
+    // var_dump($thongTinDonHang);
+    ?>
     <div class="container py-5">
         <h2 class="mb-4 text-primary fw-bold">Chi Tiết Đơn Hàng #<?= $thongTinDonHang['ma_don_hang'] ?></h2>
 
@@ -43,23 +46,38 @@
             <p><strong>Địa chỉ:</strong> <?= $thongTinDonHang['dia_chi_nguoi_nhan'] ?></p>
             <p><strong>Ghi chú:</strong> <?= $thongTinDonHang['ghi_chu'] ?: '(Không có)' ?></p>
             <p><strong>Trạng thái:</strong>
-            <p><strong>Trạng thái:</strong>
                 <?php
-                switch ($thongTinDonHang['trang_thai_don_hang']) {
-                    case 'pending':
+                switch ($thongTinDonHang['trang_thai_id']) {
+                    case '1':
                         echo '<span class="badge bg-warning">Chờ xác nhận</span>';
                         break;
-                    case 'processing':
-                        echo '<span class="badge bg-primary">Đang xử lý</span>';
+                    case '2':
+                        echo '<span class="badge bg-primary">Đã xác nhận</span>';
                         break;
-                    case 'shipped':
-                        echo '<span class="badge bg-info">Đang giao</span>';
+                    case '3':
+                        echo '<span class="badge bg-info">Chưa thanh toán</span>';
                         break;
-                    case 'delivered':
-                        echo '<span class="badge bg-success">Hoàn thành</span>';
+                    case '4':
+                        echo '<span class="badge bg-success">Đã thanh toán </span>';
                         break;
-                    case 'canceled':
-                        echo '<span class="badge bg-danger">Đã huỷ</span>';
+                    case '5':
+                        echo '<span class="badge bg-danger">Đang chuẩn bị hàng</span>';
+                        break;
+
+                    case '6':
+                        echo '<span class="badge bg-danger">Đang giao hàng</span>';
+                        break;
+                    case '7':
+                        echo '<span class="badge bg-danger">Đã giao</span>';
+                        break;
+                    case '8':
+                        echo '<span class="badge bg-danger">Giao hàng thành công</span>';
+                        break;
+                    case '9':
+                        echo '<span class="badge bg-danger">Hoàn Đơn</span>';
+                        break;
+                    case '10':
+                        echo '<span class="badge bg-danger">Hủy đơn</span>';
                         break;
                     default:
                         echo '<span class="badge bg-secondary">Không rõ</span>';
@@ -67,9 +85,9 @@
                 }
                 ?>
 
-                <?php if (in_array($thongTinDonHang['trang_thai_don_hang'], ['pending', 'processing'])): ?>
+                <?php if (in_array($thongTinDonHang['trang_thai_id'], [1, 2 ,3])): ?>
             <form action="<?= BASE_URL . '?act=cap-nhat' ?>" method="POST" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này không?');" class="d-inline">
-                <input type="hidden" name="don_hang_id" value="<?= $thongTinDonHang['id'] ?>">
+                <input type="hidden" name="don_hang_id" value="<?= $thongTinDonHang['don_hang_id'] ?>">
                 <button type="submit" class="btn btn-danger ms-3">Hủy hàng</button>
             </form>
         <?php endif; ?>

@@ -52,10 +52,10 @@
                                     <span>Số Lượng : <?= $sanPham['so_luong'] ?></span>
                                 </div>
                                 <p class="mt-3">Mô tả:<?= $sanPham['mo_ta'] ?></p>
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <span class="badge bg-warning text-dark">⭐ 4.5/5</span>
                                     <span class="text-muted">(200 đánh giá)</span>
-                                </div>
+                                </div> -->
                                 <div class="mb-3">
                                     <label for="quantity" class="form-label">Số lượng:</label>
                                     <input type="number" name="so_luong" class="form-control w-25 d-inline" value="1" min="1" max="<?= $sanPham['so_luong'] ?>">

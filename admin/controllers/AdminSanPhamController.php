@@ -20,6 +20,8 @@ class AdminSanPhamController
     {
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         require_once('views/sanpham/addSanPham.php');
+        unset($_SESSION['error']);
+        unset($_SESSION['old']);
     }
 
     public function addSanPham()
@@ -32,7 +34,7 @@ class AdminSanPhamController
             $gia = $_POST['gia'] ?? '';
             $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? null;
             $so_luong = $_POST['so_luong'] ?? '';
-            $hinh_anh = $_FILES['hinh_anh'] ?? null;
+            $hinh_anh = $_FILES['hinh_anh'];
             $mo_ta = $_POST['mo_ta'] ?? '';
             $file_thumb = uploadFile($hinh_anh, 'assets/img/product/');
             // var_dump($file_thumb);
@@ -48,31 +50,45 @@ class AdminSanPhamController
             }
             if (empty($gia)) {
                 $error['gia'] = 'Bắt buộc nhập giá sản phẩm';
+            } else {
+                // Kiểm tra giá khuyến mãi có lớn hơn giá gốc không
+                if (!empty($gia_khuyen_mai) && $gia_khuyen_mai > $gia) {
+                    $error['gia_khuyen_mai'] = 'Giá khuyến mãi không được lớn hơn giá gốc';
+                }
             }
             if (empty($so_luong)) {
                 $error['so_luong'] = 'Vui lòng nhập số lượng';
             }
-            if (empty($hinh_anh)) {
+            if (empty($file_thumb)) {
                 $error['hinh_anh'] = 'Vui lòng chọn ảnh sản phẩm';
             }
-            if (empty($mo_ta)) {
-                $error['mo_ta'] = 'Nhập mô tả của sản phẩm';
-            }
+            $loi = 0;
 
-
+            $_SESSION['old'] = $_POST;
             $_SESSION['error'] = $error;
+
             if (empty($error)) {
-                unset($_SESSION['error']);
+                // unset($_SESSION['error']);
+                // unset($_SESSION['old']);
+
                 $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
                 if ($gia_khuyen_mai === '') {
                     $gia_khuyen_mai = 0; // hoặc null nếu DB cho phép
                 }
                 $this->modelSanPham->insertSanPham($danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $file_thumb, $mo_ta);
+                
+                unset($_SESSION['error']);
+                unset($_SESSION['old']);
                 header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
                 exit();
             } else {
                 // var_dump(123);die;
+
+                $_SESSION['error'] = $error;
+                $_SESSION['old'] = $_POST;
                 header('location: ' . BASE_URL_ADMIN . '?act=formAddSanPham');
+                // unset($_SESSION['error']);
+                // unset($_SESSION['old']);
                 exit();
             }
         }
@@ -122,15 +138,19 @@ class AdminSanPhamController
             if (empty($ten_san_pham)) {
                 $error['ten_san_pham'] = 'Bắt buộc nhập tên sản phẩm';
             }
-            if (empty($gia > 0)) {
-                $error['gia'] = 'Giá phải lớn hơn 0';
-            }
-
-            if (empty($gia_khuyen_mai <= $gia)) {
-                $error['gia_khuyen_mai'] = 'Giá khuyến mãi phải nhỏ hơn giá gốc';
+            if (empty($gia)) {
+                $error['gia'] = 'Bắt buộc nhập giá sản phẩm';
+            } else {
+                // Kiểm tra giá khuyến mãi có lớn hơn giá gốc không
+                if (!empty($gia_khuyen_mai) && $gia_khuyen_mai > $gia) {
+                    $error['gia_khuyen_mai'] = 'Giá khuyến mãi không được lớn hơn giá gốc';
+                }
             }
             if (empty($so_luong)) {
                 $error['so_luong'] = 'Vui lòng nhập số lượng';
+            }
+            if (empty($hinh_anh)) {
+                $error['hinh_anh'] = 'Vui lòng chọn hình ảnh';
             }
             if (empty($mo_ta)) {
                 $error['mo_ta'] = 'Nhập mô tả của sản phẩm';
@@ -159,28 +179,15 @@ class AdminSanPhamController
 
             if (empty($error)) {
                 unset($_SESSION['error']); // Xóa lỗi nếu cập nhật thành công
+                unset($_SESSION['old']);
                 $this->modelSanPham->editSanPham($id, $danh_muc_id, $ten_san_pham, $gia, $gia_khuyen_mai, $so_luong, $trang_thai, $new_file, $mo_ta);
-                header('location: ' . BASE_URL_ADMIN . '?act=listSanPham');
+                header('location: ' . BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $id);
                 exit();
             } else {
                 $_SESSION['flash'] = true;
                 header('location: ' . BASE_URL_ADMIN . '?act=formEditSanPham&id=' . $id);
                 exit();
             }
-        }
-    }
-
-
-    public function deleteSanPham()
-    {
-        $id = $_GET['id'];
-        $products = $this->modelSanPham->getDetailSanPham($id);
-        if ($id) {
-            $this->modelSanPham->deleteSanPham($id);
-            deleteFile($products['hinh_anh']);
-            header('location:' . BASE_URL_ADMIN . '?act=listSanPham');
-        } else {
-            header('location:' . BASE_URL_ADMIN . '?act=listSanPham');
         }
     }
 }

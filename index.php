@@ -30,6 +30,7 @@ match ($act) {
     'allsanpham' => (new HomeController())->allSanPham(),
     'sanphamdanhmuc' => (new HomeController())->danhSachSanPhamTheoDanhMuc(),
     'chi-tiet-san-pham' => (new HomeController())->detailSanPham(),
+    'tim-kiem' => (new HomeController())->timKiemSanPham(),
     // Giỏ Hàng
     'gio-hang' => (new GioHangController())->gioHang(),
     'them-gio-hang' => (new GioHangController())->addGioHang(),

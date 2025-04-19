@@ -86,38 +86,60 @@
                                         <td><?= $order['ngay_tao'] ?></td>
                                         <td>
                                             <?php
-                                            $trangThaiHienTai = $order['trang_thai_don_hang'];
+                                            $trangThaiHienTai = $order['trang_thai_id'];
                                             $dsTrangThai = [
-                                                'pending' => 'Chờ xác nhận',
-                                                'processing' => 'Đang xử lý',
-                                                'shipped' => 'Đang giao',
-                                                'delivered' => 'Hoàn thành',
-                                                'canceled' => 'Đã huỷ'
+                                                1 => 'Chưa xác nhận',
+                                                2 => 'Đã xác nhận',
+                                                3 => 'Chưa thanh toán',
+                                                4 => 'Đã thanh toán',
+                                                5 => 'Đang chuẩn bị hàng',
+                                                6 => 'Đang giao hàng',
+                                                7 => 'Đã giao',
+                                                8 => 'Giao hàng thành công',
+                                               
+
                                             ];
                                             $thuTu = array_keys($dsTrangThai);
                                             $viTriHienTai = array_search($trangThaiHienTai, $thuTu);
                                             $khongChoHuy = in_array($trangThaiHienTai, ['shipped', 'delivered']);
 
                                             switch ($trangThaiHienTai) {
-                                                case 'pending':
+                                                case '1':
                                                     echo '<span class="badge bg-warning">Chờ xác nhận</span>';
                                                     break;
-                                                case 'processing':
-                                                    echo '<span class="badge bg-primary">Đang xử lý</span>';
+                                                case '2':
+                                                    echo '<span class="badge bg-primary">Đã xác nhận</span>';
                                                     break;
-                                                case 'shipped':
-                                                    echo '<span class="badge bg-info">Đang giao</span>';
+                                                case '3':
+                                                    echo '<span class="badge bg-info">Chưa thanh toán</span>';
                                                     break;
-                                                case 'delivered':
-                                                    echo '<span class="badge bg-success">Hoàn thành</span>';
+                                                case '4':
+                                                    echo '<span class="badge bg-success">Đã thanh toán </span>';
                                                     break;
-                                                case 'canceled':
-                                                    echo '<span class="badge bg-danger">Đã huỷ</span>';
+                                                case '5':
+                                                    echo '<span class="badge bg-danger">Đang chuẩn bị hàng</span>';
+                                                    break;
+
+                                                case '6':
+                                                    echo '<span class="badge bg-danger">Đang giao hàng</span>';
+                                                    break;
+                                                case '7':
+                                                    echo '<span class="badge bg-danger">Đã giao</span>';
+                                                    break;
+                                                case '8':
+                                                    echo '<span class="badge bg-danger">Giao hàng thành công</span>';
+                                                    break;
+                                                case '9':
+                                                    echo '<span class="badge bg-danger">Hoàn Đơn</span>';
+                                                    break;
+                                                case '10':
+                                                    echo '<span class="badge bg-danger">Hủy đơn</span>';
                                                     break;
                                                 default:
                                                     echo '<span class="badge bg-secondary">Không rõ</span>';
                                                     break;
                                             }
+
                                             ?>
                                             <form action="<?= BASE_URL_ADMIN . '?act=capNhat' ?>" method="POST" class="d-flex gap-2 align-items-center mt-3">
                                                 <input type="hidden" name="don_hang_id" value="<?= $order['id'] ?>">

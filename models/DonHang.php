@@ -15,8 +15,8 @@ class DonHang
             $this->conn->beginTransaction();
 
             // Insert đơn hàng
-            $sql = "INSERT INTO don_hang (ma_don_hang, tai_khoan_id, tong_tien, ngay_tao, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, phuong_thuc_thanh_toan_id, trang_thai_don_hang)
-                VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id, :trang_thai_don_hang)";
+            $sql = "INSERT INTO don_hang (ma_don_hang, tai_khoan_id, tong_tien, ngay_tao, ten_nguoi_nhan, email_nguoi_nhan, sdt_nguoi_nhan, dia_chi_nguoi_nhan, ghi_chu, phuong_thuc_thanh_toan_id, trang_thai_id)
+                VALUES (:ma_don_hang, :tai_khoan_id, :tong_tien, :ngay_tao, :ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :phuong_thuc_thanh_toan_id, :trang_thai_id)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':ma_don_hang' => $ma_don_hang,
@@ -29,7 +29,7 @@ class DonHang
                 ':dia_chi_nguoi_nhan' => $dia_chi_nguoi_nhan,
                 ':ghi_chu' => $ghi_chu,
                 ':phuong_thuc_thanh_toan_id' => $phuong_thuc_thanh_toan_id,
-                ':trang_thai_don_hang'             => 'pending' // Giá trị mặc định (ví dụ: 1 = "pending")
+                ':trang_thai_id'             => '1' // Giá trị mặc định (ví dụ: 1 = "pending")
 
             ]);
             $order_id = $this->conn->lastInsertId();
@@ -84,12 +84,12 @@ class DonHang
     public function historyDonHang($id)
     {
         try {
-            $sql = 'SELECT don_hang.*, tai_khoan.id AS tai_khoan_id
+            $sql = 'SELECT  don_hang.id AS don_hang_id,don_hang.*,trang_thai_don_hang.* , tai_khoan.id AS tai_khoan_id
             FROM don_hang
             INNER JOIN tai_khoan ON don_hang.tai_khoan_id = tai_khoan.id
+            INNER JOIN trang_thai_don_hang ON don_hang.trang_thai_id = trang_thai_don_hang.id
             WHERE don_hang.tai_khoan_id = :id
-            ORDER BY don_hang.ngay_tao DESC'
-            ;
+            ORDER BY don_hang.ngay_tao DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':id' => $id
@@ -103,13 +103,21 @@ class DonHang
     public function detailOrder($order_id)
     {
         try {
-            $sql = 'SELECT chi_tiet_don_hang.*, san_pham.*,chi_tiet_don_hang.so_luong, don_hang.*,danh_muc.ten_danh_muc
-            FROM chi_tiet_don_hang
-            INNER JOIN san_pham ON san_pham.id = chi_tiet_don_hang.san_pham_id
-            INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id
-            INNER JOIN don_hang ON don_hang.id = chi_tiet_don_hang.don_hang_id 
-            WHERE chi_tiet_don_hang.don_hang_id = :order_id
-            ';
+            $sql = 'SELECT 
+                    chi_tiet_don_hang.*, 
+                    san_pham.*, 
+                    chi_tiet_don_hang.so_luong, 
+                    don_hang.*, 
+                    danh_muc.ten_danh_muc, 
+                    trang_thai_don_hang.*
+                FROM chi_tiet_don_hang
+                INNER JOIN san_pham ON san_pham.id = chi_tiet_don_hang.san_pham_id
+                INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id
+                INNER JOIN don_hang ON don_hang.id = chi_tiet_don_hang.don_hang_id
+                INNER JOIN trang_thai_don_hang ON don_hang.trang_thai_id = trang_thai_don_hang.id
+                WHERE chi_tiet_don_hang.don_hang_id = :order_id
+';
+
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':order_id' => $order_id
@@ -123,7 +131,7 @@ class DonHang
     public function updateTrangThai($trang_thai, $don_hang_id)
     {
         try {
-            $sql = "UPDATE don_hang SET trang_thai_don_hang = :trang_thai WHERE id = :don_hang_id";
+            $sql = "UPDATE don_hang SET trang_thai_id = :trang_thai WHERE id = :don_hang_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':trang_thai'    => $trang_thai,
@@ -139,7 +147,7 @@ class DonHang
     public function getTrangThai($id)
     {
         try {
-            $sql = 'SELECT don_hang.trang_thai_don_hang
+            $sql = 'SELECT don_hang.trang_thai_id
             FROM don_hang
             WHERE don_hang.id = :id
             ';

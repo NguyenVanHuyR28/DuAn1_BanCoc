@@ -73,6 +73,9 @@ include './views/layouts/slidebar.php';
                                 <div class="form-group">
                                     <label>Giá khuyến mãi</label>
                                     <input type="number" name="gia_khuyen_mai" class="form-control" placeholder="Nhập giá" min="0" value="<?= $products['gia_khuyen_mai'] ?>">
+                                    <?php if (isset($_SESSION['error']['gia_khuyen_mai'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['gia_khuyen_mai'] ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">

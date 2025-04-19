@@ -52,21 +52,37 @@
                                 <td><?= date('d/m/Y H:i', strtotime($item['ngay_tao'])) ?></td>
                                 <td>
                                     <?php
-                                    switch ($item['trang_thai_don_hang']) {
-                                        case 'pending':
+                                    switch ($item['trang_thai_id']) {
+                                        case '1':
                                             echo '<span class="badge bg-warning">Chờ xác nhận</span>';
                                             break;
-                                        case 'processing':
-                                            echo '<span class="badge bg-primary">Đang xử lý</span>';
+                                        case '2':
+                                            echo '<span class="badge bg-primary">Đã xác nhận</span>';
                                             break;
-                                        case 'shipped':
-                                            echo '<span class="badge bg-info">Đang giao</span>';
+                                        case '3':
+                                            echo '<span class="badge bg-info">Chưa thanh toán</span>';
                                             break;
-                                        case 'delivered':
-                                            echo '<span class="badge bg-success">Hoàn thành</span>';
+                                        case '4':
+                                            echo '<span class="badge bg-success">Đã thanh toán </span>';
                                             break;
-                                        case 'canceled':
-                                            echo '<span class="badge bg-danger">Đã hủy</span>';
+                                        case '5':
+                                            echo '<span class="badge bg-danger">Đang chuẩn bị hàng</span>';
+                                            break;
+
+                                        case '6':
+                                            echo '<span class="badge bg-danger">Đang giao hàng</span>';
+                                            break;
+                                        case '7':
+                                            echo '<span class="badge bg-danger">Đã giao</span>';
+                                            break;
+                                        case '8':
+                                            echo '<span class="badge bg-danger">Giao hàng thành công</span>';
+                                            break;
+                                        case '9':
+                                            echo '<span class="badge bg-danger">Hoàn Đơn</span>';
+                                            break;
+                                        case '10':
+                                            echo '<span class="badge bg-danger">Hủy đơn</span>';
                                             break;
                                         default:
                                             echo '<span class="badge bg-secondary">Không rõ</span>';
@@ -76,7 +92,7 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="<?= BASE_URL . '?act=chi-tiet-don-hang&id=' . $item['id'] ?>" class="btn btn-sm btn-primary">
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-don-hang&id=' . $item['don_hang_id'] ?>" class="btn btn-sm btn-primary">
                                         <i class="fas fa-eye"></i> Xem
                                     </a>
                                 </td>
